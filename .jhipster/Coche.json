@@ -1,0 +1,32 @@
+{
+    "name": "Coche",
+    "fields": [
+        {
+            "fieldName": "marca",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "anio",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "electrico",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "precio",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20201013104900",
+    "entityTableName": "coche",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
