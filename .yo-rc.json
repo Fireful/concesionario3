@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.concesionario3",
+      "nativeLanguage": "es"
+    },
+    "jhipsterVersion": "6.7.0",
+    "applicationType": "monolith",
+    "baseName": "concesionario3",
+    "packageName": "com.concesionario3",
+    "packageFolder": "com/concesionario3",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "N2FiZTEyY2ZmMDkzNjZhOTcxZGVmOGVmZjY0ZGJiODE3ZmUyMWM1YTU5NDE3NzI0MzY4Y2EzYmZjMjFiYTQ1Njg4YjdjODZhM2Q1YjA2NGU0YWVkMjM3ZDA0ZTlhYTExYzkwMWQ4MjUzMDQ1OGNjMWMyOGI5ZTg0YmQxZmY3NmY=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1602584940324,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "es",
+    "languages": ["es", "en"],
+    "blueprints": []
+  }
+}
