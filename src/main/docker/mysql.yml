@@ -1,7 +1,7 @@
 version: '2'
 services:
   concesionario3-mysql:
-    image: mysql:8.0.20
+    image: mysql:8.0.19
     # volumes:
     #     - ~/volumes/jhipster/concesionario3/mysql/:/var/lib/mysql/
     environment:

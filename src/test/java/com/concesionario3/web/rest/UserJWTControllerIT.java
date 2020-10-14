@@ -3,12 +3,14 @@ package com.concesionario3.web.rest;
 import com.concesionario3.Concesionario3App;
 import com.concesionario3.domain.User;
 import com.concesionario3.repository.UserRepository;
+import com.concesionario3.security.jwt.TokenProvider;
+import com.concesionario3.web.rest.errors.ExceptionTranslator;
 import com.concesionario3.web.rest.vm.LoginVM;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -26,9 +28,14 @@ import static org.hamcrest.Matchers.not;
 /**
  * Integration tests for the {@link UserJWTController} REST controller.
  */
-@AutoConfigureMockMvc
 @SpringBootTest(classes = Concesionario3App.class)
 public class UserJWTControllerIT {
+
+    @Autowired
+    private TokenProvider tokenProvider;
+
+    @Autowired
+    private AuthenticationManagerBuilder authenticationManager;
 
     @Autowired
     private UserRepository userRepository;
@@ -37,7 +44,17 @@ public class UserJWTControllerIT {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private ExceptionTranslator exceptionTranslator;
+
     private MockMvc mockMvc;
+
+    @BeforeEach
+    public void setup() {
+        UserJWTController userJWTController = new UserJWTController(tokenProvider, authenticationManager);
+        this.mockMvc = MockMvcBuilders.standaloneSetup(userJWTController)
+            .setControllerAdvice(exceptionTranslator)
+            .build();
+    }
 
     @Test
     @Transactional
@@ -54,7 +71,7 @@ public class UserJWTControllerIT {
         login.setUsername("user-jwt-controller");
         login.setPassword("test");
         mockMvc.perform(post("/api/authenticate")
-            .contentType(MediaType.APPLICATION_JSON)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(login)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id_token").isString())
@@ -79,7 +96,7 @@ public class UserJWTControllerIT {
         login.setPassword("test");
         login.setRememberMe(true);
         mockMvc.perform(post("/api/authenticate")
-            .contentType(MediaType.APPLICATION_JSON)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(login)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id_token").isString())
@@ -94,7 +111,7 @@ public class UserJWTControllerIT {
         login.setUsername("wrong-user");
         login.setPassword("wrong password");
         mockMvc.perform(post("/api/authenticate")
-            .contentType(MediaType.APPLICATION_JSON)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(login)))
             .andExpect(status().isUnauthorized())
             .andExpect(jsonPath("$.id_token").doesNotExist())

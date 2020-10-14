@@ -1,7 +1,6 @@
 package com.concesionario3.repository;
 
 import com.concesionario3.Concesionario3App;
-
 import com.concesionario3.config.Constants;
 import com.concesionario3.config.audit.AuditEventConverter;
 import com.concesionario3.domain.PersistentAuditEvent;

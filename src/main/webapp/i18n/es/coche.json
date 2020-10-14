@@ -1,0 +1,32 @@
+{
+  "concesionario3App": {
+    "coche": {
+      "home": {
+        "title": "Coches",
+        "createLabel": "Crear nuevo Coche",
+        "createOrEditLabel": "Crear o editar Coche",
+        "notFound": "Ningún Coches encontrado",
+
+        "todos": "Todos",
+        "disponibles": "Disponibles",
+        "vendidos": "Vendidos"
+      },
+      "created": "Un nuevo Coche ha sido creado con el identificador {{ param }}",
+      "updated": "Un Coche ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Coche ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Coche {{ id }}?"
+      },
+      "detail": {
+        "title": "Coche"
+      },
+      "marca": "Marca",
+      "anio": "Año",
+      "electrico": "Electrico",
+      "precio": "Precio",
+      "venta_id": "Nº Venta",
+      "vendido": "Vendido",
+      "disponible": "Disponible"
+    }
+  }
+}

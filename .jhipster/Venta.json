@@ -1,0 +1,47 @@
+{
+    "name": "Venta",
+    "fields": [
+        {
+            "fieldName": "fecha",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "importeTotal",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "coche",
+            "otherEntityRelationshipName": "venta",
+            "relationshipName": "coche",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cliente",
+            "otherEntityRelationshipName": "venta",
+            "relationshipName": "cliente",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "vendedor",
+            "otherEntityRelationshipName": "venta",
+            "relationshipName": "vendedor",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20201013105100",
+    "entityTableName": "venta",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

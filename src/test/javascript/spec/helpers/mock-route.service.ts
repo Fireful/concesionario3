@@ -1,28 +1,21 @@
 import Spy = jasmine.Spy;
-import { ActivatedRoute, Router, RouterEvent, Data, Params } from '@angular/router';
-import { Observable, ReplaySubject } from 'rxjs';
+import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 import { SpyObject } from './spyobject';
 
 export class MockActivatedRoute extends ActivatedRoute {
-  private queryParamsSubject = new ReplaySubject<Params>();
-  private paramSubject = new ReplaySubject<Params>();
-  private dataSubject = new ReplaySubject<Data>();
-
-  constructor(parameters: Params) {
+  constructor(parameters?: any) {
     super();
-    this.queryParams = this.queryParamsSubject.asObservable();
-    this.params = this.paramSubject.asObservable();
-    this.data = this.dataSubject.asObservable();
-    this.setParameters(parameters);
-  }
-
-  setParameters(parameters: Params): void {
-    this.queryParamsSubject.next(parameters);
-    this.paramSubject.next(parameters);
-    this.dataSubject.next({
+    this.queryParams = of(parameters);
+    this.params = of(parameters);
+    this.data = of({
       ...parameters,
-      defaultSort: 'id,desc',
+      pagingParams: {
+        page: 10,
+        ascending: false,
+        predicate: 'id'
+      }
     });
   }
 }

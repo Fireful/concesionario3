@@ -4,7 +4,6 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
-import { Authority } from 'app/shared/constants/authority.constants';
 import { Concesionario3TestModule } from '../../../test.module';
 import { UserManagementUpdateComponent } from 'app/admin/user-management/user-management-update.component';
 import { UserService } from 'app/core/user/user.service';
@@ -16,7 +15,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<UserManagementUpdateComponent>;
     let service: UserService;
     const route: ActivatedRoute = ({
-      data: of({ user: new User(1, 'user', 'first', 'last', 'first@last.com', true, 'en', [Authority.USER], 'admin') }),
+      data: of({ user: new User(1, 'user', 'first', 'last', 'first@last.com', true, 'en', ['ROLE_USER'], 'admin') })
     } as any) as ActivatedRoute;
 
     beforeEach(async(() => {
@@ -27,9 +26,9 @@ describe('Component Tests', () => {
           FormBuilder,
           {
             provide: ActivatedRoute,
-            useValue: route,
-          },
-        ],
+            useValue: route
+          }
+        ]
       })
         .overrideTemplate(UserManagementUpdateComponent, '')
         .compileComponents();
@@ -67,7 +66,7 @@ describe('Component Tests', () => {
           spyOn(service, 'update').and.returnValue(
             of(
               new HttpResponse({
-                body: entity,
+                body: entity
               })
             )
           );

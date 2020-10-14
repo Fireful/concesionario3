@@ -23,9 +23,9 @@ import { ErrorComponent } from './layouts/error/error.component';
     Concesionario3HomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     Concesionario3EntityModule,
-    Concesionario3AppRoutingModule,
+    Concesionario3AppRoutingModule
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
-  bootstrap: [MainComponent],
+  bootstrap: [MainComponent]
 })
 export class Concesionario3AppModule {}

@@ -1,7 +1,7 @@
 version: '2'
 services:
   concesionario3-prometheus:
-    image: prom/prometheus:v2.18.1
+    image: prom/prometheus:v2.15.2
     volumes:
       - ./prometheus/:/etc/prometheus/
     command:
@@ -12,7 +12,7 @@ services:
     # grafana/provisioning/datasources/datasource.yml
     network_mode: 'host' # to test locally running service
   concesionario3-grafana:
-    image: grafana/grafana:7.0.1
+    image: grafana/grafana:6.6.0
     volumes:
       - ./grafana/provisioning/:/etc/grafana/provisioning/
     environment:

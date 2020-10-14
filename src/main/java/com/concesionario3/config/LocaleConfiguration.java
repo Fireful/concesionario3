@@ -11,7 +11,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 @Configuration
 public class LocaleConfiguration implements WebMvcConfigurer {
 
-    @Bean
+    @Bean(name = "localeResolver")
     public LocaleResolver localeResolver() {
         AngularCookieLocaleResolver cookieLocaleResolver = new AngularCookieLocaleResolver();
         cookieLocaleResolver.setCookieName("NG_TRANSLATE_LANG_KEY");

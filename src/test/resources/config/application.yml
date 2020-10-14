@@ -14,9 +14,6 @@
 # ===================================================================
 
 spring:
-  profiles:
-    # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
-    #active: testcontainers
   application:
     name: concesionario3
   datasource:
@@ -55,6 +52,9 @@ spring:
     allow-bean-definition-overriding: true
   messages:
     basename: i18n/messages
+  mvc:
+    favicon:
+      enabled: false
   task:
     execution:
       thread-name-prefix: concesionario-3-task-
@@ -84,7 +84,7 @@ jhipster:
     name: 'concesionario3App'
   logging:
     # To test json console appender
-    use-json-format: false
+    use-json-format: true # By default, logs are in Json format
     logstash:
       enabled: false
       host: localhost
@@ -97,7 +97,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: MDllZjU0YWU3MmQxNmJlNmFjZjQ0ZTcyOTEwZWU0M2MxY2IwNDhjNDViOWRiZjI4Nzk5MjBjNjZkYjc4NzQzYzk1ZDRlNDE5M2E4ZjI3MTgzYTliNTI4YTI1YTE5NDNjYTBjNzQ5OTQ3NjM4MzU5Y2I5ZGYzYjFmNzBlYzE1ZmU=
+        base64-secret: N2FiZTEyY2ZmMDkzNjZhOTcxZGVmOGVmZjY0ZGJiODE3ZmUyMWM1YTU5NDE3NzI0MzY4Y2EzYmZjMjFiYTQ1Njg4YjdjODZhM2Q1YjA2NGU0YWVkMjM3ZDA0ZTlhYTExYzkwMWQ4MjUzMDQ1OGNjMWMyOGI5ZTg0YmQxZmY3NmY=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
   metrics:

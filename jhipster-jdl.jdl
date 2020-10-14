@@ -1,0 +1,35 @@
+
+entity Coche {
+	marca String,
+    anio Integer,
+    electrico Boolean,
+    precio Float
+}
+
+entity Vendedor {
+	nombre String,
+    dni String,
+    totalVentas Double
+}
+
+entity Venta {
+	fecha Instant,
+	importeTotal Double
+}
+
+entity Cliente {
+	nombre String,
+    dni String,
+    empresa Boolean
+}
+paginate all with pagination
+
+service all with serviceImpl
+
+relationship OneToOne{
+	Venta{coche} to Coche
+}
+relationship ManyToOne{
+	Venta{cliente} to Cliente,
+    Venta{vendedor} to Vendedor
+}

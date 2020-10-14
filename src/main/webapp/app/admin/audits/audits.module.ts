@@ -8,6 +8,6 @@ import { auditsRoute } from './audits.route';
 
 @NgModule({
   imports: [Concesionario3SharedModule, RouterModule.forChild([auditsRoute])],
-  declarations: [AuditsComponent],
+  declarations: [AuditsComponent]
 })
 export class AuditsModule {}

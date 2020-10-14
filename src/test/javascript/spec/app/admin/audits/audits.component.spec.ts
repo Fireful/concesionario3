@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { advanceTo } from 'jest-date-mock';
 
@@ -9,7 +8,6 @@ import { AuditsComponent } from 'app/admin/audits/audits.component';
 import { AuditsService } from 'app/admin/audits/audits.service';
 import { Audit } from 'app/admin/audits/audit.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { MockRouter, MockActivatedRoute } from '../../../helpers/mock-route.service';
 
 function build2DigitsDatePart(datePart: number): string {
   return `0${datePart}`.slice(-2);
@@ -38,14 +36,12 @@ describe('Component Tests', () => {
     let comp: AuditsComponent;
     let fixture: ComponentFixture<AuditsComponent>;
     let service: AuditsService;
-    let mockRouter: MockRouter;
-    let mockActivatedRoute: MockActivatedRoute;
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [Concesionario3TestModule],
         declarations: [AuditsComponent],
-        providers: [AuditsService],
+        providers: [AuditsService]
       })
         .overrideTemplate(AuditsComponent, '')
         .compileComponents();
@@ -55,8 +51,6 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(AuditsComponent);
       comp = fixture.componentInstance;
       service = fixture.debugElement.injector.get(AuditsService);
-      mockRouter = TestBed.get(Router);
-      mockActivatedRoute = TestBed.get(ActivatedRoute);
     });
 
     describe('today function', () => {
@@ -103,7 +97,7 @@ describe('Component Tests', () => {
         expect(comp.toDate).toBe(getDate());
         expect(comp.fromDate).toBe(getDate(false));
         expect(comp.itemsPerPage).toBe(ITEMS_PER_PAGE);
-        expect(comp.page).toBe(1);
+        expect(comp.page).toBe(10);
         expect(comp.ascending).toBe(false);
         expect(comp.predicate).toBe('id');
       });
@@ -118,7 +112,7 @@ describe('Component Tests', () => {
           of(
             new HttpResponse({
               body: [audit],
-              headers,
+              headers
             })
           )
         );
@@ -127,7 +121,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         // THEN
-        expect(service.query).toHaveBeenCalledTimes(1);
+        expect(service.query).toHaveBeenCalled();
         expect(comp.audits && comp.audits[0]).toEqual(jasmine.objectContaining(audit));
         expect(comp.totalItems).toBe(1);
       });
@@ -135,56 +129,82 @@ describe('Component Tests', () => {
 
     describe('Create sort object', () => {
       beforeEach(() => {
+        comp.toDate = getDate();
+        comp.fromDate = getDate(false);
         spyOn(service, 'query').and.returnValue(of(new HttpResponse({ body: null })));
       });
 
       it('Should sort only by id asc', () => {
         // GIVEN
-        mockActivatedRoute.setParameters({
-          sort: 'id,desc',
-        });
+        comp.predicate = 'id';
+        comp.ascending = false;
 
         // WHEN
-        comp.ngOnInit();
+        comp.transition();
 
         // THEN
         expect(service.query).toBeCalledWith(
           expect.objectContaining({
-            sort: ['id,desc'],
+            sort: ['id,desc']
           })
         );
       });
 
       it('Should sort by timestamp asc then by id', () => {
         // GIVEN
-        mockActivatedRoute.setParameters({
-          sort: 'timestamp,asc',
-        });
-
-        // WHEN
-        comp.ngOnInit();
-
-        // THEN
-        expect(service.query).toBeCalledWith(
-          expect.objectContaining({
-            sort: ['timestamp,asc', 'id'],
-          })
-        );
-      });
-    });
-
-    describe('transition', () => {
-      it('Should not query data if fromDate and toDate are empty', () => {
-        // GIVEN
-        comp.toDate = '';
-        comp.fromDate = '';
+        comp.predicate = 'timestamp';
+        comp.ascending = true;
 
         // WHEN
         comp.transition();
 
         // THEN
+        expect(service.query).toBeCalledWith(
+          expect.objectContaining({
+            sort: ['timestamp,asc', 'id']
+          })
+        );
+      });
+    });
+
+    describe('loadPage', () => {
+      beforeEach(() => {
+        comp.toDate = getDate();
+        comp.fromDate = getDate(false);
+        comp.previousPage = 1;
+        spyOn(comp, 'transition');
+      });
+
+      it('Should not reload page already shown', () => {
+        // WHEN
+        comp.loadPage(1);
+
+        // THEN
+        expect(comp.transition).not.toBeCalled();
+      });
+
+      it('Should load new page', () => {
+        // WHEN
+        comp.loadPage(2);
+
+        // THEN
+        expect(comp.previousPage).toBe(2);
+        expect(comp.transition).toBeCalled();
+      });
+    });
+
+    describe('transition', () => {
+      beforeEach(() => {
+        spyOn(service, 'query').and.returnValue(of(new HttpResponse({ body: null })));
+      });
+
+      it('Should not query data if fromDate and toDate are empty', () => {
+        // WHEN
+        comp.transition();
+
+        // THEN
         expect(comp.canLoad()).toBe(false);
-        expect(mockRouter.navigateSpy).not.toBeCalled();
+        expect(service.query).not.toBeCalled();
       });
 
       it('Should query data if fromDate and toDate are not empty', () => {
@@ -197,7 +217,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(comp.canLoad()).toBe(true);
-        expect(mockRouter.navigateSpy).toBeCalled();
+        expect(service.query).toBeCalled();
       });
     });
   });
