@@ -19,19 +19,19 @@
                 <dt><span jhiTranslate="concesionario3App.venta.coche">Coche</span></dt>
                 <dd>
                     <div *ngIf="venta.coche">
-                        <a [routerLink]="['/coche', venta.coche?.id, 'view']">{{ venta.coche?.id }}</a>
+                        <a [routerLink]="['/coche', venta.coche?.id, 'view']">{{ venta.coche?.marca }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.venta.cliente">Cliente</span></dt>
                 <dd>
                     <div *ngIf="venta.cliente">
-                        <a [routerLink]="['/cliente', venta.cliente?.id, 'view']">{{ venta.cliente?.id }}</a>
+                        <a [routerLink]="['/cliente', venta.cliente?.id, 'view']">{{ venta.cliente?.nombre }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.venta.vendedor">Vendedor</span></dt>
                 <dd>
                     <div *ngIf="venta.vendedor">
-                        <a [routerLink]="['/vendedor', venta.vendedor?.id, 'view']">{{ venta.vendedor?.id }}</a>
+                        <a [routerLink]="['/vendedor', venta.vendedor?.id, 'view']">{{ venta.vendedor?.nombre }}</a>
                     </div>
                 </dd>
             </dl>
