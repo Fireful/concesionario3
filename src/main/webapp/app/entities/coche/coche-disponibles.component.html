@@ -1,7 +1,12 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="concesionario3App.coche.home.title">Coches</span>
+        <select #mySelectDisp (change)='paginador(mySelectDisp.value)'>
+            <option class='option' [value]="5">5</option>
+            <option class='option' [value]="10">10</option>
+            <option class='option' [value]="20">20</option>
 
+        </select>
         <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche"
             [routerLink]="['/coche/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -24,12 +29,14 @@
                 Disponibles
             </span>
         </button>
-        <button id="jh-sold" class="mr-3 btn btn-warning float-right jh-sold sold-cars" [routerLink]="['/coche/vendidos']">
+        <button id="jh-sold" class="mr-3 btn btn-warning float-right jh-sold sold-cars"
+            [routerLink]="['/coche/vendidos']">
             <fa-icon icon="plus"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.vendidos">
                 Vendidos
             </span>
         </button>
+
     </h2>
 
     <jhi-alert-error></jhi-alert-error>
@@ -37,7 +44,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="coches?.length === 0">
-        <span jhiTranslate="concesionario3App.coche.home.notFound">No coches found</span>
+        <span jhiTranslate="concesionario3App.coche.home.notFound">No cars found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="coches?.length > 0">
@@ -69,48 +76,48 @@
             </thead>
             <tbody *ngFor="let coche of coches ;trackBy: trackId">
                 <tr *ngIf="!coche.venta">
-                    
-                        <td><a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a></td>
-                        <td>{{ coche.marca }}</td>
-                        <td>{{ coche.anio }}</td>
-                        <td *ngIf="coche.electrico==true">
-                            <fa-icon icon="check" style="color: green;"></fa-icon>
-                        </td>
 
-                        <td *ngIf="coche.electrico==false">
-                            <fa-icon icon="times" style="color: red;"></fa-icon>
-                        </td>
-                        <td>{{ coche.precio }}</td>
-                        <td *ngIf="!coche.venta">
-                            <span jhiTranslate="concesionario3App.coche.disponible">Disponible</span>
-                        </td>
-                        <td *ngIf="coche.venta">
-                            <a [routerLink]="['/venta', coche.venta?.id, 'view']">{{ coche.venta?.id }} <span
-                                    jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a>
-                        </td>
+                    <td><a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a></td>
+                    <td>{{ coche.marca }}</td>
+                    <td>{{ coche.anio }}</td>
+                    <td *ngIf="coche.electrico==true">
+                        <fa-icon icon="check" style="color: green;"></fa-icon>
+                    </td>
 
-                        <td class="text-right">
-                            <div class="btn-group">
-                                <button type="submit" [routerLink]="['/coche', coche.id, 'view']"
-                                    class="btn btn-info btn-sm">
-                                    <fa-icon icon="eye"></fa-icon>
-                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                                </button>
+                    <td *ngIf="coche.electrico==false">
+                        <fa-icon icon="times" style="color: red;"></fa-icon>
+                    </td>
+                    <td>{{ coche.precio }}</td>
+                    <td *ngIf="!coche.venta">
+                        <span jhiTranslate="concesionario3App.coche.disponible">Disponible</span>
+                    </td>
+                    <td *ngIf="coche.venta">
+                        <a [routerLink]="['/venta', coche.venta?.id, 'view']">{{ coche.venta?.id }} <span
+                                jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a>
+                    </td>
 
-                                <button type="submit" [routerLink]="['/coche', coche.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
-                                    <fa-icon icon="pencil-alt"></fa-icon>
-                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                                </button>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit" [routerLink]="['/coche', coche.id, 'view']"
+                                class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
 
-                                <button type="submit" (click)="delete(coche)" class="btn btn-danger btn-sm">
-                                    <fa-icon icon="times"></fa-icon>
-                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                                </button>
-                            </div>
-                        </td>
-                    
-                    </tr>
+                            <button type="submit" [routerLink]="['/coche', coche.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(coche)" class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+
+                </tr>
             </tbody>
         </table>
     </div>

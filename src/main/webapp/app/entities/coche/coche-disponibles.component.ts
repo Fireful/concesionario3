@@ -90,7 +90,7 @@ export class CocheDisponiblesComponent implements OnInit, OnDestroy {
   protected onSuccess(data: ICoche[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    this.router.navigate(['/coche'], {
+    this.router.navigate(['/coche/disponibles'], {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
@@ -102,5 +102,8 @@ export class CocheDisponiblesComponent implements OnInit, OnDestroy {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page;
+  }
+  paginador(value: string): void {
+    alert('the selected value is ' + value);
   }
 }

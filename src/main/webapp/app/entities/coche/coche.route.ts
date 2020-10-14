@@ -67,7 +67,7 @@ export const cocheRoute: Routes = [
     path: 'vendidos',
     component: CocheVendidosComponent,
     resolve: {
-      coche: CocheResolve
+      pagingParams: JhiResolvePagingParams
     },
     data: {
       authorities: ['ROLE_USER'],

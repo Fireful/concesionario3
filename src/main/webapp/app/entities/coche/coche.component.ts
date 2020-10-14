@@ -17,6 +17,7 @@ import { CocheDeleteDialogComponent } from './coche-delete-dialog.component';
 })
 export class CocheComponent implements OnInit, OnDestroy {
   coches?: ICoche[];
+  todos?: ICoche[];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -24,6 +25,7 @@ export class CocheComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  filtro = '';
 
   constructor(
     protected cocheService: CocheService,
@@ -32,6 +34,43 @@ export class CocheComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
   ) {}
+
+  public all(filtro: string): void {
+    this.filtro = filtro;
+    this.coches = [];
+    if (this.todos) {
+      this.todos.forEach(coche => {
+        if (this.coches) {
+          this.coches.push(coche);
+        }
+      });
+    }
+  }
+
+  public disponibles(filtro: string): void {
+    this.filtro = filtro;
+    this.coches = [];
+    if (this.todos) {
+      this.todos.forEach(element => {
+        if (element.venta == null && this.coches) {
+          this.coches.push(element);
+        }
+      });
+      console.error(this.coches);
+    }
+  }
+
+  public vendidos(filtro: string): void {
+    this.filtro = filtro;
+    this.coches = [];
+    if (this.todos) {
+      this.todos.forEach(element => {
+        if (element.venta != null && this.coches) {
+          this.coches.push(element);
+        }
+      });
+    }
+  }
 
   loadPage(page?: number): void {
     const pageToLoad: number = page || this.page;
@@ -46,6 +85,17 @@ export class CocheComponent implements OnInit, OnDestroy {
         (res: HttpResponse<ICoche[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
         () => this.onError()
       );
+    if (this.filtro === 'disponibles') {
+      this.disponibles(this.filtro);
+    } else if (this.filtro === 'vendidos') {
+      this.vendidos(this.filtro);
+    }
+  }
+
+  public paginador(valor: number): void {
+    this.itemsPerPage = valor;
+
+    this.loadPage();
   }
 
   ngOnInit(): void {
@@ -54,6 +104,7 @@ export class CocheComponent implements OnInit, OnDestroy {
       this.ascending = data.pagingParams.ascending;
       this.predicate = data.pagingParams.predicate;
       this.ngbPaginationPage = data.pagingParams.page;
+
       this.loadPage();
     });
     this.registerChangeInCoches();
@@ -98,6 +149,12 @@ export class CocheComponent implements OnInit, OnDestroy {
       }
     });
     this.coches = data || [];
+    this.todos = data || [];
+    if (this.filtro === 'disponibles') {
+      this.disponibles(this.filtro);
+    } else if (this.filtro === 'vendidos') {
+      this.vendidos(this.filtro);
+    }
   }
 
   protected onError(): void {

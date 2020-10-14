@@ -1,7 +1,11 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="concesionario3App.coche.home.title">Coches</span>
-
+        <select class="form-control-sm" #mySelectVend (change)='paginador(mySelectVend.value)'>
+            <option class='option' [value]="5">5</option>
+            <option class='option' [value]="10">10</option>
+            <option class='option' [value]="20">20</option>
+        </select>
         <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche"
             [routerLink]="['/coche/new']">
             <fa-icon icon="plus"></fa-icon>
@@ -30,6 +34,7 @@
                 Vendidos
             </span>
         </button>
+        
     </h2>
 
     <jhi-alert-error></jhi-alert-error>
