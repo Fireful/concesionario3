@@ -5,7 +5,10 @@
         "title": "Cars",
         "createLabel": "Create a new car",
         "createOrEditLabel": "Create or edit a car",
-        "notFound": "No cars found"
+        "notFound": "No cars found",
+        "todos": "All cars",
+        "disponibles": "Available cars",
+        "vendidos": "Sold cars"
       },
       "created": "A new car is created with identifier {{ param }}",
       "updated": "A car is updated with identifier {{ param }}",
@@ -21,7 +24,7 @@
       "electrico": "Hybrid",
       "precio": "Price",
       "venta_id": "# Sale",
-      "dsponible": "Available",
+      "disponible": "Available",
       "vendido": "Sold"
     }
   }

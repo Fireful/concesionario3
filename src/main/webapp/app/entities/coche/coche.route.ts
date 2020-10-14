@@ -9,6 +9,8 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
 import { ICoche, Coche } from 'app/shared/model/coche.model';
 import { CocheService } from './coche.service';
 import { CocheComponent } from './coche.component';
+import { CocheDisponiblesComponent } from './coche-disponibles.component';
+import { CocheVendidosComponent } from './coche-vendidos.component';
 import { CocheDetailComponent } from './coche-detail.component';
 import { CocheUpdateComponent } from './coche-update.component';
 
@@ -40,6 +42,32 @@ export const cocheRoute: Routes = [
     component: CocheComponent,
     resolve: {
       pagingParams: JhiResolvePagingParams
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      defaultSort: 'id,asc',
+      pageTitle: 'concesionario3App.coche.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'disponibles',
+    component: CocheDisponiblesComponent,
+    resolve: {
+      pagingParams: JhiResolvePagingParams
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      defaultSort: 'id,asc',
+      pageTitle: 'concesionario3App.coche.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'vendidos',
+    component: CocheVendidosComponent,
+    resolve: {
+      coche: CocheResolve
     },
     data: {
       authorities: ['ROLE_USER'],

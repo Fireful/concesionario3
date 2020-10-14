@@ -5,7 +5,11 @@
         "title": "Coches",
         "createLabel": "Crear nuevo Coche",
         "createOrEditLabel": "Crear o editar Coche",
-        "notFound": "Ningún Coches encontrado"
+        "notFound": "Ningún Coches encontrado",
+
+        "todos": "Todos",
+        "disponibles": "Disponibles",
+        "vendidos": "Vendidos"
       },
       "created": "Un nuevo Coche ha sido creado con el identificador {{ param }}",
       "updated": "Un Coche ha sido actualizado con el identificador {{ param }}",
@@ -21,8 +25,8 @@
       "electrico": "Electrico",
       "precio": "Precio",
       "venta_id": "Nº Venta",
-      "disponible": "Disponible",
-      "vendido": "Vendido"
+      "vendido": "Vendido",
+      "disponible": "Disponible"
     }
   }
 }

@@ -68,7 +68,7 @@
                 </tr>
             </thead>
             <tbody *ngFor="let coche of coches ;trackBy: trackId">
-                <tr *ngIf="!coche.venta">
+                <tr *ngIf="coche.venta">
                     
                         <td><a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a></td>
                         <td>{{ coche.marca }}</td>
