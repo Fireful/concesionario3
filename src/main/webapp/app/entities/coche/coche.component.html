@@ -8,6 +8,11 @@
             <option class='option' value="10">10</option>
             <option class='option' value="20">20</option>
         </select>
+        <select class="form-control-sm" #mySelectHybrid (change)='hybrid(mySelectHybrid.value)'>
+            <option class='option' value='todos' selected>Todos</option>
+            <option class='option' value="electricos"><span jhiTranslate="concesionario3App.coche.home.hybrid">Eléctricos</span></option>
+            <option class='option' value="termicos"><span jhiTranslate="concesionario3App.coche.home.termico">Térmicos</span></option>
+        </select>
 
         <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche"
             [routerLink]="['/coche/new']">
@@ -37,6 +42,9 @@
                 Vendidos
             </span>
         </button>
+        
+
+
 
     </h2>
 
@@ -61,6 +69,9 @@
                     <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.coche.anio">Anio</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
+                    <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.coche.color">Color</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                     <th scope="col" jhiSortBy="electrico"><span
                             jhiTranslate="concesionario3App.coche.electrico">Electrico</span>
                         <fa-icon icon="sort"></fa-icon>
@@ -81,6 +92,7 @@
                     <td><a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a></td>
                     <td>{{ coche.marca }}</td>
                     <td>{{ coche.anio }}</td>
+                    <td>{{ coche.color }}</td>
                     <td *ngIf="coche.electrico==true">
                         <fa-icon icon="check" style="color: green;"></fa-icon>
                     </td>

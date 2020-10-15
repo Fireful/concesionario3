@@ -42,4 +42,8 @@ public interface CocheService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Page<Coche> findVenta(Pageable page, Boolean venta);
+
+    // Page<Coche> findElectrico(Pageable electrico);
 }

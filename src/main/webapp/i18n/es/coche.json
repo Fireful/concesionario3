@@ -6,10 +6,11 @@
         "createLabel": "Crear nuevo Coche",
         "createOrEditLabel": "Crear o editar Coche",
         "notFound": "Ningún Coches encontrado",
-
+        "hybrid": "Eléctricos",
         "todos": "Todos",
         "disponibles": "Disponibles",
-        "vendidos": "Vendidos"
+        "vendidos": "Vendidos",
+        "termico": "Térmico"
       },
       "created": "Un nuevo Coche ha sido creado con el identificador {{ param }}",
       "updated": "Un Coche ha sido actualizado con el identificador {{ param }}",
@@ -26,7 +27,8 @@
       "precio": "Precio",
       "venta_id": "Nº Venta",
       "vendido": "Vendido",
-      "disponible": "Disponible"
+      "disponible": "Disponible",
+      "color": "Color"
     }
   }
 }

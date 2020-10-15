@@ -8,6 +8,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ICoche } from 'app/shared/model/coche.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { TIPO } from 'app/shared/constants/pagination.constants';
+
 import { CocheService } from './coche.service';
 import { CocheDeleteDialogComponent } from './coche-delete-dialog.component';
 
@@ -21,6 +23,8 @@ export class CocheComponent implements OnInit, OnDestroy {
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
+  tipo = TIPO;
+
   page!: number;
   predicate!: string;
   ascending!: boolean;
@@ -35,13 +39,29 @@ export class CocheComponent implements OnInit, OnDestroy {
     protected modalService: NgbModal
   ) {}
 
+  public hybrid(tipo: string): void {
+    this.tipo = tipo;
+
+    this.loadPage();
+  }
+
   public all(filtro: string): void {
     this.filtro = filtro;
     this.coches = [];
     if (this.todos) {
-      this.todos.forEach(coche => {
-        if (this.coches) {
-          this.coches.push(coche);
+      this.todos.forEach(element => {
+        if (this.tipo === 'electricos') {
+          if (this.coches && element.electrico) {
+            this.coches.push(element);
+          }
+        } else if (this.tipo === 'termicos') {
+          if (this.coches && !element.electrico) {
+            this.coches.push(element);
+          }
+        } else {
+          if (this.coches) {
+            this.coches.push(element);
+          }
         }
       });
     }
@@ -52,11 +72,20 @@ export class CocheComponent implements OnInit, OnDestroy {
     this.coches = [];
     if (this.todos) {
       this.todos.forEach(element => {
-        if (element.venta == null && this.coches) {
-          this.coches.push(element);
+        if (this.tipo === 'electricos') {
+          if (element.venta == null && this.coches && element.electrico) {
+            this.coches.push(element);
+          }
+        } else if (this.tipo === 'termicos') {
+          if (element.venta == null && this.coches && !element.electrico) {
+            this.coches.push(element);
+          }
+        } else {
+          if (element.venta == null && this.coches) {
+            this.coches.push(element);
+          }
         }
       });
-      console.error(this.coches);
     }
   }
 
@@ -65,7 +94,39 @@ export class CocheComponent implements OnInit, OnDestroy {
     this.coches = [];
     if (this.todos) {
       this.todos.forEach(element => {
-        if (element.venta != null && this.coches) {
+        if (this.tipo === 'electricos') {
+          if (element.venta != null && this.coches && element.electrico) {
+            this.coches.push(element);
+          }
+        } else if (this.tipo === 'termicos') {
+          if (element.venta != null && this.coches && !element.electrico) {
+            this.coches.push(element);
+          }
+        } else {
+          if (element.venta != null && this.coches) {
+            this.coches.push(element);
+          }
+        }
+      });
+    }
+  }
+  public electricos(tipo: string): void {
+    this.tipo = tipo;
+    this.coches = [];
+    if (this.todos) {
+      this.todos.forEach(element => {
+        if (element.electrico && this.coches) {
+          this.coches.push(element);
+        }
+      });
+    }
+  }
+  public termicos(tipo: string): void {
+    this.tipo = tipo;
+    this.coches = [];
+    if (this.todos) {
+      this.todos.forEach(element => {
+        if (!element.electrico && this.coches) {
           this.coches.push(element);
         }
       });
@@ -79,6 +140,7 @@ export class CocheComponent implements OnInit, OnDestroy {
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
+        tipo: this.tipo,
         sort: this.sort()
       })
       .subscribe(
@@ -89,6 +151,13 @@ export class CocheComponent implements OnInit, OnDestroy {
       this.disponibles(this.filtro);
     } else if (this.filtro === 'vendidos') {
       this.vendidos(this.filtro);
+    }
+    if (this.tipo === 'electricos') {
+      this.electricos(this.tipo);
+    } else if (this.tipo === 'termicos') {
+      this.termicos(this.tipo);
+    } else if (this.tipo === 'todos') {
+      this.all(this.tipo);
     }
   }
 
@@ -145,6 +214,7 @@ export class CocheComponent implements OnInit, OnDestroy {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
+        tipo: this.tipo,
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
@@ -154,6 +224,11 @@ export class CocheComponent implements OnInit, OnDestroy {
       this.disponibles(this.filtro);
     } else if (this.filtro === 'vendidos') {
       this.vendidos(this.filtro);
+    }
+    if (this.tipo === 'electricos') {
+      this.electricos(this.tipo);
+    } else if (this.tipo === 'termicos') {
+      this.termicos(this.tipo);
     }
   }
 

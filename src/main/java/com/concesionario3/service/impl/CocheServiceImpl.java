@@ -76,4 +76,14 @@ public class CocheServiceImpl implements CocheService {
         log.debug("Request to delete Coche : {}", id);
         cocheRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Coche> findVenta(Pageable page, Boolean venta) {
+        if(venta){
+            return cocheRepository.findAllByVendidos(page);
+        } else{
+            return cocheRepository.findAllByDisponibles(page);
+        }
+    }
 }

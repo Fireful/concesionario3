@@ -122,4 +122,14 @@ public class CocheResource {
         cocheService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/coches/{venta}/vendidos")
+    public ResponseEntity<List<Coche>> getVendidos(Pageable page, Boolean venta){
+        log.debug("REST request to get venta: {}", venta);
+        Page<Coche> coche=cocheService.findVenta(page, venta);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), coche);
+        return ResponseEntity.ok().headers(headers).body(coche.getContent());
+    }
+
+
 }
