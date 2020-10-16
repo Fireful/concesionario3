@@ -36,8 +36,13 @@ export class CocheService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  customQuery(req?: any): Observable<EntityArrayResponseType> {
+  vendidos(req?: any, venta?: Boolean): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<ICoche[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http.get<ICoche[]>(`${this.resourceUrl}/${venta}/vendidos`, { params: options, observe: 'response' });
+  }
+
+  electricos(req?: any, tipo?: string): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<ICoche[]>(`${this.resourceUrl}/${tipo}/electricos`, { params: options, observe: 'response' });
   }
 }

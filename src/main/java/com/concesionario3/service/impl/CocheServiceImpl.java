@@ -11,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javafx.scene.control.Alert;
+import net.bytebuddy.matcher.StringMatcher;
+
 import java.util.Optional;
 
 /**
@@ -80,10 +83,27 @@ public class CocheServiceImpl implements CocheService {
     @Override
     @Transactional(readOnly = true)
     public Page<Coche> findVenta(Pageable page, Boolean venta) {
+        
         if(venta){
+
             return cocheRepository.findAllByVendidos(page);
         } else{
             return cocheRepository.findAllByDisponibles(page);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Coche> findTipo(Pageable page, String tipo){
+        if(tipo.equals("termicos" )){
+            log.debug("Entramos en tipo termicos");
+            return cocheRepository.findAllTermicos(page);
+        } else if(tipo.equals("electricos")){
+            log.debug("Entramos en tipo electricos");
+            return cocheRepository.findAllElectricos(page);
+        } else {
+            log.debug("Entramos en tipo todos");
+            return cocheRepository.findAll(page);
         }
     }
 }

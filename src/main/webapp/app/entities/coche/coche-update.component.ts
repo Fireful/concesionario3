@@ -14,6 +14,7 @@ import { CocheService } from './coche.service';
 })
 export class CocheUpdateComponent implements OnInit {
   isSaving = false;
+  texto: any;
 
   editForm = this.fb.group({
     id: [],
@@ -25,6 +26,11 @@ export class CocheUpdateComponent implements OnInit {
 
   constructor(protected cocheService: CocheService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
+  color(color: string): void {
+    const inputElement = document.getElementById('color') as HTMLInputElement;
+    inputElement.value = color;
+    alert('Hola: ' + color);
+  }
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ coche }) => {
       this.updateForm(coche);

@@ -46,4 +46,6 @@ public interface CocheService {
     Page<Coche> findVenta(Pageable page, Boolean venta);
 
     // Page<Coche> findElectrico(Pageable electrico);
+
+    Page<Coche> findTipo(Pageable page, String tipo);
 }

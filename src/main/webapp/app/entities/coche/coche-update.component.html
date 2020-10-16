@@ -1,7 +1,8 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-coche-heading" jhiTranslate="concesionario3App.coche.home.createOrEditLabel">Create or edit a Coche</h2>
+            <h2 id="jhi-coche-heading" jhiTranslate="concesionario3App.coche.home.createOrEditLabel">Create or edit a
+                Coche</h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,28 +13,51 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.marca" for="field_marca">Marca</label>
-                    <input type="text" class="form-control" name="marca" id="field_marca"
-                           formControlName="marca"/>
+                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.marca"
+                        for="field_marca">Marca</label>
+                    <input type="text" class="form-control" name="marca" id="field_marca" formControlName="marca" />
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.anio" for="field_anio">Anio</label>
-                    <input type="number" class="form-control" name="anio" id="field_anio"
-                           formControlName="anio"/>
+                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.anio"
+                        for="field_anio">Anio</label>
+                    <input type="number" class="form-control" name="anio" id="field_anio" formControlName="anio" />
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.electrico" for="field_electrico">Electrico</label>
+                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.electrico"
+                        for="field_electrico">Electrico</label>
                     <input type="checkbox" class="form-control" name="electrico" id="field_electrico"
-                           formControlName="electrico"/>
+                        formControlName="electrico" />
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.precio" for="field_precio">Precio</label>
+                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.precio"
+                        for="field_precio">Precio</label>
                     <input type="number" class="form-control" name="precio" id="field_precio"
-                           formControlName="precio"/>
+                        formControlName="precio" />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="concesionario3App.coche.color"
+                        for="field-color">Color</label>
+                    
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <input type="color" style="height:38px; width: 100px;" list="colores"  #myColor (change)='color(myColor.value)'/>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Color" id="color" name="color">
+                          </div>
+                      
+                    <datalist id="colores">
+                        <option>#ff0000</option>
+                        <option>#0000ff</option>
+                        <option>#aaaaaa</option>
+                        <option>#00ff00</option>
+                        <option>orange</option>
+
+                    </datalist>
+                </div>
+
             </div>
 
             <div>
@@ -41,7 +65,8 @@
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

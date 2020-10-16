@@ -16,8 +16,17 @@ public interface CocheRepository extends JpaRepository<Coche, Long> {
     @Query("SELECT c FROM Coche c INNER JOIN Venta v ON v.coche=c.id")
     Page<Coche> findAllByVendidos(Pageable page);
     
-
-    @Query("SELECT c FROM Coche c LEFT JOIN Venta v ON v.coche=c.id")
+    @Query("SELECT c FROM Coche c INNER JOIN Venta v ON v.coche != c.id")
     Page<Coche> findAllByDisponibles(Pageable disp);
-    
+
+    /* @Query("SELECT c FROM Coche c INNER JOIN Venta v ON v.coche=c.id")
+    Page<Coche> findAllByDisponibles(Pageable disp);
+     */
+
+     @Query("SELECT c FROM Coche c WHERE c.electrico=1")
+     Page<Coche> findAllElectricos(Pageable page);
+
+     @Query("SELECT c FROM Coche c WHERE c.electrico=0")
+     Page<Coche> findAllTermicos(Pageable page);
+
 }
