@@ -12,6 +12,7 @@ import { TIPO } from 'app/shared/constants/pagination.constants';
 
 import { CocheService } from './coche.service';
 import { CocheDeleteDialogComponent } from './coche-delete-dialog.component';
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
 
 @Component({
   selector: 'jhi-coche',
@@ -20,7 +21,6 @@ import { CocheDeleteDialogComponent } from './coche-delete-dialog.component';
 export class CocheComponent implements OnInit, OnDestroy {
   coches?: ICoche[];
   todos?: ICoche[];
-  colores: any = [];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;

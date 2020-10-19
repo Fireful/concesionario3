@@ -63,12 +63,11 @@
         <input type="color" name="filtroColor" list="filtroColores" #colorFiltro (change)='colorFilter(colorFiltro.value)'>
         <datalist id="filtroColores">
             <option *ngFor="let coche1 of coches">
-                <span *ngFor="let coche2 of coches">
-                    <span *ngIf="coche2.color===coche1.color; else distintos">
-                        {{ coche2.color }}
+                
+                        {{ coche1.color }}
                         
-                    </span>
-                </span>
+                    
+                
             </option>
             <ng-template #distintos>
                 
