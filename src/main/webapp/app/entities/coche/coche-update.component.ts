@@ -15,21 +15,22 @@ import { CocheService } from './coche.service';
 export class CocheUpdateComponent implements OnInit {
   isSaving = false;
   texto: any;
-
+  colorinput: any;
   editForm = this.fb.group({
     id: [],
     marca: [],
     anio: [],
     electrico: [],
-    precio: []
+    precio: [],
+    color: []
   });
 
   constructor(protected cocheService: CocheService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
-  color(color: string): void {
+  public color(colorForm: string): void {
     const inputElement = document.getElementById('color') as HTMLInputElement;
-    inputElement.value = color;
-    alert('Hola: ' + color);
+    inputElement.value = colorForm;
+    this.editForm.controls.color.setValue(colorForm);
   }
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ coche }) => {
@@ -43,7 +44,8 @@ export class CocheUpdateComponent implements OnInit {
       marca: coche.marca,
       anio: coche.anio,
       electrico: coche.electrico,
-      precio: coche.precio
+      precio: coche.precio,
+      color: coche.color
     });
   }
 
@@ -54,6 +56,7 @@ export class CocheUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const coche = this.createFromForm();
+
     if (coche.id !== undefined) {
       this.subscribeToSaveResponse(this.cocheService.update(coche));
     } else {
@@ -68,7 +71,8 @@ export class CocheUpdateComponent implements OnInit {
       marca: this.editForm.get(['marca'])!.value,
       anio: this.editForm.get(['anio'])!.value,
       electrico: this.editForm.get(['electrico'])!.value,
-      precio: this.editForm.get(['precio'])!.value
+      precio: this.editForm.get(['precio'])!.value,
+      color: this.editForm.get(['color'])!.value
     };
   }
 

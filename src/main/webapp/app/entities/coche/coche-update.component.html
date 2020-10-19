@@ -20,7 +20,7 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="concesionario3App.coche.anio"
-                        for="field_anio">Anio</label>
+                        for="field_year">Anio</label>
                     <input type="number" class="form-control" name="anio" id="field_anio" formControlName="anio" />
                 </div>
 
@@ -43,9 +43,9 @@
                     
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                              <input type="color" style="height:38px; width: 100px;" list="colores"  #myColor (change)='color(myColor.value)'/>
+                              <input type="color" style="height:38px; width: 100px;" name="color" list="colores"  #myColor (change)='color(myColor.value)'/>
                             </div>
-                            <input type="text" class="form-control" placeholder="Color" id="color" name="color">
+                            <input type="text" class="form-control" placeholder="Color" id="field_color" id="color" name="color" formControlName="color">
                           </div>
                       
                     <datalist id="colores">
@@ -53,7 +53,7 @@
                         <option>#0000ff</option>
                         <option>#aaaaaa</option>
                         <option>#00ff00</option>
-                        <option>orange</option>
+                        
 
                     </datalist>
                 </div>

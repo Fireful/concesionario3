@@ -20,6 +20,7 @@ import { CocheDeleteDialogComponent } from './coche-delete-dialog.component';
 export class CocheComponent implements OnInit, OnDestroy {
   coches?: ICoche[];
   todos?: ICoche[];
+  colores: any = [];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -28,6 +29,7 @@ export class CocheComponent implements OnInit, OnDestroy {
   swElec: any;
   swTodos: any;
   swTermic: any;
+  color: any;
 
   page!: number;
   predicate!: string;
@@ -60,6 +62,21 @@ export class CocheComponent implements OnInit, OnDestroy {
 
   public all(): void {
     this.loadPage();
+  }
+
+  colorFilter(colorFiltro: string): void {
+    this.color = colorFiltro;
+    this.cocheService
+      .colores({
+        page: this.page - 1,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+        color: colorFiltro
+      })
+      .subscribe(
+        (res: HttpResponse<ICoche[]>) => this.onSuccess(res.body, res.headers, this.page),
+        () => this.onError()
+      );
   }
 
   disponibles(): void {
@@ -162,7 +179,8 @@ export class CocheComponent implements OnInit, OnDestroy {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
-        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
+        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc'),
+        color: this.color
       }
     });
     this.coches = data || [];

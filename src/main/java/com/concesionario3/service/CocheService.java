@@ -48,4 +48,8 @@ public interface CocheService {
     // Page<Coche> findElectrico(Pageable electrico);
 
     Page<Coche> findTipo(Pageable page, String tipo);
+
+    Page<Coche> findColor(Pageable page, String color);
+
+
 }

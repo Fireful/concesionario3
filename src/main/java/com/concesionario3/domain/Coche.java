@@ -35,6 +35,9 @@ public class Coche implements Serializable {
     @Column(name = "precio")
     private Float precio;
 
+    @Column(name = "color")
+    private String color;
+
     @OneToOne(mappedBy = "coche")
     @JsonIgnoreProperties(value = "coche")
     private Venta venta;
@@ -126,6 +129,7 @@ public class Coche implements Serializable {
             ", electrico='" + isElectrico() + "'" +
             ", precio=" + getPrecio() + "'" +
             ", Venta id="+getVenta() + "'"+
+            ", Color="+getColor() + "'"+
             "}";
     }
 
@@ -135,5 +139,13 @@ public class Coche implements Serializable {
 
     public void setVenta(Venta venta) {
         this.venta = venta;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

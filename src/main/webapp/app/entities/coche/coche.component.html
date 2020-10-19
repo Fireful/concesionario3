@@ -7,10 +7,11 @@
 
     <h2>
         <select class="form-control-sm" #mySelect (change)='paginador(mySelect.value)'>
-            <option class='option' value='selecciona' selected disabled>Selecciona</option>
+            <!--             <option class='option' value='selecciona' selected disabled>Selecciona</option>
+ -->
             <option class='option' value="5">5</option>
             <option class='option' value="10">10</option>
-            <option class='option' value="20">20</option>
+            <option class='option' value="20" selected>20</option>
         </select>
 
         <!-- <select class="form-control-sm" #mySelectHybrid (change)='hybrid(mySelectHybrid.value)'>
@@ -27,12 +28,10 @@
     </div> -->
 
         <div class="btn-group btn-group-sm  d-inline" role="group" aria-label="...">
-            <button type="button" class="btn btn-secondary" name="todos" [(ngModel)]='swTodos' value='swTodos'
-                (click)='hybrid("todos")'>Todos</button>
-            <button type="button" class="btn btn-secondary" name="elec" [(ngModel)]='swElec' value='swElec'
+            <button type="button" class="btn btn-secondary" name="todos" (click)='hybrid("todos")'>Todos</button>
+            <button type="button" class="btn btn-secondary" name="elec"
                 (click)='hybrid("electricos")'>Electricos</button>
-            <button type="button" class="btn btn-secondary" name="termic" [(ngModel)]='swTermic' value='swTermic'
-                (click)='hybrid("termicos")'>Térmicos</button>
+            <button type="button" class="btn btn-secondary" name="termic" (click)='hybrid("termicos")'>Térmicos</button>
         </div>
         <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche"
             [routerLink]="['/coche/new']">
@@ -61,6 +60,20 @@
                 Vendidos
             </span>
         </button>
+        <input type="color" name="filtroColor" list="filtroColores" #colorFiltro (change)='colorFilter(colorFiltro.value)'>
+        <datalist id="filtroColores">
+            <option *ngFor="let coche1 of coches">
+                <span *ngFor="let coche2 of coches">
+                    <span *ngIf="coche2.color===coche1.color; else distintos">
+                        {{ coche2.color }}
+                        
+                    </span>
+                </span>
+            </option>
+            <ng-template #distintos>
+                
+            </ng-template>
+        </datalist>
     </h2>
 
     <jhi-alert-error></jhi-alert-error>
@@ -126,6 +139,15 @@
                         <a [routerLink]="['/venta', coche.venta?.id, 'view']">{{ coche.venta?.id }} <span
                                 jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a>
                     </td>
+                    <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
+                    <td>
+                        <fa-icon icon="car" style="color:'{{ coche.color }}'; stroke: black; stroke-width: 30px;">
+                        </fa-icon>{{ coche.color }}
+                    </td>
+
+                    <ng-template #sinColor>
+                        <td></td>
+                    </ng-template>
 
                     <td class="text-right">
                         <div class="btn-group">

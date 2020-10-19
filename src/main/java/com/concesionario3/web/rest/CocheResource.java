@@ -138,6 +138,14 @@ public class CocheResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), coche);
         return ResponseEntity.ok().headers(headers).body(coche.getContent());
     }
+
+    @GetMapping("/coches/color/{color}")
+    public ResponseEntity<List<Coche>> getColores(Pageable page, @PathVariable String color){
+        log.debug("REST request to get venta: {}", color);
+        Page<Coche> coche=cocheService.findColor(page, color);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), coche);
+        return ResponseEntity.ok().headers(headers).body(coche.getContent());
+    }
     
 
 

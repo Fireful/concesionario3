@@ -6,6 +6,7 @@ export interface ICoche {
   electrico?: boolean;
   precio?: number;
   venta?: IVenta;
+  color?: string;
 }
 
 export class Coche implements ICoche {
@@ -15,7 +16,8 @@ export class Coche implements ICoche {
     public anio?: number,
     public electrico?: boolean,
     public precio?: number,
-    public venta?: IVenta
+    public venta?: IVenta,
+    public color?: string
   ) {
     this.electrico = this.electrico || false;
   }

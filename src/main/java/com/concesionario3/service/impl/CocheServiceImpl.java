@@ -106,4 +106,12 @@ public class CocheServiceImpl implements CocheService {
             return cocheRepository.findAll(page);
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Coche> findColor(Pageable page, String color){
+    
+            return cocheRepository.findByColor(page, color);
+
+    }
 }

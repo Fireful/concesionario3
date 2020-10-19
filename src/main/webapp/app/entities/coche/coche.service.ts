@@ -45,4 +45,8 @@ export class CocheService {
     const options = createRequestOption(req);
     return this.http.get<ICoche[]>(`${this.resourceUrl}/${tipo}/electricos`, { params: options, observe: 'response' });
   }
+  colores(req?: any, color?: string): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<ICoche[]>(`${this.resourceUrl}/color/${encodeURIComponent(req.color)}`, { params: options, observe: 'response' });
+  }
 }
