@@ -1,11 +1,11 @@
-id;marca;anio;electrico;precio
-1;gold;24400;true;82329
-2;Global invoice;15636;false;30617
-3;deposit;32161;true;63709
-4;Focused bypass;83131;true;69514
-5;Credit Card Account card Soft;23593;true;48929
-6;Auto Loan Account compressing radical;14537;true;65758
-7;Wisconsin Berkshire;88189;true;32333
-8;Handmade Metal Chicken Keyboard customer loyalty;55378;true;35349
-9;frame function;50730;false;99216
-10;Kazakhstan Sports;51710;false;89266
+id;marca;modelo;anio;electrico;precio
+1;Renault;Clio;24400;true;82329
+2;Citroën;C5 Aircross;15636;false;30617
+3;Peugeot;3008;32161;true;63709
+4;Opel;Insignia;83131;true;69514
+5;Tesla;Model S;23593;true;48929
+6;Fiat;Punto;14537;true;65758
+7;Lamborghini;Gallardo;88189;true;32333
+8;Bugatti;Veyron;55378;true;35349
+9;DS;4 Crossback;50730;false;99216
+10;Citroën; C3 Picasso;51710;false;89266

@@ -37,6 +37,10 @@ public class CocheResourceIT {
     private static final String DEFAULT_MARCA = "AAAAAAAAAA";
     private static final String UPDATED_MARCA = "BBBBBBBBBB";
 
+    private static final String DEFAULT_MODELO = "CCCCCCCCCC";
+    private static final String UPDATED_MODELO = "DDDDDDDDDD";
+
+
     private static final Integer DEFAULT_ANIO = 1;
     private static final Integer UPDATED_ANIO = 2;
 
@@ -92,6 +96,7 @@ public class CocheResourceIT {
     public static Coche createEntity(EntityManager em) {
         Coche coche = new Coche()
             .marca(DEFAULT_MARCA)
+            .modelo(DEFAULT_MODELO)
             .anio(DEFAULT_ANIO)
             .electrico(DEFAULT_ELECTRICO)
             .precio(DEFAULT_PRECIO);
@@ -106,6 +111,7 @@ public class CocheResourceIT {
     public static Coche createUpdatedEntity(EntityManager em) {
         Coche coche = new Coche()
             .marca(UPDATED_MARCA)
+            .modelo(UPDATED_MODELO)
             .anio(UPDATED_ANIO)
             .electrico(UPDATED_ELECTRICO)
             .precio(UPDATED_PRECIO);
@@ -174,7 +180,7 @@ public class CocheResourceIT {
             .andExpect(jsonPath("$.[*].electrico").value(hasItem(DEFAULT_ELECTRICO.booleanValue())))
             .andExpect(jsonPath("$.[*].precio").value(hasItem(DEFAULT_PRECIO.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getCoche() throws Exception {

@@ -26,6 +26,10 @@ public class Coche implements Serializable {
     @Column(name = "marca")
     private String marca;
 
+    @Column(name = "modelo")
+    private String modelo;
+
+
     @Column(name = "anio")
     private Integer anio;
 
@@ -141,6 +145,11 @@ public class Coche implements Serializable {
         this.venta = venta;
     }
 
+    public Coche color(String color) {
+        this.color = color;
+        return this;
+    }
+
     public String getColor() {
         return color;
     }
@@ -148,4 +157,16 @@ public class Coche implements Serializable {
     public void setColor(String color) {
         this.color = color;
     }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+	public Coche modelo(String updatedModelo) {
+		return null;
+	}
 }

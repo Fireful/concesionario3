@@ -14,13 +14,14 @@
         "question": "Are you sure you want to delete Venta {{ id }}?"
       },
       "detail": {
-        "title": "Venta"
+        "title": "Sales"
       },
-      "fecha": "Fecha",
-      "importeTotal": "Importe Total",
-      "coche": "Coche",
-      "cliente": "Cliente",
-      "vendedor": "Vendedor"
+      "fecha": "Date",
+      "importeTotal": "Total Amount",
+      "coche": "Car",
+      "cliente": "Customer",
+      "vendedor": "Salesman",
+      "metodoPago": "Payment method"
     }
   }
 }

@@ -29,6 +29,9 @@ export class VentaUpdateComponent implements OnInit {
   coches: ICoche[] = [];
   clientes: ICliente[] = [];
   vendedors: IVendedor[] = [];
+  metodoPago: MetodoPago[] = [];
+
+  metodo = Object.entries(MetodoPago).map(([key, value]) => ({ number: key, word: value }));
 
   editForm = this.fb.group({
     id: [],
@@ -36,7 +39,8 @@ export class VentaUpdateComponent implements OnInit {
     importeTotal: [],
     coche: [],
     cliente: [],
-    vendedor: []
+    vendedor: [],
+    metodoPago: []
   });
 
   constructor(
