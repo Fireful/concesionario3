@@ -17,6 +17,8 @@
 	<include file="config/liquibase/changelog/20201013105100_added_entity_Venta.xml" relativeToChangelogFile="false"/>
 	<include file="config/liquibase/changelog/20201013105200_added_entity_Cliente.xml" relativeToChangelogFile="false"/>
 	<include file="config/liquibase/changelog/20201015125425_modified_entity_Coche_add_column_color.xml" relativeToChangelogFile="false"/>
+	<include file="config/liquibase/changelog/20201020100725_modified_entity_Venta_add_column_metodo_pago.xml" relativeToChangelogFile="false"/>
+	
 	<!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 	<include file="config/liquibase/changelog/20201013105100_added_entity_constraints_Venta.xml" relativeToChangelogFile="false"/>
 	<!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+        <property name="autoIncrement" value="true"/>
+        <property name="enumerate" value="enum('transferencia','efectivo','adeudos_sepa','tarjeta')" dbms="mysql" />
+        <property name="enumerate" value="varchar(20)" dbms="postgresql, h2, oracle" />
+    <!--
+        Added the entity Coche.
+    -->
+    <changeSet id="20201020100725" author="jhipster">
+        <addColumn tableName="venta">
+            <column name="metodo_pago" type="${enumerate}">
+            </column>
+            <column name="numero_venta" type="varchar(20)" >
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

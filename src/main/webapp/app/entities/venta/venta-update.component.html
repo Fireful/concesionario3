@@ -47,6 +47,7 @@
                         <option [ngValue]="vendedorOption.id === editForm.get('vendedor')!.value?.id ? editForm.get('vendedor')!.value : vendedorOption" *ngFor="let vendedorOption of vendedors; trackBy: trackById">{{ vendedorOption.nombre }}</option>
                     </select>
                 </div>
+                
             </div>
 
             <div>

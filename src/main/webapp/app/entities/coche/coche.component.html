@@ -60,17 +60,14 @@
                 Vendidos
             </span>
         </button>
-        <input type="color" name="filtroColor" list="filtroColores" #colorFiltro (change)='colorFilter(colorFiltro.value)'>
+        <input type="color" name="filtroColor" list="filtroColores" #colorFiltro
+            (change)='colorFilter(colorFiltro.value)'>
         <datalist id="filtroColores">
             <option *ngFor="let coche1 of coches">
-                
-                        {{ coche1.color }}
-                        
-                    
-                
+                {{ coche1.color }}
             </option>
             <ng-template #distintos>
-                
+
             </ng-template>
         </datalist>
     </h2>
@@ -139,11 +136,9 @@
                                 jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a>
                     </td>
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
-                    <td>
-                        <fa-icon icon="car" style="color:'{{ coche.color }}'; stroke: black; stroke-width: 30px;">
-                        </fa-icon>{{ coche.color }}
+                    <td *ngIf="coche.color; else sinColor">
+                        <fa-icon icon="car" style="color: {{ coche.color }};"></fa-icon>{{ coche.color }}
                     </td>
-
                     <ng-template #sinColor>
                         <td></td>
                     </ng-template>

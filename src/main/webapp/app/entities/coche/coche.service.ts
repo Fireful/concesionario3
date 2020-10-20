@@ -12,7 +12,6 @@ type EntityArrayResponseType = HttpResponse<ICoche[]>;
 @Injectable({ providedIn: 'root' })
 export class CocheService {
   public resourceUrl = SERVER_API_URL + 'api/coches';
-
   constructor(protected http: HttpClient) {}
 
   create(coche: ICoche): Observable<EntityResponseType> {
@@ -45,7 +44,7 @@ export class CocheService {
     const options = createRequestOption(req);
     return this.http.get<ICoche[]>(`${this.resourceUrl}/${tipo}/electricos`, { params: options, observe: 'response' });
   }
-  colores(req?: any, color?: any): Observable<EntityArrayResponseType> {
+  colores(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<ICoche[]>(`${this.resourceUrl}/color/${encodeURIComponent(req.color)}`, { params: options, observe: 'response' });
   }
