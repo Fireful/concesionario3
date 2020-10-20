@@ -16,6 +16,7 @@ import { ICliente } from 'app/shared/model/cliente.model';
 import { ClienteService } from 'app/entities/cliente/cliente.service';
 import { IVendedor } from 'app/shared/model/vendedor.model';
 import { VendedorService } from 'app/entities/vendedor/vendedor.service';
+import { MetodoPago } from 'app/entities/venta/metodo-pago.enum';
 
 type SelectableEntity = ICoche | ICliente | IVendedor;
 

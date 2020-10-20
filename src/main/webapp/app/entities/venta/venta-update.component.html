@@ -31,7 +31,7 @@
                         <option [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption" *ngFor="let cocheOption of coches; trackBy: trackById">{{ cocheOption.marca }}</option>
                     </select>
                 </div>
-
+                
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="concesionario3App.venta.cliente" for="field_cliente">Cliente</label>
                     <select class="form-control" id="field_cliente" name="cliente" formControlName="cliente">
