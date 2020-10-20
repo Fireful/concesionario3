@@ -2,6 +2,7 @@ import { IVenta } from 'app/shared/model/venta.model';
 export interface ICoche {
   id?: number;
   marca?: string;
+  modelo?: string;
   anio?: number;
   electrico?: boolean;
   precio?: number;
@@ -13,6 +14,7 @@ export class Coche implements ICoche {
   constructor(
     public id?: number,
     public marca?: string,
+    public modelo?: string,
     public anio?: number,
     public electrico?: boolean,
     public precio?: number,

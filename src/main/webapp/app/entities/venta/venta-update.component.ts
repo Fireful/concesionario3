@@ -16,6 +16,7 @@ import { ICliente } from 'app/shared/model/cliente.model';
 import { ClienteService } from 'app/entities/cliente/cliente.service';
 import { IVendedor } from 'app/shared/model/vendedor.model';
 import { VendedorService } from 'app/entities/vendedor/vendedor.service';
+import { MetodoPago } from 'app/entities/venta/metodo-pago.enum';
 
 type SelectableEntity = ICoche | ICliente | IVendedor;
 
@@ -28,6 +29,9 @@ export class VentaUpdateComponent implements OnInit {
   coches: ICoche[] = [];
   clientes: ICliente[] = [];
   vendedors: IVendedor[] = [];
+  metodoPago: MetodoPago[] = [];
+
+  metodo = Object.entries(MetodoPago).map(([key, value]) => ({ number: key, word: value }));
 
   editForm = this.fb.group({
     id: [],
@@ -35,7 +39,8 @@ export class VentaUpdateComponent implements OnInit {
     importeTotal: [],
     coche: [],
     cliente: [],
-    vendedor: []
+    vendedor: [],
+    metodoPago: []
   });
 
   constructor(

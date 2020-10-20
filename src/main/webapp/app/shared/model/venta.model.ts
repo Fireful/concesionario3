@@ -19,6 +19,8 @@ export class Venta implements IVenta {
     public importeTotal?: number,
     public coche?: ICoche,
     public cliente?: ICliente,
-    public vendedor?: IVendedor
+    public vendedor?: IVendedor,
+    public metodoPago?: string,
+    public numeroVenta?: number
   ) {}
 }

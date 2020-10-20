@@ -20,7 +20,8 @@
       "importeTotal": "Importe Total",
       "coche": "Coche",
       "cliente": "Cliente",
-      "vendedor": "Vendedor"
+      "vendedor": "Vendedor",
+      "metodoPago": "Método de pago"
     }
   }
 }

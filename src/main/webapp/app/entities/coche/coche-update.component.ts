@@ -19,6 +19,7 @@ export class CocheUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     marca: [],
+    modelo: [],
     anio: [],
     electrico: [],
     precio: [],
@@ -42,6 +43,7 @@ export class CocheUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: coche.id,
       marca: coche.marca,
+      modelo: coche.modelo,
       anio: coche.anio,
       electrico: coche.electrico,
       precio: coche.precio,
@@ -69,6 +71,7 @@ export class CocheUpdateComponent implements OnInit {
       ...new Coche(),
       id: this.editForm.get(['id'])!.value,
       marca: this.editForm.get(['marca'])!.value,
+      modelo: this.editForm.get(['modelo'])!.value,
       anio: this.editForm.get(['anio'])!.value,
       electrico: this.editForm.get(['electrico'])!.value,
       precio: this.editForm.get(['precio'])!.value,

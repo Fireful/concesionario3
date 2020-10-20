@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(CocheService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Coche(0, 'AAAAAAA', 0, false, 0);
+      elemDefault = new Coche(0, 'AAAAAAA', '0', 0, false, 0);
     });
 
     describe('Service methods', () => {

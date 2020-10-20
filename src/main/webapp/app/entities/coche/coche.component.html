@@ -29,12 +29,10 @@
 
         <div class="btn-group btn-group-sm  d-inline" role="group" aria-label="...">
             <button type="button" class="btn btn-secondary" name="todos" (click)='hybrid("todos")'>Todos</button>
-            <button type="button" class="btn btn-secondary" name="elec"
-                (click)='hybrid("electricos")'>Electricos</button>
+            <button type="button" class="btn btn-secondary" name="elec" (click)='hybrid("electricos")'>Electricos</button>
             <button type="button" class="btn btn-secondary" name="termic" (click)='hybrid("termicos")'>Térmicos</button>
         </div>
-        <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche"
-            [routerLink]="['/coche/new']">
+        <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche" [routerLink]="['/coche/new']">
             <fa-icon icon="plus"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.createLabel">
                 Create a new Coche
@@ -47,8 +45,7 @@
                 Todos
             </span>
         </button>
-        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars"
-            (click)="disponibles()">
+        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars" (click)="disponibles()">
             <fa-icon icon="asterisk"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.disponibles">
                 Disponibles
@@ -63,14 +60,10 @@
         <input type="color" name="filtroColor" list="filtroColores" #colorFiltro (change)='colorFilter(colorFiltro.value)'>
         <datalist id="filtroColores">
             <option *ngFor="let coche1 of coches">
-                
-                        {{ coche1.color }}
-                        
-                    
-                
+                {{ coche1.color }}
             </option>
             <ng-template #distintos>
-                
+
             </ng-template>
         </datalist>
     </h2>
@@ -93,14 +86,16 @@
                     <th scope="col" jhiSortBy="marca"><span jhiTranslate="concesionario3App.coche.marca">Marca</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
+                    <th scope="col" jhiSortBy="modelo"><span jhiTranslate="concesionario3App.coche.modelo">Modelo</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                     <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.coche.anio">Anio</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.coche.color">Color</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="electrico"><span
-                            jhiTranslate="concesionario3App.coche.electrico">Electrico</span>
+                    <th scope="col" jhiSortBy="electrico"><span jhiTranslate="concesionario3App.coche.electrico">Electrico</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="precio"><span jhiTranslate="concesionario3App.coche.precio">Precio</span>
@@ -121,6 +116,7 @@
 
                     <td><a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a></td>
                     <td>{{ coche.marca }}</td>
+                    <td>{{ coche.modelo }}</td>
                     <td>{{ coche.anio }}</td>
                     <td>{{ coche.color }}</td>
                     <td *ngIf="coche.electrico==true">
@@ -139,25 +135,21 @@
                                 jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a>
                     </td>
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
-                    <td>
-                        <fa-icon icon="car" style="color:'{{ coche.color }}'; stroke: black; stroke-width: 30px;">
-                        </fa-icon>{{ coche.color }}
+                    <td *ngIf="coche.color; else sinColor">
+                        <fa-icon icon="car" style="color: {{coche.color}};"></fa-icon>{{ coche.color }}
                     </td>
-
                     <ng-template #sinColor>
                         <td></td>
                     </ng-template>
 
                     <td class="text-right">
                         <div class="btn-group">
-                            <button type="submit" [routerLink]="['/coche', coche.id, 'view']"
-                                class="btn btn-info btn-sm">
+                            <button type="submit" [routerLink]="['/coche', coche.id, 'view']" class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <button type="submit" [routerLink]="['/coche', coche.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                            <button type="submit" [routerLink]="['/coche', coche.id, 'edit']" class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
@@ -180,8 +172,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
-                [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)">
             </ngb-pagination>
         </div>
     </div>

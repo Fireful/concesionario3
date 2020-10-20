@@ -19,6 +19,9 @@
             <column name="marca" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="modelo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="anio" type="integer">
                 <constraints nullable="true" />
             </column>

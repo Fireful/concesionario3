@@ -1,8 +1,11 @@
 {
     "name": "Coche",
-    "fields": [
-        {
+    "fields": [{
             "fieldName": "marca",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "modelo",
             "fieldType": "String"
         },
         {
@@ -16,7 +19,13 @@
         {
             "fieldName": "precio",
             "fieldType": "Float"
+        },
+
+        {
+            "fieldName": "color",
+            "fieldType": "String"
         }
+
     ],
     "relationships": [],
     "changelogDate": "20201013104900",

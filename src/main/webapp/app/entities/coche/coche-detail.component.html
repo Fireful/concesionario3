@@ -24,17 +24,16 @@
                 <dd>
                     <span>{{ coche.precio }}</span>
                 </dd>
+                <dd>
+                    <span>{{ coche.color }}</span>
+                </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/coche', coche.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/coche', coche.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>

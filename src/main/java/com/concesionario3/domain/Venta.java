@@ -1,5 +1,6 @@
 package com.concesionario3.domain;
 
+import com.concesionario3.domain.Enum.EnumMetodoPago;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -41,6 +42,10 @@ public class Venta implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("ventas")
     private Vendedor vendedor;
+
+    @Column(name="metodo_pago", nullable = false )
+    @Enumerated(value = EnumType.STRING)
+    private EnumMetodoPago metodoPago;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -140,5 +145,13 @@ public class Venta implements Serializable {
             ", fecha='" + getFecha() + "'" +
             ", importeTotal=" + getImporteTotal() +
             "}";
+    }
+
+    public EnumMetodoPago getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(EnumMetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
     }
 }

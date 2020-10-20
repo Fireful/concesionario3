@@ -12,7 +12,6 @@ import { TIPO } from 'app/shared/constants/pagination.constants';
 
 import { CocheService } from './coche.service';
 import { CocheDeleteDialogComponent } from './coche-delete-dialog.component';
-import { createOfflineCompileUrlResolver } from '@angular/compiler';
 
 @Component({
   selector: 'jhi-coche',
