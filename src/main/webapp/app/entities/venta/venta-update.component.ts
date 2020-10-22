@@ -26,6 +26,7 @@ type SelectableEntity = ICoche | ICliente | IVendedor;
 })
 export class VentaUpdateComponent implements OnInit {
   isSaving = false;
+
   coches: ICoche[] = [];
   clientes: ICliente[] = [];
   vendedors: IVendedor[] = [];
@@ -96,7 +97,8 @@ export class VentaUpdateComponent implements OnInit {
       importeTotal: venta.importeTotal,
       coche: venta.coche,
       cliente: venta.cliente,
-      vendedor: venta.vendedor
+      vendedor: venta.vendedor,
+      metodoPago: venta.metodoPago
     });
   }
 
@@ -122,7 +124,8 @@ export class VentaUpdateComponent implements OnInit {
       importeTotal: this.editForm.get(['importeTotal'])!.value,
       coche: this.editForm.get(['coche'])!.value,
       cliente: this.editForm.get(['cliente'])!.value,
-      vendedor: this.editForm.get(['vendedor'])!.value
+      vendedor: this.editForm.get(['vendedor'])!.value,
+      metodoPago: this.editForm.get(['metodoPago'])!.value
     };
   }
 

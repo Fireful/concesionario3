@@ -10,6 +10,7 @@ export interface IVenta {
   coche?: ICoche;
   cliente?: ICliente;
   vendedor?: IVendedor;
+  metodoPago?: string;
 }
 
 export class Venta implements IVenta {

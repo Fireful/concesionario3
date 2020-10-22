@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
         <property name="autoIncrement" value="true"/>
-        <property name="enumerate" value="enum('transferencia','efectivo','adeudos_sepa','tarjeta')" dbms="mysql" />
+        <property name="enumerate" value="enum('TRANSFERENCIA','EFECTIVO','DOMICILIACIÓN','TARJETA')" dbms="mysql" />
         <property name="enumerate" value="varchar(20)" dbms="postgresql, h2, oracle" />
     <!--
         Added the entity Coche.

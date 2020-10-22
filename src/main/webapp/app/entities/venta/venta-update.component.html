@@ -55,6 +55,7 @@
                     <select class="form-control" id="field_metodoPago" name="metodoPago" formControlName="metodoPago">
                         <option [ngValue]="null"></option>
                         <option
+                            [ngValue]="met.word"
                             *ngFor="let met of metodo; trackBy: trackById">{{ met.number }}
                         </option>
                     </select>

@@ -21,7 +21,8 @@
       "coche": "Coche",
       "cliente": "Cliente",
       "vendedor": "Vendedor",
-      "metodoPago": "Método de pago"
+      "metodoPago": "Método de pago",
+      "numeroVenta": "Número de venta"
     }
   }
 }
