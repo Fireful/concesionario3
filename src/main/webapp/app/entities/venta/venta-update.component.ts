@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
@@ -18,12 +18,9 @@ import { IVendedor } from 'app/shared/model/vendedor.model';
 import { VendedorService } from 'app/entities/vendedor/vendedor.service';
 import { MetodoPago } from 'app/entities/venta/metodo-pago.enum';
 
-type SelectableEntity = ICoche | ICliente | IVendedor;
+type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 
-@Component({
-  selector: 'jhi-venta-update',
-  templateUrl: './venta-update.component.html'
-})
+@Component({ selector: 'jhi-venta-update', templateUrl: './venta-update.component.html' })
 export class VentaUpdateComponent implements OnInit {
   isSaving = false;
 
@@ -31,6 +28,8 @@ export class VentaUpdateComponent implements OnInit {
   clientes: ICliente[] = [];
   vendedors: IVendedor[] = [];
   metodoPago: MetodoPago[] = [];
+  predicate!: string;
+  ascending!: boolean;
 
   metodo = Object.entries(MetodoPago).map(([key, value]) => ({ number: key, word: value }));
 
@@ -41,11 +40,13 @@ export class VentaUpdateComponent implements OnInit {
     coche: [],
     cliente: [],
     vendedor: [],
-    metodoPago: []
+    metodoPago: [],
+    numeroVenta: []
   });
 
   constructor(
     protected ventaService: VentaService,
+    protected router: Router,
     protected cocheService: CocheService,
     protected clienteService: ClienteService,
     protected vendedorService: VendedorService,
@@ -58,6 +59,11 @@ export class VentaUpdateComponent implements OnInit {
       if (!venta.id) {
         const today = moment().startOf('day');
         venta.fecha = today;
+      }
+
+      if (!venta.numeroVenta) {
+        const today = moment().startOf('day');
+        venta.numeroVenta = '00' + 'Hola' + today.year();
       }
 
       this.updateForm(venta);
@@ -98,7 +104,8 @@ export class VentaUpdateComponent implements OnInit {
       coche: venta.coche,
       cliente: venta.cliente,
       vendedor: venta.vendedor,
-      metodoPago: venta.metodoPago
+      metodoPago: venta.metodoPago,
+      numeroVenta: venta.numeroVenta
     });
   }
 
@@ -125,7 +132,8 @@ export class VentaUpdateComponent implements OnInit {
       coche: this.editForm.get(['coche'])!.value,
       cliente: this.editForm.get(['cliente'])!.value,
       vendedor: this.editForm.get(['vendedor'])!.value,
-      metodoPago: this.editForm.get(['metodoPago'])!.value
+      metodoPago: this.editForm.get(['metodoPago'])!.value,
+      numeroVenta: this.editForm.get(['numeroVenta'])!.value
     };
   }
 

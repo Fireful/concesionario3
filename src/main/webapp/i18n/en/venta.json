@@ -21,7 +21,8 @@
       "coche": "Car",
       "cliente": "Customer",
       "vendedor": "Salesman",
-      "metodoPago": "Payment method"
+      "metodoPago": "Payment method",
+      "numeroVenta": "# Sale"
     }
   }
 }

@@ -10,9 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Calendar;
 
 import java.util.Optional;
 
@@ -30,27 +34,30 @@ public class VentaServiceImpl implements VentaService {
 
     public VentaServiceImpl(VentaRepository ventaRepository, CocheRepository cocheRepository) {
         this.ventaRepository = ventaRepository;
-        this.cocheRepository=cocheRepository;
+        this.cocheRepository = cocheRepository;
     }
 
     /**
-     * Save a venta.
-     *9
+     * Save a venta. 9
+     *
      * @param venta the entity to save.
      * @return the persisted entity.
      */
     @Override
     public Venta save(Venta venta) {
         log.debug("Request to save Venta : {}", venta);
+
+        String numero = numeroVenta();
+
+        log.debug("Número generado: " + numero);
+        venta.setNumeroVenta(numero);
         Venta result = ventaRepository.save(venta);
         Optional<Coche> coche = cocheRepository.findById(venta.getCoche().getId());
         /* TODO Mirar por qué peta al modificar una ventaa poniendo el coche vacío */
-        /* if(coche.isPresent())
-        {
-            log.debug("Entramos");
-            coche.get().setVenta(venta);
-            cocheRepository.save(coche.get());
-        } */
+        /*
+         * if(coche.isPresent()) { log.debug("Entramos"); coche.get().setVenta(venta);
+         * cocheRepository.save(coche.get()); }
+         */
         return result;
     }
 
@@ -66,6 +73,19 @@ public class VentaServiceImpl implements VentaService {
         log.debug("Request to get all Ventas");
         return ventaRepository.findAll(pageable);
     }
+
+    /* TODO Borrar la siguiente funcion */
+    public String numeroVenta() {
+        Page<Venta> num = ventaRepository.findAll(PageRequest.of(0, 1, Direction.DESC, "Id"));
+        Calendar ahora = Calendar.getInstance();
+
+        String numVenta = "00" + ((num.getContent().get(0).getId()) + 1) + String.valueOf(ahora.get(Calendar.YEAR));
+
+        return numVenta;
+    }
+    /* */
+
+    
 
     /**
      * Get one venta by id.

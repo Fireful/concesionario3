@@ -118,7 +118,7 @@
                     <td>{{ coche.marca }}</td>
                     <td>{{ coche.modelo }}</td>
                     <td>{{ coche.anio }}</td>
-                    <td>{{ coche.color }}</td>
+                    <td style="color: {{coche.color}};">{{ coche.color }}</td>
                     <td *ngIf="coche.electrico==true">
                         <fa-icon icon="check" style="color: green;"></fa-icon>
                     </td>
@@ -135,8 +135,8 @@
                                 jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a>
                     </td>
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
-                    <td *ngIf="coche.color; else sinColor">
-                        <fa-icon icon="car" style="color: {{coche.color}};"></fa-icon>{{ coche.color }}
+                    <td *ngIf="coche.color; else sinColor" style="background-color: {{coche.color}};">
+                        <fa-icon icon="car" style="color: {{ coche.color }};"></fa-icon>{{ coche.color }}
                     </td>
                     <ng-template #sinColor>
                         <td></td>

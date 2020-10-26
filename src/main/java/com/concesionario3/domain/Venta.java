@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 
+
 /**
  * A Venta.
  */
@@ -30,7 +31,7 @@ public class Venta implements Serializable {
     @Column(name = "importe_total")
     private Double importeTotal;
 
-    @OneToOne 
+    @OneToOne
     @JoinColumn(name = "coche_id")
     @JsonIgnoreProperties(value = "venta")
     private Coche coche;
@@ -46,6 +47,12 @@ public class Venta implements Serializable {
     @Column(name="metodo_pago", nullable = false )
     @Enumerated(value = EnumType.STRING)
     private EnumMetodoPago metodoPago;
+
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secuencia")
+    @SequenceGenerator(name = "secuencia", allocationSize = 1)
+    @Column(name = "numero_venta")
+    private String numeroVenta;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -77,6 +84,8 @@ public class Venta implements Serializable {
         this.importeTotal = importeTotal;
         return this;
     }
+
+
 
     public void setImporteTotal(Double importeTotal) {
         this.importeTotal = importeTotal;
@@ -153,5 +162,14 @@ public class Venta implements Serializable {
 
     public void setMetodoPago(EnumMetodoPago metodoPago) {
         this.metodoPago = metodoPago;
+    }
+
+    public String getNumeroVenta() {
+        return numeroVenta;
+    }
+
+    public Venta setNumeroVenta(String numeroVenta) {
+        this.numeroVenta = numeroVenta;
+        return this;
     }
 }

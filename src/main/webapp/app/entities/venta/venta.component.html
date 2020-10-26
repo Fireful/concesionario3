@@ -69,22 +69,22 @@
                             <a [routerLink]="['/vendedor', venta.vendedor?.id, 'view']">{{ venta.vendedor?.nombre }}</a>
                         </div>
                     </td>
-                    <td *ngIf="venta.metodoPago=='TRANSFERENCIA' else noTransferencia">
-                        <span style="color: red;">{{venta.metodoPago }}</span>
+                    <td *ngIf="venta.metodoPago=='TRANSFERENCIA' else noTransferencia" style="text-align: center;">
+                        <span style="color: red; font-weight: bold;">{{venta.metodoPago }}</span>
                     </td>
                     <ng-template #noTransferencia>
-                        <td *ngIf="venta.metodoPago=='EFECTIVO' else noEfectivo">
-                            <span style="color: orange;">{{venta.metodoPago }}</span>
+                        <td *ngIf="venta.metodoPago=='EFECTIVO' else noEfectivo" style="text-align: center;">
+                            <span style="color: orange; font-weight: bold;">{{venta.metodoPago }}</span>
                         </td>
                     </ng-template>
                     <ng-template #noEfectivo>
-                        <td *ngIf="venta.metodoPago=='DOMICILIACIÓN' else noDomiciliacion">
-                            <span style="color: green;">{{venta.metodoPago }}</span>
+                        <td *ngIf="venta.metodoPago=='DOMICILIACION' else noDomiciliacion" style="text-align: center;">
+                            <span style="color: green; font-weight: bold;">{{venta.metodoPago }}</span>
                         </td>
                     </ng-template>
                     <ng-template #noDomiciliacion>
-                        <td *ngIf="venta.metodoPago=='TARJETA' else otro">
-                            <span style="color: blue;">{{venta.metodoPago }}</span>
+                        <td *ngIf="venta.metodoPago=='TARJETA' else otro" style="text-align: center;">
+                            <span style="color: blue; font-weight: bold;">{{venta.metodoPago }}</span>
                         </td>
                     </ng-template>
                     <ng-template #otro>

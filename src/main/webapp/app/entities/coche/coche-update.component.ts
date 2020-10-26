@@ -31,6 +31,7 @@ export class CocheUpdateComponent implements OnInit {
   public color(colorForm: string): void {
     const inputElement = document.getElementById('color') as HTMLInputElement;
     inputElement.value = colorForm;
+    inputElement.style.backgroundColor = colorForm;
     this.editForm.controls.color.setValue(colorForm);
   }
   ngOnInit(): void {
