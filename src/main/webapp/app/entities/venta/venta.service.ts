@@ -70,4 +70,8 @@ export class VentaService {
     }
     return res;
   }
+
+  getNumeroVenta(): Observable<Object> {
+    return this.http.get<string>(`${this.resourceUrl}/get-num`, { responseType: 'text' as 'json' });
+  }
 }

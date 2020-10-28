@@ -53,7 +53,7 @@
                 <tr *ngFor="let venta of ventas ;trackBy: trackId">
                     <td><a [routerLink]="['/venta', venta.id, 'view']">{{ venta.id }}</a></td>
                     <td>{{ venta.fecha | date:'medium' }}</td>
-                    <td>{{ venta.importeTotal }}</td>
+                    <td>{{ venta.importeTotal | currency: 'EUR' }}</td>
                     <td>
                         <div *ngIf="venta.coche">
                             <a [routerLink]="['/coche', venta.coche?.id, 'view']">{{ venta.coche?.marca }} {{ venta.coche?.modelo }}</a>

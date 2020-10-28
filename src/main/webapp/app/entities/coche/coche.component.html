@@ -6,7 +6,7 @@
     </h2>
 
     <h2>
-        <select class="form-control-sm" #mySelect (change)='paginador(mySelect.value)'>
+        <select class="form-control-sm rounded-pill" #mySelect (change)='paginador(mySelect.value)'>
             <!--             <option class='option' value='selecciona' selected disabled>Selecciona</option>
  -->
             <option class='option' value="5">5</option>
@@ -32,26 +32,26 @@
             <button type="button" class="btn btn-secondary" name="elec" (click)='hybrid("electricos")'>Electricos</button>
             <button type="button" class="btn btn-secondary" name="termic" (click)='hybrid("termicos")'>Térmicos</button>
         </div>
-        <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche" [routerLink]="['/coche/new']">
+        <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche rounded-pill" [routerLink]="['/coche/new']">
             <fa-icon icon="plus"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.createLabel">
                 Create a new Coche
             </span>
         </button>
 
-        <button id="jh-show-all" class="mr-3 btn btn-success float-right jh-show-all all-cars" (click)="all()">
+        <button id="jh-show-all" class="mr-3 btn btn-success float-right jh-show-all all-cars rounded-pill" (click)="all()">
             <fa-icon icon="list"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.todos">
                 Todos
             </span>
         </button>
-        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars" (click)="disponibles()">
+        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars rounded-pill" (click)="disponibles()">
             <fa-icon icon="asterisk"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.disponibles">
                 Disponibles
             </span>
         </button>
-        <button id="jh-sold" class="mr-3 btn btn-warning float-right jh-sold sold-cars" (click)="vendidos()">
+        <button id="jh-sold" class="mr-3 btn btn-warning float-right jh-sold sold-cars rounded-pill" (click)="vendidos()">
             <fa-icon icon="road"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.vendidos">
                 Vendidos
@@ -92,10 +92,13 @@
                     <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.coche.anio">Anio</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.coche.color">Color</span>
+
+                    <th scope="col" jhiSortBy="electrico"><span jhiTranslate="concesionario3App.coche.electrico">Electrico</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="electrico"><span jhiTranslate="concesionario3App.coche.electrico">Electrico</span>
+
+
+                    <th scope="col" jhiSortBy="color"><span jhiTranslate="concesionario3App.coche.color">Color</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="precio"><span jhiTranslate="concesionario3App.coche.precio">Precio</span>
@@ -103,9 +106,6 @@
                     </th>
                     <th scope="col" jhiSortBy="venta_id"><span jhiTranslate="concesionario3App.coche.venta_id">Venta
                             Id</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="color"><span jhiTranslate="concesionario3App.coche.color">Color</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col"></th>
@@ -118,7 +118,6 @@
                     <td>{{ coche.marca }}</td>
                     <td>{{ coche.modelo }}</td>
                     <td>{{ coche.anio }}</td>
-                    <td style="color: {{coche.color}};">{{ coche.color }}</td>
                     <td *ngIf="coche.electrico==true">
                         <fa-icon icon="check" style="color: green;"></fa-icon>
                     </td>
@@ -126,21 +125,26 @@
                     <td *ngIf="coche.electrico==false">
                         <fa-icon icon="times" style="color: red;"></fa-icon>
                     </td>
-                    <td>{{ coche.precio }}</td>
-                    <td *ngIf="!coche.venta">
-                        <span jhiTranslate="concesionario3App.coche.disponible">Disponible</span>
-                    </td>
-                    <td *ngIf="coche.venta">
-                        <a [routerLink]="['/venta', coche.venta?.id, 'view']">{{ coche.venta?.id }} <span
-                                jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a>
-                    </td>
+
+
+
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
-                    <td *ngIf="coche.color; else sinColor" style="background-color: {{coche.color}};">
-                        <fa-icon icon="car" style="color: {{ coche.color }};"></fa-icon>{{ coche.color }}
+                    <td *ngIf="coche.color; else sinColor">
+                        <fa-icon icon="car" style="color:{{ coche.color }}; stroke: black; stroke-width: 30px;">
+                        </fa-icon>{{ coche.color }}
                     </td>
                     <ng-template #sinColor>
                         <td></td>
                     </ng-template>
+                    <td>{{ coche.precio | currency: 'EUR' }}</td>
+                    <td *ngIf="!coche.venta">
+                        <span jhiTranslate="concesionario3App.coche.disponible">Disponible</span>
+                    </td>
+                    <td *ngIf="coche.venta">
+                        <a [routerLink]="['/venta', coche.venta?.id, 'view']">{{ coche.venta?.numeroVenta }}</a>
+                        <!-- <span jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a> -->
+                    </td>
+
 
                     <td class="text-right">
                         <div class="btn-group">

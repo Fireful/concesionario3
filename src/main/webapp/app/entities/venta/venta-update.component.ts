@@ -33,6 +33,7 @@ export class VentaUpdateComponent implements OnInit {
 
   metodo = Object.entries(MetodoPago).map(([key, value]) => ({ number: key, word: value }));
 
+  dataAux = '';
   editForm = this.fb.group({
     id: [],
     fecha: [],
@@ -54,6 +55,13 @@ export class VentaUpdateComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
+  public cambioCoche(idCoche: string): void {
+    const inputElement = document.getElementById('field_importeTotal') as HTMLInputElement;
+    inputElement.value = idCoche;
+
+    this.editForm.controls.importeTotal.setValue(idCoche);
+  }
+
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ venta }) => {
       if (!venta.id) {
@@ -62,14 +70,23 @@ export class VentaUpdateComponent implements OnInit {
       }
 
       if (!venta.numeroVenta) {
-        const today = moment().startOf('day');
-        venta.numeroVenta = '00' + 'Hola' + today.year();
+        if (venta.id) {
+          const today = moment().startOf('day');
+          venta.numeroVenta = '00' + venta.id + today.year();
+        } else {
+          this.ventaService.getNumeroVenta().subscribe(data => {
+            this.dataAux = data.toString();
+            this.editForm.patchValue({
+              numeroVenta: this.dataAux
+            });
+          });
+        }
       }
 
       this.updateForm(venta);
 
       this.cocheService
-        .query({ filter: 'venta-is-null' })
+        .disponibles({ venta: false })
         .pipe(
           map((res: HttpResponse<ICoche[]>) => {
             return res.body || [];
@@ -94,6 +111,14 @@ export class VentaUpdateComponent implements OnInit {
 
       this.vendedorService.query().subscribe((res: HttpResponse<IVendedor[]>) => (this.vendedors = res.body || []));
     });
+    if (null === this.editForm.get('numeroVenta')!.value) {
+      this.ventaService.getNumeroVenta().subscribe(data => {
+        this.dataAux = data.toString();
+        this.editForm.patchValue({
+          numeroVenta: this.dataAux
+        });
+      });
+    }
   }
 
   updateForm(venta: IVenta): void {
@@ -155,5 +180,9 @@ export class VentaUpdateComponent implements OnInit {
 
   trackById(index: number, item: SelectableEntity): any {
     return item.id;
+  }
+
+  getNumVenta(): void {
+    this.ventaService.getNumeroVenta();
   }
 }

@@ -34,6 +34,7 @@ export class CocheUpdateComponent implements OnInit {
     inputElement.style.backgroundColor = colorForm;
     this.editForm.controls.color.setValue(colorForm);
   }
+
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ coche }) => {
       this.updateForm(coche);

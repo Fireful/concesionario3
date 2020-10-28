@@ -22,11 +22,14 @@
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.coche.precio">Precio</span></dt>
                 <dd>
-                    <span>{{ coche.precio }}</span>
+                    <span>{{ coche.precio | currency: 'EUR' }}</span>
                 </dd>
-                <dd>
-                    <span>{{ coche.color }}</span>
-                </dd>
+                <dt><span jhiTranslate="concesionario3App.coche.color">Color</span></dt>
+                <div class="border-box" style="width: 80px; height: 40px; background-color: {{ coche.color }};">
+                    <dd>
+                        <span>{{ coche.color }}</span>
+                    </dd>
+                </div>
             </dl>
 
             <button type="submit" (click)="previousState()" class="btn btn-info">

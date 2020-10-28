@@ -12,6 +12,7 @@ type EntityArrayResponseType = HttpResponse<ICoche[]>;
 @Injectable({ providedIn: 'root' })
 export class CocheService {
   public resourceUrl = SERVER_API_URL + 'api/coches';
+
   constructor(protected http: HttpClient) {}
 
   create(coche: ICoche): Observable<EntityResponseType> {
@@ -35,9 +36,14 @@ export class CocheService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  vendidos(req?: any, venta?: Boolean): Observable<EntityArrayResponseType> {
+  vendidos(req?: any, venta?: boolean): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<ICoche[]>(`${this.resourceUrl}/${venta}/vendidos`, { params: options, observe: 'response' });
+  }
+
+  disponibles(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<ICoche[]>(`${this.resourceUrl}/${req.venta}/vendidos`, { params: options, observe: 'response' });
   }
 
   electricos(req?: any, tipo?: string): Observable<EntityArrayResponseType> {

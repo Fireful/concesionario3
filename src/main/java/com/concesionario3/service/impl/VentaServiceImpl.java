@@ -45,20 +45,12 @@ public class VentaServiceImpl implements VentaService {
      */
     @Override
     public Venta save(Venta venta) {
+
+        if (venta.getNumeroVenta() == null) {
+            venta.setNumeroVenta(getNewNumeroVenta());
+        }
         log.debug("Request to save Venta : {}", venta);
-
-        String numero = numeroVenta();
-
-        log.debug("Número generado: " + numero);
-        venta.setNumeroVenta(numero);
-        Venta result = ventaRepository.save(venta);
-        Optional<Coche> coche = cocheRepository.findById(venta.getCoche().getId());
-        /* TODO Mirar por qué peta al modificar una ventaa poniendo el coche vacío */
-        /*
-         * if(coche.isPresent()) { log.debug("Entramos"); coche.get().setVenta(venta);
-         * cocheRepository.save(coche.get()); }
-         */
-        return result;
+        return ventaRepository.save(venta);
     }
 
     /**
@@ -85,7 +77,7 @@ public class VentaServiceImpl implements VentaService {
     }
     /* */
 
-    
+
 
     /**
      * Get one venta by id.
@@ -109,5 +101,19 @@ public class VentaServiceImpl implements VentaService {
     public void delete(Long id) {
         log.debug("Request to delete Venta : {}", id);
         ventaRepository.deleteById(id);
+    }
+
+    @Override
+    public String getNewNumeroVenta() {
+
+        String numero = "00";
+
+        Page<Venta> numeros = ventaRepository.findAll(PageRequest.of(0, 1, Direction.DESC, "id"));
+        numero += ((numeros.getContent().get(0).getId()) + 1);
+
+        Calendar rightNow = Calendar.getInstance();
+        numero += String.valueOf(rightNow.get(Calendar.YEAR));
+        return numero;
+
     }
 }
