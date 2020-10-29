@@ -25,9 +25,10 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="concesionario3App.venta.coche" for="field_coche">Coche</label>
-                    <select class="form-control" id="field_coche" name="coche" formControlName="coche">
+                    <select class="form-control" id="field_coche" name="coche" formControlName="coche" [(ngModel)]="cocheSeleccionado" (change)="cambioCoche()">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption" *ngFor="let cocheOption of coches; trackBy: trackById">{{ cocheOption.marca }} {{cocheOption.modelo }}</option>
+                        <option [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption" *ngFor="let cocheOption of coches; trackBy: trackById">
+                            {{ cocheOption.marca }} {{cocheOption.modelo }}</option>
                     </select>
                 </div>
 

@@ -29,7 +29,7 @@ public class Venta implements Serializable {
     private Instant fecha;
 
     @Column(name = "importe_total")
-    private Double importeTotal;
+    private Float importeTotal;
 
     @OneToOne
     @JoinColumn(name = "coche_id")
@@ -76,18 +76,18 @@ public class Venta implements Serializable {
         this.fecha = fecha;
     }
 
-    public Double getImporteTotal() {
+    public Float getImporteTotal() {
         return importeTotal;
     }
 
-    public Venta importeTotal(Double importeTotal) {
+    public Venta importeTotal(Float importeTotal) {
         this.importeTotal = importeTotal;
         return this;
     }
 
 
 
-    public void setImporteTotal(Double importeTotal) {
+    public void setImporteTotal(Float importeTotal) {
         this.importeTotal = importeTotal;
     }
 

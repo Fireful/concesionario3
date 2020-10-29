@@ -34,6 +34,7 @@ export class VentaUpdateComponent implements OnInit {
   metodo = Object.entries(MetodoPago).map(([key, value]) => ({ number: key, word: value }));
 
   dataAux = '';
+  seleccion = 'Importe Total';
   editForm = this.fb.group({
     id: [],
     fecha: [],
@@ -44,6 +45,8 @@ export class VentaUpdateComponent implements OnInit {
     metodoPago: [],
     numeroVenta: []
   });
+  cocheSeleccionado: any;
+  seleccionado: any;
 
   constructor(
     protected ventaService: VentaService,
@@ -55,11 +58,16 @@ export class VentaUpdateComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  public cambioCoche(idCoche: string): void {
-    const inputElement = document.getElementById('field_importeTotal') as HTMLInputElement;
-    inputElement.value = idCoche;
+  cambioCoche(): void {
+    this.seleccionado = this.cocheSeleccionado.precio;
+    this.editForm.patchValue({
+      importeTotal: this.seleccionado
+    });
+    alert(this.seleccionado);
+    /*  this.ventaService.subscribe(data =>{
+        this.dataAux = data
 
-    this.editForm.controls.importeTotal.setValue(idCoche);
+      }); */
   }
 
   ngOnInit(): void {
@@ -125,7 +133,7 @@ export class VentaUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: venta.id,
       fecha: venta.fecha ? venta.fecha.format(DATE_TIME_FORMAT) : null,
-      importeTotal: venta.importeTotal,
+      importeTotal: venta.coche ? venta.coche.precio : null,
       coche: venta.coche,
       cliente: venta.cliente,
       vendedor: venta.vendedor,

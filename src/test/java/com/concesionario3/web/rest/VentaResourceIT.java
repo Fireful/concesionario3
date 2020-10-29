@@ -39,8 +39,8 @@ public class VentaResourceIT {
     private static final Instant DEFAULT_FECHA = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FECHA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Double DEFAULT_IMPORTE_TOTAL = 1D;
-    private static final Double UPDATED_IMPORTE_TOTAL = 2D;
+    private static final Float DEFAULT_IMPORTE_TOTAL = 1F;
+    private static final Float UPDATED_IMPORTE_TOTAL = 2F;
 
     @Autowired
     private VentaRepository ventaRepository;
@@ -162,7 +162,7 @@ public class VentaResourceIT {
             .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())))
             .andExpect(jsonPath("$.[*].importeTotal").value(hasItem(DEFAULT_IMPORTE_TOTAL.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getVenta() throws Exception {
