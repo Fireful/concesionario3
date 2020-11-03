@@ -82,12 +82,12 @@ public class VendedorServiceImpl implements VendedorService {
     }
 
     @Override
-    public String getMaxVentas() {
+    public Vendedor getMaxVentas() {
 
-        String nombre;
+        Vendedor nombre;
 
         Page<Vendedor> nombres = vendedorRepository.findAll(PageRequest.of(0, 1, Direction.DESC, "numVentas"));
-        nombre = nombres.getContent().get(0).getNombre();
+        nombre = nombres.getContent().get(0);
 
 
         return nombre;

@@ -17,7 +17,6 @@ import { JhiEventManager } from 'ng-jhipster';
   styleUrls: ['home.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  dataAux = '';
   maxVentasHome = '';
   vendedores?: IVendedor[] = [];
   account: Account | null = null;
@@ -30,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ascending!: boolean;
   ngbPaginationPage = 1;
   maxVentas: IVendedor[] = [];
+  dataAux?: IVendedor | null;
 
   constructor(
     private accountService: AccountService,
@@ -62,9 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
 
     this.vendedorService.getMax().subscribe(data => {
-      this.dataAux = data.toString();
-      this.dataAux = data.toString();
-      this.maxVentasHome = this.dataAux;
+      this.dataAux = data.body;
     });
   }
 

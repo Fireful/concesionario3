@@ -43,6 +43,6 @@ public interface VendedorService {
      */
     void delete(Long id);
 
-    String getMaxVentas();
+    Vendedor getMaxVentas();
 
 }

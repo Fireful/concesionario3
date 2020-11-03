@@ -126,9 +126,9 @@ public class VendedorResource {
 
     @GetMapping(value = "/vendedors/get-max")
     @Transactional
-    public ResponseEntity<String> maxVentas() {
+    public ResponseEntity<Vendedor> maxVentas() {
         log.debug("REST request to get num venta");
-        String vendMaxVentas = vendedorService.getMaxVentas();
+        Vendedor vendMaxVentas = vendedorService.getMaxVentas();
         return new ResponseEntity<>(vendMaxVentas, HttpStatus.OK);
     }
 }

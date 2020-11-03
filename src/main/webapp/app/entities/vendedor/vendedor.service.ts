@@ -36,7 +36,7 @@ export class VendedorService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  getMax(): Observable<Object> {
-    return this.http.get<string>(`${this.resourceUrl}/get-max`, { responseType: 'text' as 'json' });
+  getMax(): Observable<EntityResponseType> {
+    return this.http.get<IVendedor>(`${this.resourceUrl}/get-max`, { observe: 'response' });
   }
 }

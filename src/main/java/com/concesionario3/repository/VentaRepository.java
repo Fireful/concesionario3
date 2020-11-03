@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface VentaRepository extends JpaRepository<Venta, Long> {
+    Long countByName(String name);
 
 }
