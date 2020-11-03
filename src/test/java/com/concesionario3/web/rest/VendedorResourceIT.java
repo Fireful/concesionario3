@@ -167,7 +167,7 @@ public class VendedorResourceIT {
             .andExpect(jsonPath("$.[*].dni").value(hasItem(DEFAULT_DNI)))
             .andExpect(jsonPath("$.[*].totalVentas").value(hasItem(DEFAULT_TOTAL_VENTAS.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getVendedor() throws Exception {

@@ -1,13 +1,17 @@
 package com.concesionario3.service.impl;
 
 import com.concesionario3.service.VendedorService;
+import com.concesionario3.web.rest.VendedorResource;
 import com.concesionario3.domain.Vendedor;
+import com.concesionario3.repository.CocheRepository;
 import com.concesionario3.repository.VendedorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,5 +79,18 @@ public class VendedorServiceImpl implements VendedorService {
     public void delete(Long id) {
         log.debug("Request to delete Vendedor : {}", id);
         vendedorRepository.deleteById(id);
+    }
+
+    @Override
+    public String getMaxVentas() {
+
+        String nombre;
+
+        Page<Vendedor> nombres = vendedorRepository.findAll(PageRequest.of(0, 1, Direction.DESC, "numVentas"));
+        nombre = nombres.getContent().get(0).getNombre();
+
+
+        return nombre;
+
     }
 }

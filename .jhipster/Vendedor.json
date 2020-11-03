@@ -1,7 +1,6 @@
 {
     "name": "Vendedor",
-    "fields": [
-        {
+    "fields": [{
             "fieldName": "nombre",
             "fieldType": "String"
         },
@@ -11,6 +10,10 @@
         },
         {
             "fieldName": "totalVentas",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "numVentas",
             "fieldType": "Double"
         }
     ],

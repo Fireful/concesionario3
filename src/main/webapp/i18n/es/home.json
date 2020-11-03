@@ -2,10 +2,11 @@
   "home": {
     "title": "¡Bienvenido, Java Hipster!",
     "subtitle": "Esta es su página de inicio",
+    "question": "Si tiene preguntas sobre JHipster:",
     "logged": {
       "message": "Está conectado como \"{{username}}\"."
     },
-    "question": "Si tiene preguntas sobre JHipster:",
+
     "link": {
       "homepage": "Página de inicio de JHipster",
       "stackoverflow": "JHipster en Stack Overflow",
@@ -14,6 +15,7 @@
       "follow": "contacto @jhipster en Twitter"
     },
     "like": "Si te gusta JHipster, danos una estrella en",
-    "github": "GitHub"
+    "github": "GitHub",
+    "masVentas": "Vendedor con más ventas"
   }
 }

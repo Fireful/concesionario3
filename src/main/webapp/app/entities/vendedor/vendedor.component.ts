@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IVendedor } from 'app/shared/model/vendedor.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+
 import { VendedorService } from './vendedor.service';
 import { VendedorDeleteDialogComponent } from './vendedor-delete-dialog.component';
 
@@ -17,6 +18,7 @@ import { VendedorDeleteDialogComponent } from './vendedor-delete-dialog.componen
 })
 export class VendedorComponent implements OnInit, OnDestroy {
   vendedors?: IVendedor[];
+  venta: Boolean = true;
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;

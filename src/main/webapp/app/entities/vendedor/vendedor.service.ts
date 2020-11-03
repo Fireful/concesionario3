@@ -35,4 +35,8 @@ export class VendedorService {
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  getMax(): Observable<Object> {
+    return this.http.get<string>(`${this.resourceUrl}/get-max`, { responseType: 'text' as 'json' });
+  }
 }

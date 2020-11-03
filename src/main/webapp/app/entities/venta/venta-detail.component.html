@@ -10,16 +10,16 @@
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="concesionario3App.venta.fecha">Fecha</span></dt>
                 <dd>
-                    <span>{{ venta.fecha }}</span>
+                    <span>{{ venta.fecha | date: 'EEEE, d, MMMM y, h:mm:ss' }}</span>
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.venta.importeTotal">Importe Total</span></dt>
                 <dd>
-                    <span>{{ venta.importeTotal }}</span>
+                    <span>{{ venta.importeTotal | currency: 'EUR' }}</span>
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.venta.coche">Coche</span></dt>
                 <dd>
                     <div *ngIf="venta.coche">
-                        <a [routerLink]="['/coche', venta.coche?.id, 'view']">{{ venta.coche?.marca }}</a>
+                        <a [routerLink]="['/coche', venta.coche?.id, 'view']">{{ venta.coche?.marca }} {{ venta.coche?.modelo }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.venta.cliente">Cliente</span></dt>

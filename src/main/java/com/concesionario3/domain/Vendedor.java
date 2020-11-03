@@ -5,6 +5,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 
 /**
@@ -30,7 +32,14 @@ public class Vendedor implements Serializable {
     @Column(name = "total_ventas")
     private Double totalVentas;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    @Column(name = "num_ventas")
+    private Integer numVentas;
+
+
+
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not
+    // remove
     public Long getId() {
         return id;
     }
@@ -77,7 +86,8 @@ public class Vendedor implements Serializable {
     public void setTotalVentas(Double totalVentas) {
         this.totalVentas = totalVentas;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -95,13 +105,22 @@ public class Vendedor implements Serializable {
         return 31;
     }
 
+
+
     @Override
     public String toString() {
-        return "Vendedor{" +
-            "id=" + getId() +
+        return "Vendedor{" + "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", dni='" + getDni() + "'" +
-            ", totalVentas=" + getTotalVentas() +
-            "}";
+            ", totalVentas=" + getTotalVentas() + "}";
     }
+
+    public Integer getNumVentas() {
+        return numVentas;
+    }
+
+    public void setNumVentas(Integer numVentas) {
+        this.numVentas = numVentas;
+    }
+
 }

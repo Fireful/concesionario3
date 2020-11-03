@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, RequiredValidator, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -47,6 +47,7 @@ export class VentaUpdateComponent implements OnInit {
   });
   cocheSeleccionado: any;
   seleccionado: any;
+  numero: any;
 
   constructor(
     protected ventaService: VentaService,
@@ -133,8 +134,8 @@ export class VentaUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: venta.id,
       fecha: venta.fecha ? venta.fecha.format(DATE_TIME_FORMAT) : null,
-      importeTotal: venta.coche ? venta.coche.precio : null,
-      coche: venta.coche,
+      importeTotal: venta.importeTotal,
+      coche: venta.id,
       cliente: venta.cliente,
       vendedor: venta.vendedor,
       metodoPago: venta.metodoPago,

@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -121,5 +122,13 @@ public class VendedorResource {
         log.debug("REST request to delete Vendedor : {}", id);
         vendedorService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping(value = "/vendedors/get-max")
+    @Transactional
+    public ResponseEntity<String> maxVentas() {
+        log.debug("REST request to get num venta");
+        String vendMaxVentas = vendedorService.getMaxVentas();
+        return new ResponseEntity<>(vendMaxVentas, HttpStatus.OK);
     }
 }

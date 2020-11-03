@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="vendedor">
-            <h2><span jhiTranslate="concesionario3App.vendedor.detail.title">Vendedor</span> {{ vendedor.id }}</h2>
+            <h2>{{ vendedor.nombre }}</h2>
 
             <hr>
 
@@ -18,19 +18,19 @@
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.vendedor.totalVentas">Total Ventas</span></dt>
                 <dd>
-                    <span>{{ vendedor.totalVentas }}</span>
+                    <span>{{ vendedor.totalVentas | currency: 'EUR' }}</span>
+                </dd>
+                <dt><span jhiTranslate="concesionario3App.vendedor.numVentas">Núm. Ventas</span></dt>
+                <dd>
+                    <span>{{ vendedor.numVentas }}</span>
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/vendedor', vendedor.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/vendedor', vendedor.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>

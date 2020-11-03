@@ -42,4 +42,7 @@ public interface VendedorService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    String getMaxVentas();
+
 }

@@ -34,15 +34,19 @@
                     <th scope="col" jhiSortBy="totalVentas"><span jhiTranslate="concesionario3App.vendedor.totalVentas">Total Ventas</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
+                    <th scope="col" jhiSortBy="numVentas"><span jhiTranslate="concesionario3App.vendedor.numVentas">Núm. Ventas</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let vendedor of vendedors ;trackBy: trackId">
                     <td><a [routerLink]="['/vendedor', vendedor.id, 'view']">{{ vendedor.id }}</a></td>
-                    <td>{{ vendedor.nombre }}</td>
-                    <td>{{ vendedor.dni }}</td>
-                    <td>{{ vendedor.totalVentas }}</td>
+                    <td>{{ vendedor.nombre }} {{vendedor.venta?.id}}</td>
+                    <td>{{ vendedor.dni }} </td>
+                    <td>{{ vendedor.totalVentas | currency: 'EUR' }}</td>
+                    <td>{{ vendedor.numVentas }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit" [routerLink]="['/vendedor', vendedor.id, 'view']" class="btn btn-info btn-sm">

@@ -11,6 +11,7 @@ Main page styles
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
   only screen and (-moz-min-device-pixel-ratio: 2),
   only screen and (-o-min-device-pixel-ratio: 2/1),
@@ -20,4 +21,54 @@ Main page styles
     background: url('../../content/images/jhipster_family_member_1.svg') no-repeat center top;
     background-size: contain;
   }
+}
+
+.tarjeta {
+  height: 200px;
+  width: 360px;
+  color: #333;
+  border-radius: 20px;
+  transition: 500ms linear;
+  background-color: aquamarine;
+  border-radius: 20px;
+  transition: 1000ms;
+}
+
+.tarjeta-cuerpo {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 40px;
+}
+
+.tarjeta:hover {
+  background-color: rgb(64, 153, 123);
+  box-shadow: 8px 8px 10px 0 rgb(126, 126, 126);
+  transform: scale(1.03);
+}
+
+.tarjeta-header {
+  background-color: rgb(109, 216, 180);
+  border-radius: 20px;
+}
+
+.tarj {
+  background-color: indianred;
+}
+
+.tarj:hover {
+  background-color: green;
+}
+
+.styleMaxVentas {
+  font-size: 20px;
+  font-weight: bold;
+  transition: 1s linear;
+}
+
+.styleMaxVentas:hover {
+  background-color: rgb(121, 104, 151);
+  font-size: 40px;
 }

@@ -2,7 +2,7 @@
   "concesionario3App": {
     "vendedor": {
       "home": {
-        "title": "Vendedors",
+        "title": "Vendedores",
         "createLabel": "Crear nuevo Vendedor",
         "createOrEditLabel": "Crear o editar Vendedor",
         "notFound": "Ningún Vendedors encontrado"
@@ -18,7 +18,8 @@
       },
       "nombre": "Nombre",
       "dni": "Dni",
-      "totalVentas": "Total Ventas"
+      "totalVentas": "Total Ventas",
+      "numVentas": "Núm. Ventas"
     }
   }
 }

@@ -1,10 +1,13 @@
 package com.concesionario3.service.impl;
 
+import com.concesionario3.service.VendedorService;
 import com.concesionario3.service.VentaService;
 import com.concesionario3.domain.Coche;
+import com.concesionario3.domain.Vendedor;
 import com.concesionario3.domain.Venta;
 import com.concesionario3.repository.VentaRepository;
 import com.concesionario3.repository.CocheRepository;
+import com.concesionario3.repository.VendedorRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +34,13 @@ public class VentaServiceImpl implements VentaService {
 
     private final VentaRepository ventaRepository;
     private final CocheRepository cocheRepository;
+    private final VendedorRepository vendedorRepository;
 
-    public VentaServiceImpl(VentaRepository ventaRepository, CocheRepository cocheRepository) {
+    public VentaServiceImpl(VentaRepository ventaRepository, CocheRepository cocheRepository,
+            VendedorRepository vendedorRepository) {
         this.ventaRepository = ventaRepository;
         this.cocheRepository = cocheRepository;
+        this.vendedorRepository = vendedorRepository;
     }
 
     /**
@@ -48,9 +54,28 @@ public class VentaServiceImpl implements VentaService {
 
         if (venta.getNumeroVenta() == null) {
             venta.setNumeroVenta(getNewNumeroVenta());
+
         }
+
+        if (!venta.getVendedor().getNombre().equals("")) {
+            Double actualizaVenta = venta.getVendedor().getTotalVentas();
+            actualizaVenta = (venta.getImporteTotal() + actualizaVenta);
+            venta.getVendedor().setTotalVentas(actualizaVenta);
+
+        }
+        if (venta.getVendedor().getNumVentas() == null) {
+            venta.getVendedor().setNumVentas(1);
+        } else {
+            Integer actualizaNumVentas = venta.getVendedor().getNumVentas();
+            actualizaNumVentas = (actualizaNumVentas + 1);
+            venta.getVendedor().setNumVentas(actualizaNumVentas);
+        }
+
+        vendedorRepository.save(venta.getVendedor());
+
         log.debug("Request to save Venta : {}", venta);
         return ventaRepository.save(venta);
+
     }
 
     /**
@@ -76,8 +101,6 @@ public class VentaServiceImpl implements VentaService {
         return numVenta;
     }
     /* */
-
-
 
     /**
      * Get one venta by id.

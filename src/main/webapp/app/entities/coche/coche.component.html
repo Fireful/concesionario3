@@ -7,25 +7,10 @@
 
     <h2>
         <select class="form-control-sm rounded-pill" #mySelect (change)='paginador(mySelect.value)'>
-            <!--             <option class='option' value='selecciona' selected disabled>Selecciona</option>
- -->
             <option class='option' value="5">5</option>
             <option class='option' value="10">10</option>
             <option class='option' value="20" selected>20</option>
         </select>
-
-        <!-- <select class="form-control-sm" #mySelectHybrid (change)='hybrid(mySelectHybrid.value)'>
-            <option class='option' value='todos' selected>Todos</option>
-            <option class='option' value="electricos"><span
-                    jhiTranslate="concesionario3App.coche.home.hybrid">Eléctricos</span></option>
-            <option class='option' value="termicos"><span
-                    jhiTranslate="concesionario3App.coche.home.termico">Térmicos</span></option>
-        </select> -->
-        <!-- <div class="custom-control custom-switch d-inline">
-        <input type="checkbox" class="custom-control-input" id='swElectricos' [(ngModel)]='swElec' (change)="hybrid()">
-        <label class="custom-control-label" for="swElectricos"><span
-                jhiTranslate="concesionario3App.coche.home.hybrid">Eléctricos</span></label>
-    </div> -->
 
         <div class="btn-group btn-group-sm  d-inline" role="group" aria-label="...">
             <button type="button" class="btn btn-secondary" name="todos" (click)='hybrid("todos")'>Todos</button>
@@ -125,12 +110,9 @@
                     <td *ngIf="coche.electrico==false">
                         <fa-icon icon="times" style="color: red;"></fa-icon>
                     </td>
-
-
-
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
                     <td *ngIf="coche.color; else sinColor">
-                        <fa-icon icon="car" style="color:{{ coche.color }}; stroke: black; stroke-width: 30px;">
+                        <fa-icon icon="car" style="color: {{ coche.color }}">
                         </fa-icon>{{ coche.color }}
                     </td>
                     <ng-template #sinColor>
@@ -142,7 +124,6 @@
                     </td>
                     <td *ngIf="coche.venta">
                         <a [routerLink]="['/venta', coche.venta?.id, 'view']">{{ coche.venta?.numeroVenta }}</a>
-                        <!-- <span jhiTranslate="concesionario3App.coche.vendido">Vendido</span></a> -->
                     </td>
 
 

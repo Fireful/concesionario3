@@ -2,23 +2,24 @@
   "concesionario3App": {
     "vendedor": {
       "home": {
-        "title": "Vendedors",
-        "createLabel": "Create a new Vendedor",
-        "createOrEditLabel": "Create or edit a Vendedor",
-        "notFound": "No Vendedors found"
+        "title": "Salesmen",
+        "createLabel": "Create a new salesman",
+        "createOrEditLabel": "Create or edit a salesman",
+        "notFound": "No salesmen found"
       },
-      "created": "A new Vendedor is created with identifier {{ param }}",
-      "updated": "A Vendedor is updated with identifier {{ param }}",
-      "deleted": "A Vendedor is deleted with identifier {{ param }}",
+      "created": "A new salesman is created with identifier {{ param }}",
+      "updated": "A salesman is updated with identifier {{ param }}",
+      "deleted": "A salesman is deleted with identifier {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Vendedor {{ id }}?"
+        "question": "Are you sure you want to delete salesman {{ id }}?"
       },
       "detail": {
-        "title": "Vendedor"
+        "title": "Salesman"
       },
-      "nombre": "Nombre",
-      "dni": "Dni",
-      "totalVentas": "Total Ventas"
+      "nombre": "Name",
+      "dni": "NID",
+      "totalVentas": "Total Amount",
+      "numVentas": "# Sales"
     }
   }
 }
