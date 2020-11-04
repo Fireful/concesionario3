@@ -102,10 +102,20 @@
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary btn-sm">
-                                <fa-icon icon="pencil-alt"></fa-icon>
-                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+                            <ng-container *ngIf="venta.numeroVenta===null else botonEditar">
+                                <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary btn-sm">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                            </ng-container>
+                            <ng-template #botonEditar>
+                                <button type="submit" disabled [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary btn-sm">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.vendido">Vendido</span>
+                                </button>
+                            </ng-template>
+
+
 
                             <button type="submit" (click)="delete(venta)" class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>

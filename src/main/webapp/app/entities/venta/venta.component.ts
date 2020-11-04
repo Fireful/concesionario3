@@ -24,6 +24,8 @@ export class VentaComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  booleanoEditar = true;
+  numero = '0';
 
   constructor(
     protected ventaService: VentaService,
@@ -49,6 +51,15 @@ export class VentaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.data.subscribe(({ venta }) => {
+      alert('v: ' + venta.g);
+      if (!venta.numeroVenta) {
+        this.booleanoEditar = false;
+      } else {
+        this.booleanoEditar = true;
+      }
+    });
+
     this.activatedRoute.data.subscribe(data => {
       this.page = data.pagingParams.page;
       this.ascending = data.pagingParams.ascending;

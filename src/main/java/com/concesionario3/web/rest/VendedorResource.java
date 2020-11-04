@@ -131,4 +131,13 @@ public class VendedorResource {
         Vendedor vendMaxVentas = vendedorService.getMaxVentas();
         return new ResponseEntity<>(vendMaxVentas, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/vendedors/get-max-dinero")
+    @Transactional
+    public ResponseEntity<Vendedor> maxDinero() {
+        log.debug("REST request to get num venta");
+        Vendedor vendMaxDinero = vendedorService.getMaxDinero();
+        return new ResponseEntity<>(vendMaxDinero, HttpStatus.OK);
+    }
+
 }

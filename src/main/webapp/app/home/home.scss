@@ -24,9 +24,9 @@ Main page styles
   }
 }
 
-.tarjeta {
+.tarjeta1 {
   height: 200px;
-  width: 360px;
+  width: auto;
   color: #333;
   border-radius: 20px;
   transition: 500ms linear;
@@ -35,23 +35,54 @@ Main page styles
   transition: 1000ms;
 }
 
-.tarjeta-cuerpo {
+.tarjeta1-cuerpo {
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  top: 40px;
+  top: 15px;
 }
 
-.tarjeta:hover {
+.tarjeta1:hover {
   background-color: rgb(64, 153, 123);
   box-shadow: 8px 8px 10px 0 rgb(126, 126, 126);
   transform: scale(1.03);
 }
 
-.tarjeta-header {
+.tarjeta1-header {
   background-color: rgb(109, 216, 180);
+  border-radius: 20px;
+}
+
+.tarjeta2 {
+  height: 200px;
+  width: auto;
+  color: #333;
+  border-radius: 20px;
+  transition: 500ms linear;
+  background-color: #ffa07a;
+  border-radius: 20px;
+  transition: 1000ms;
+}
+
+.tarjeta2-cuerpo {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 15px;
+}
+
+.tarjeta2:hover {
+  background-color: rgb(151, 94, 73);
+  box-shadow: 8px 8px 10px 0 #ce7c5e;
+  transform: scale(1.03);
+}
+
+.tarjeta2-header {
+  background-color: #ce7c5e;
   border-radius: 20px;
 }
 
@@ -61,15 +92,4 @@ Main page styles
 
 .tarj:hover {
   background-color: green;
-}
-
-.styleMaxVentas {
-  font-size: 20px;
-  font-weight: bold;
-  transition: 1s linear;
-}
-
-.styleMaxVentas:hover {
-  background-color: rgb(121, 104, 151);
-  font-size: 40px;
 }

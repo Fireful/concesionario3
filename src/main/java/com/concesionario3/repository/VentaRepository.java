@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface VentaRepository extends JpaRepository<Venta, Long> {
-    Long countByName(String name);
-
+    @Query("SELECT COUNT(v) FROM Venta v WHERE v.vendedor=?1")
+    Long countByName(String nombre);
 }

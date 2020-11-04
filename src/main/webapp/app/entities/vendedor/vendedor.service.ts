@@ -39,4 +39,8 @@ export class VendedorService {
   getMax(): Observable<EntityResponseType> {
     return this.http.get<IVendedor>(`${this.resourceUrl}/get-max`, { observe: 'response' });
   }
+
+  getMaxDinero(): Observable<EntityResponseType> {
+    return this.http.get<IVendedor>(`${this.resourceUrl}/get-max-dinero`, { observe: 'response' });
+  }
 }

@@ -8,23 +8,60 @@
             <div *ngSwitchCase="true ">
                 <h1>
                     <span id="home-logged-message " *ngIf="account " jhiTranslate="home.title" [translateValues]="{ username: account.login } ">Welcome,
-                    "{{ account.login }} ".</span>
+                        "{{ account.login }} ".</span>
                 </h1>
                 <div class="row">
                     <div class="col-4">
-                        <div class="tarjeta p-3">
-                            <div class="tarjeta-header p-2">
+                        <div class="tarjeta1 p-3">
+                            <div class="tarjeta1-header p-2">
                                 <h3 jhiTranslate="home.masVentas">Vendedor con más ventas</h3>
                             </div>
-                            <div class="tarjeta-cuerpo">
+                            <div class="tarjeta1-cuerpo">
+                                <div class="tarjeta1-texto">
+                                    <table class="table table-bordered" aria-describedby="HomePage">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    Vendedor
+                                                </th>
+                                                <th style="text-align: center;" scope="col">
+                                                    Ventas
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tr>
+                                            <td>{{dataMax.nombre}}</td>
+                                            <td style="text-align: center;">{{dataMax.numVentas}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
 
-                                <div class="tarjeta-texto">
-
-
-                                    <!-- <span class="styleMaxVentas" *ngFor="let vendedor of dataAux">{{vendedor.id}}</span> -->
-
-                                    <span *ngIf="dataAux" class="styleMaxVentas">{{dataAux.nombre}}</span>
-
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="tarjeta2 p-3">
+                            <div class="tarjeta2-header p-2">
+                                <h3 jhiTranslate="home.masDinero">Vendedor con mmejor recaudación</h3>
+                            </div>
+                            <div class="tarjeta2-cuerpo">
+                                <div class="tarjeta2-texto">
+                                    <table class="table table-bordered" aria-describedby="HomePage">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    Vendedor
+                                                </th>
+                                                <th style="text-align: center;" scope="col">
+                                                    Ventas
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tr>
+                                            <td>{{dataMaxDinero.nombre}}</td>
+                                            <td style="text-align: center;">{{dataMaxDinero.totalVentas}}</td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
 
@@ -61,7 +98,8 @@
                 <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
                 <a class="alert-link " (click)="login() " jhiTranslate="global.messages.info.authenticated.link">sign
                     in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default
-                    accounts:<br />- Administrator (login="admin " and password="admin ") <br />- User (login="user " and
+                    accounts:<br />- Administrator (login="admin " and password="admin ") <br />- User (login="user "
+                    and
                     password="user ").</span>
             </div>
 

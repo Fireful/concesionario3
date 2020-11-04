@@ -64,7 +64,6 @@ export class VentaUpdateComponent implements OnInit {
     this.editForm.patchValue({
       importeTotal: this.seleccionado
     });
-    alert(this.seleccionado);
     /*  this.ventaService.subscribe(data =>{
         this.dataAux = data
 

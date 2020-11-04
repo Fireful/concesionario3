@@ -45,4 +45,6 @@ public interface VendedorService {
 
     Vendedor getMaxVentas();
 
+    Vendedor getMaxDinero();
+
 }

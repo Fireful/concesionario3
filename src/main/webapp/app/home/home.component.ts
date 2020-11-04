@@ -29,7 +29,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ascending!: boolean;
   ngbPaginationPage = 1;
   maxVentas: IVendedor[] = [];
-  dataAux?: IVendedor | null;
+  dataMax?: IVendedor | null;
+  dataMaxDinero?: IVendedor | null;
+
+  today: Date = new Date();
+  dia?: any;
 
   constructor(
     private accountService: AccountService,
@@ -62,8 +66,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
 
     this.vendedorService.getMax().subscribe(data => {
-      this.dataAux = data.body;
+      this.dataMax = data.body;
     });
+
+    this.vendedorService.getMaxDinero().subscribe(data => {
+      this.dataMaxDinero = data.body;
+    });
+    this.dia = this.today.getDate();
+    alert(this.dia);
   }
 
   isAuthenticated(): boolean {

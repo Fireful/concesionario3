@@ -30,6 +30,8 @@ import java.util.Optional;
 @Transactional
 public class VentaServiceImpl implements VentaService {
 
+
+
     private final Logger log = LoggerFactory.getLogger(VentaServiceImpl.class);
 
     private final VentaRepository ventaRepository;
@@ -122,6 +124,15 @@ public class VentaServiceImpl implements VentaService {
      */
     @Override
     public void delete(Long id) {
+        Optional<Venta> venta = ventaRepository.findById(id);
+        if(venta.isPresent()){
+            Integer numeroVentas=venta.get().getVendedor().getNumVentas();
+            Double totalVentas=venta.get().getVendedor().getTotalVentas();
+            numeroVentas-=1;
+            totalVentas-=venta.get().getImporteTotal();
+            venta.get().getVendedor().setNumVentas(numeroVentas);
+            venta.get().getVendedor().setTotalVentas(totalVentas);
+        }
         log.debug("Request to delete Venta : {}", id);
         ventaRepository.deleteById(id);
     }
