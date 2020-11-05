@@ -1,6 +1,7 @@
 package com.concesionario3.domain;
 
-import com.concesionario3.domain.Enum.EnumMetodoPago;
+import com.concesionario3.domain.enums.EnumMetodoPago;
+import com.concesionario3.domain.enums.EnumEstadoVenta;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -53,6 +54,10 @@ public class Venta implements Serializable {
     @SequenceGenerator(name = "secuencia", allocationSize = 1)
     @Column(name = "numero_venta")
     private String numeroVenta;
+
+    @Column(name = "estado_venta", nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private EnumEstadoVenta estadoVenta;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -171,5 +176,13 @@ public class Venta implements Serializable {
     public Venta setNumeroVenta(String numeroVenta) {
         this.numeroVenta = numeroVenta;
         return this;
+    }
+
+    public EnumEstadoVenta getEstadoVenta() {
+        return estadoVenta;
+    }
+
+    public void setEstadoVenta(EnumEstadoVenta estadoVenta) {
+        this.estadoVenta = estadoVenta;
     }
 }

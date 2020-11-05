@@ -1,10 +1,17 @@
 {
   "home": {
-    "title": "Welcome, \"{{username}}\".",
+    "title": "PSA Group",
+    "disponibles": "Available cars",
+    "sinVentas": "No sales yet",
     "subtitle": "This is your homepage",
     "quesition": "If you have any question on JHipster:",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
+    },
+    "modal": {
+      "reset": {
+        "ventas": "Restaured sales"
+      }
     },
 
     "link": {

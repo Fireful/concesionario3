@@ -103,7 +103,11 @@
       "open": "Abrir",
       "save": "Guardar",
       "view": "Vista",
-      "vendido": "Vendido"
+      "vendido": "Vendido",
+      "disponible": "Disponible",
+      "iniciada": "Iniciada",
+      "enProceso": "En Procreso",
+      "terminada": "Terminada"
     },
     "detail": {
       "field": "Campo",

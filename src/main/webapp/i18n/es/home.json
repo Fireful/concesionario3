@@ -1,10 +1,17 @@
 {
   "home": {
-    "title": "¡Bienvenido, \"{{username}}\".",
+    "title": "Grupo PSA",
+    "disponibles": "Coches disponibles",
+    "sinVentas": "No hay ventas todavía",
     "subtitle": "Esta es su página de inicio",
     "question": "Si tiene preguntas sobre JHipster:",
     "logged": {
-      "message": "Está conectado como \"{{username}}\"."
+      "message": "Bienvenido, ¡{{username}}!."
+    },
+    "modal": {
+      "reset": {
+        "ventas": "Ventas reseteadas"
+      }
     },
 
     "link": {

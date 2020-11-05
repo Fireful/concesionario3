@@ -22,7 +22,8 @@
       "cliente": "Customer",
       "vendedor": "Salesman",
       "metodoPago": "Payment method",
-      "numeroVenta": "# Sale"
+      "numeroVenta": "# Sale",
+      "estadoVenta": "Sale Status"
     }
   }
 }

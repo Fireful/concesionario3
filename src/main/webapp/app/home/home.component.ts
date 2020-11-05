@@ -7,9 +7,14 @@ import { Account } from 'app/core/user/account.model';
 import { IVendedor } from 'app/shared/model/vendedor.model';
 import { VendedorService } from 'app/entities/vendedor/vendedor.service';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
+import { CocheService } from 'app/entities/coche/coche.service';
+import { ICoche } from 'app/shared/model/coche.model';
+import { HomeResetVentasComponent } from './home-reset-ventas.component';
 
 @Component({
   selector: 'jhi-home',
@@ -18,6 +23,7 @@ import { JhiEventManager } from 'ng-jhipster';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   maxVentasHome = '';
+  disponibles?: ICoche[];
   vendedores?: IVendedor[] = [];
   account: Account | null = null;
   authSubscription?: Subscription;
@@ -25,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
   page!: number;
-  predicate!: string;
+  predicate = 'id';
   ascending!: boolean;
   ngbPaginationPage = 1;
   maxVentas: IVendedor[] = [];
@@ -36,12 +42,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   dia?: any;
 
   constructor(
+    protected cocheService: CocheService,
     private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
     private loginModalService: LoginModalService,
-    private vendedorService: VendedorService
+    private vendedorService: VendedorService,
+    protected modalService: NgbModal
   ) {}
 
   loadPage(page?: number): void {
@@ -72,8 +80,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.vendedorService.getMaxDinero().subscribe(data => {
       this.dataMaxDinero = data.body;
     });
+
+    this.cocheService
+      .vendidos(
+        {
+          page: this.page - 1,
+          size: this.itemsPerPage,
+          sort: ['id,asc']
+        },
+        false
+      )
+      .subscribe(
+        (res: HttpResponse<ICoche[]>) => this.onSuccess(res.body, res.headers, this.page),
+        () => this.onError()
+      );
+
     this.dia = this.today.getDate();
     alert(this.dia);
+    if (this.dia === 5) {
+      alert('Hola');
+      this.modalService.open(HomeResetVentasComponent, { size: 'lg', backdrop: 'static' });
+    }
   }
 
   isAuthenticated(): boolean {
@@ -90,10 +117,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
-    if (this.predicate !== 'nombre') {
-      result.push('nombre');
+    if (this.predicate !== 'id') {
+      result.push('id');
     }
     return result;
+  }
+
+  trackId(index: number, item: ICoche): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    return item.id!;
   }
 
   ngOnDestroy(): void {
@@ -102,10 +134,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected onSuccess(data: IVendedor[] | null, headers: HttpHeaders, page: number): void {
+  protected onSuccess(data: ICoche[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    this.router.navigate(['/vendedor'], {
+    this.router.navigate(['/'], {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
@@ -113,6 +145,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
     this.vendedores = data || [];
+    this.disponibles = data || [];
   }
 
   protected onError(): void {

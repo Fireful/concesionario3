@@ -22,7 +22,8 @@
       "cliente": "Cliente",
       "vendedor": "Vendedor",
       "metodoPago": "Método de pago",
-      "numeroVenta": "Número de venta"
+      "numeroVenta": "Número de venta",
+      "estadoVenta": "Estado Venta"
     }
   }
 }

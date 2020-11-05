@@ -51,5 +51,7 @@ public interface CocheService {
 
     Page<Coche> findColor(Pageable page, String color);
 
+    Page<Coche> findDisponibles(Pageable page, Boolean venta);
+
 
 }

@@ -103,7 +103,11 @@
       "open": "Open",
       "save": "Save",
       "view": "View",
-      "vendido": "Sold"
+      "vendido": "Sold",
+      "disponible": "Available",
+      "iniciada": "Started",
+      "enProceso": "In Process",
+      "terminada": "Finished"
     },
     "detail": {
       "field": "Field",

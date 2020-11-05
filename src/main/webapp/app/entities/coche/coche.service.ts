@@ -43,7 +43,7 @@ export class CocheService {
 
   disponibles(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<ICoche[]>(`${this.resourceUrl}/${req.venta}/vendidos`, { params: options, observe: 'response' });
+    return this.http.get<ICoche[]>(`${this.resourceUrl}/${req.venta}/disponibles`, { params: options, observe: 'response' });
   }
 
   electricos(req?: any, tipo?: string): Observable<EntityArrayResponseType> {

@@ -15,9 +15,12 @@ import org.springframework.stereotype.Repository;
 public interface CocheRepository extends JpaRepository<Coche, Long> {
     @Query("SELECT c FROM Coche c INNER JOIN Venta v ON v.coche=c.id")
     Page<Coche> findAllByVendidos(Pageable page);
-    
+
     @Query("SELECT c FROM Coche c WHERE c.id NOT IN (SELECT cs FROM Coche cs INNER JOIN Venta v ON v.coche = cs.id)")
     Page<Coche> findAllByDisponibles(Pageable disp);
+
+    @Query("SELECT c FROM Coche c WHERE c.id NOT IN (SELECT cs FROM Coche cs INNER JOIN Venta v ON v.coche = cs.id)")
+    Page<Coche> findByDisponibles(Pageable disp);
 
     /* @Query("SELECT c FROM Coche c INNER JOIN Venta v ON v.coche=c.id")
     Page<Coche> findAllByDisponibles(Pageable disp);
@@ -28,9 +31,9 @@ public interface CocheRepository extends JpaRepository<Coche, Long> {
 
      @Query("SELECT c FROM Coche c WHERE c.electrico=0")
      Page<Coche> findAllTermicos(Pageable page);
-     
-     
+
+
      Page<Coche> findByColor(Pageable page, String color);
-     
+
 
 }

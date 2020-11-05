@@ -17,13 +17,14 @@ import { ClienteService } from 'app/entities/cliente/cliente.service';
 import { IVendedor } from 'app/shared/model/vendedor.model';
 import { VendedorService } from 'app/entities/vendedor/vendedor.service';
 import { MetodoPago } from 'app/entities/venta/metodo-pago.enum';
+import { EstadoVenta } from './estado-venta.enum';
 
 type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 
 @Component({ selector: 'jhi-venta-update', templateUrl: './venta-update.component.html' })
 export class VentaUpdateComponent implements OnInit {
   isSaving = false;
-
+  estadoVenta: EstadoVenta[] = [];
   coches: ICoche[] = [];
   clientes: ICliente[] = [];
   vendedors: IVendedor[] = [];
@@ -32,6 +33,7 @@ export class VentaUpdateComponent implements OnInit {
   ascending!: boolean;
 
   metodo = Object.entries(MetodoPago).map(([key, value]) => ({ number: key, word: value }));
+  estado = Object.entries(EstadoVenta).map(([key, value]) => ({ number: key, word: value }));
 
   dataAux = '';
   seleccion = 'Importe Total';
@@ -43,7 +45,8 @@ export class VentaUpdateComponent implements OnInit {
     cliente: [],
     vendedor: [],
     metodoPago: [],
-    numeroVenta: []
+    numeroVenta: [],
+    estadoVenta: []
   });
   cocheSeleccionado: any;
   seleccionado: any;
@@ -119,6 +122,7 @@ export class VentaUpdateComponent implements OnInit {
 
       this.vendedorService.query().subscribe((res: HttpResponse<IVendedor[]>) => (this.vendedors = res.body || []));
     });
+
     if (null === this.editForm.get('numeroVenta')!.value) {
       this.ventaService.getNumeroVenta().subscribe(data => {
         this.dataAux = data.toString();
@@ -138,7 +142,8 @@ export class VentaUpdateComponent implements OnInit {
       cliente: venta.cliente,
       vendedor: venta.vendedor,
       metodoPago: venta.metodoPago,
-      numeroVenta: venta.numeroVenta
+      numeroVenta: venta.numeroVenta,
+      estadoVenta: venta.estadoVenta
     });
   }
 
@@ -166,7 +171,8 @@ export class VentaUpdateComponent implements OnInit {
       cliente: this.editForm.get(['cliente'])!.value,
       vendedor: this.editForm.get(['vendedor'])!.value,
       metodoPago: this.editForm.get(['metodoPago'])!.value,
-      numeroVenta: this.editForm.get(['numeroVenta'])!.value
+      numeroVenta: this.editForm.get(['numeroVenta'])!.value,
+      estadoVenta: 'DISPONIBLE'
     };
   }
 

@@ -46,6 +46,9 @@
                     <th scope="col" jhiSortBy="venta.numeroVenta"><span jhiTranslate="concesionario3App.venta.numeroVenta">Número de venta</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
+                    <th scope="col" jhiSortBy="venta.estadoVenta"><span jhiTranslate="concesionario3App.venta.estadoVenta">Estado</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -95,6 +98,29 @@
                     <td>
                         {{ venta.numeroVenta }}
                     </td>
+                    <td *ngIf="venta.estadoVenta=='DISPONIBLE' else noDisponible" style="text-align: center;">
+                        <span style="color: red; font-weight: bold;">{{venta.estadoVenta }}</span>
+                    </td>
+                    <ng-template #noDisponible>
+                        <td *ngIf="venta.estadoVenta=='INICIADA' else noIniciada" style="text-align: center;">
+                            <span style="color: orange; font-weight: bold;">{{venta.estadoVenta }}</span>
+                        </td>
+                    </ng-template>
+                    <ng-template #noIniciada>
+                        <td *ngIf="venta.estadoVenta=='EN_PROCESO' else noEnProceso" style="text-align: center;">
+                            <span style="color: green; font-weight: bold;">{{venta.estadoVenta }}</span>
+                        </td>
+                    </ng-template>
+                    <ng-template #noEnProceso>
+                        <td *ngIf="venta.estadoVenta=='TERMINADA' else otroEstado" style="text-align: center;">
+                            <span style="color: blue; font-weight: bold;">{{venta.estadoVenta }}</span>
+                        </td>
+                    </ng-template>
+                    <ng-template #otroEstado>
+                        <td>
+                            {{venta.estadoVenta }}
+                        </td>
+                    </ng-template>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit" [routerLink]="['/venta', venta.id, 'view']" class="btn btn-info btn-sm">
@@ -102,17 +128,46 @@
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <ng-container *ngIf="venta.numeroVenta===null else botonEditar">
-                                <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary btn-sm">
+                            <ng-container *ngIf="venta.estadoVenta===null else botonDisponible">
+                                <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-success btn-sm">
                                     <fa-icon icon="pencil-alt"></fa-icon>
                                     <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                                 </button>
                             </ng-container>
-                            <ng-template #botonEditar>
-                                <button type="submit" disabled [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary btn-sm">
-                                    <fa-icon icon="pencil-alt"></fa-icon>
-                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.vendido">Vendido</span>
-                                </button>
+                            <ng-template #botonDisponible>
+                                <ng-container *ngIf="venta.estadoVenta==='DISPONIBLE'; else botonIniciada">
+                                    <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-success btn-sm">
+                                        <fa-icon icon="pencil-alt"></fa-icon>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.disponible">Disponible</span>
+                                    </button>
+                                </ng-container>
+                                <ng-template #botonIniciada>
+                                    <ng-container *ngIf="venta.estadoVenta==='INICIADA'; else botonEnProceso">
+                                        <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-secondary btn-sm">
+                                            <fa-icon icon="pencil-alt"></fa-icon>
+                                            <span class="d-none d-md-inline"
+                                                jhiTranslate="entity.action.iniciada">Iniciada</span>
+                                        </button>
+                                    </ng-container>
+                                    <ng-template #botonEnProceso>
+                                        <ng-container *ngIf="venta.estadoVenta==='EN_PROCESO'; else botonTerminada">
+                                            <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-dark btn-sm">
+                                                <fa-icon icon="pencil-alt"></fa-icon>
+                                                <span class="d-none d-md-inline"
+                                                    jhiTranslate="entity.action.enProceso">En proceso</span>
+                                            </button>
+                                        </ng-container>
+                                        <ng-template #botonTerminada>
+                                            <button type="submit" disabled [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-warning btn-sm">
+                                                <fa-icon icon="pencil-alt"></fa-icon>
+                                                <span class="d-none d-md-inline"
+                                                    jhiTranslate="entity.action.terminada">terminada</span>
+                                            </button>
+                                        </ng-template>
+                                    </ng-template>
+                                </ng-template>
+
+
                             </ng-template>
 
 

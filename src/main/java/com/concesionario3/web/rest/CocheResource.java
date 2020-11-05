@@ -125,7 +125,7 @@ public class CocheResource {
 
     @GetMapping("/coches/{venta}/vendidos")
     public ResponseEntity<List<Coche>> getVendidos(Pageable page, @PathVariable Boolean venta){
-        log.debug("REST request to get venta: {}", venta);
+        log.debug("REST request to get Vendidos: {}", venta);
         Page<Coche> coche=cocheService.findVenta(page, venta);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), coche);
         return ResponseEntity.ok().headers(headers).body(coche.getContent());
@@ -133,7 +133,7 @@ public class CocheResource {
 
     @GetMapping("/coches/{tipo}/electricos")
     public ResponseEntity<List<Coche>> getElectricos(Pageable page, @PathVariable String tipo){
-        log.debug("REST request to get venta: {}", tipo);
+        log.debug("REST request to get eléctricos: {}", tipo);
         Page<Coche> coche=cocheService.findTipo(page, tipo);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), coche);
         return ResponseEntity.ok().headers(headers).body(coche.getContent());
@@ -141,12 +141,21 @@ public class CocheResource {
 
     @GetMapping("/coches/color/{color}")
     public ResponseEntity<List<Coche>> getColores(Pageable page, @PathVariable String color){
-        log.debug("REST request to get venta: {}", color);
+        log.debug("REST request to get colores: {}", color);
         Page<Coche> coche=cocheService.findColor(page, color);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), coche);
         return ResponseEntity.ok().headers(headers).body(coche.getContent());
     }
-    
+
+    @GetMapping("/coches/{venta}/disponibles")
+    public ResponseEntity<List<Coche>> getDisponibles(Pageable page, @PathVariable Boolean venta) {
+        log.debug("REST request to get disponibles: {}", venta);
+        Page<Coche> coche = cocheService.findDisponibles(page, venta);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), coche);
+        return ResponseEntity.ok().headers(headers).body(coche.getContent());
+    }
+
 
 
 }

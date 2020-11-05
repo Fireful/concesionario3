@@ -12,6 +12,7 @@ export interface IVenta {
   vendedor?: IVendedor;
   metodoPago?: string;
   numeroVenta?: string;
+  estadoVenta?: string;
 }
 
 export class Venta implements IVenta {
@@ -23,6 +24,7 @@ export class Venta implements IVenta {
     public cliente?: ICliente,
     public vendedor?: IVendedor,
     public metodoPago?: string,
-    public numeroVenta?: string
+    public numeroVenta?: string,
+    public estadoVenta?: string
   ) {}
 }

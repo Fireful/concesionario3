@@ -83,12 +83,24 @@ public class CocheServiceImpl implements CocheService {
     @Override
     @Transactional(readOnly = true)
     public Page<Coche> findVenta(Pageable page, Boolean venta) {
-        
+
         if(venta){
 
             return cocheRepository.findAllByVendidos(page);
         } else{
             return cocheRepository.findAllByDisponibles(page);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Coche> findDisponibles(Pageable page, Boolean venta) {
+
+        if (venta) {
+
+            return cocheRepository.findAllByVendidos(page);
+        } else {
+            return cocheRepository.findByDisponibles(page);
         }
     }
 
@@ -110,7 +122,7 @@ public class CocheServiceImpl implements CocheService {
     @Override
     @Transactional(readOnly = true)
     public Page<Coche> findColor(Pageable page, String color){
-    
+
             return cocheRepository.findByColor(page, color);
 
     }
