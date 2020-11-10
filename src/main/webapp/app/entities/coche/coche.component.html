@@ -62,7 +62,7 @@
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="coches?.length > 0">
-        <table class="table" aria-describedby="page-heading">
+        <table class="table table-bordered" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
@@ -111,9 +111,9 @@
                         <fa-icon icon="times" style="color: red;"></fa-icon>
                     </td>
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
-                    <td *ngIf="coche.color; else sinColor">
-                        <fa-icon icon="car" style="color: {{ coche.color }}">
-                        </fa-icon>{{ coche.color }}
+                    <td *ngIf="coche.color; else sinColor" style="text-align: center;">
+                        <fa-icon icon="car" style="color:{{coche.color}}; stroke:black; stroke-width: 30px">
+                        </fa-icon>
                     </td>
                     <ng-template #sinColor>
                         <td></td>

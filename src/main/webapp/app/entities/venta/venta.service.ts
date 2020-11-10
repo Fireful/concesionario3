@@ -74,4 +74,10 @@ export class VentaService {
   getNumeroVenta(): Observable<Object> {
     return this.http.get<string>(`${this.resourceUrl}/get-num`, { responseType: 'text' as 'json' });
   }
+
+  finishVenta(id: number): Observable<EntityResponseType> {
+    return this.http
+      .get<IVenta>(`${this.resourceUrl}/terminada/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
 }

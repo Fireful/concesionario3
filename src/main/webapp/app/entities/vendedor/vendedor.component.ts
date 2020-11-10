@@ -18,7 +18,7 @@ import { VendedorDeleteDialogComponent } from './vendedor-delete-dialog.componen
 })
 export class VendedorComponent implements OnInit, OnDestroy {
   vendedors?: IVendedor[];
-  venta: Boolean = true;
+  venta = true;
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;

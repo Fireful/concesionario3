@@ -20,6 +20,9 @@ public interface VentaService {
      */
     Venta save(Venta venta);
 
+
+    Venta finishVenta(Venta venta);
+
     /**
      * Get all the ventas.
      *

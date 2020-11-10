@@ -1,12 +1,9 @@
 package com.concesionario3.service.impl;
 
-import com.concesionario3.service.VendedorService;
 import com.concesionario3.service.VentaService;
-import com.concesionario3.domain.Coche;
-import com.concesionario3.domain.Vendedor;
 import com.concesionario3.domain.Venta;
+import com.concesionario3.domain.enums.EnumEstadoVenta;
 import com.concesionario3.repository.VentaRepository;
-import com.concesionario3.repository.CocheRepository;
 import com.concesionario3.repository.VendedorRepository;
 
 import org.slf4j.Logger;
@@ -35,13 +32,10 @@ public class VentaServiceImpl implements VentaService {
     private final Logger log = LoggerFactory.getLogger(VentaServiceImpl.class);
 
     private final VentaRepository ventaRepository;
-    private final CocheRepository cocheRepository;
     private final VendedorRepository vendedorRepository;
 
-    public VentaServiceImpl(VentaRepository ventaRepository, CocheRepository cocheRepository,
-            VendedorRepository vendedorRepository) {
+    public VentaServiceImpl(VentaRepository ventaRepository, VendedorRepository vendedorRepository) {
         this.ventaRepository = ventaRepository;
-        this.cocheRepository = cocheRepository;
         this.vendedorRepository = vendedorRepository;
     }
 
@@ -72,6 +66,12 @@ public class VentaServiceImpl implements VentaService {
             actualizaNumVentas = (actualizaNumVentas + 1);
             venta.getVendedor().setNumVentas(actualizaNumVentas);
         }
+        if(venta.getEstadoVenta()==null){
+            venta.setEstadoVenta(EnumEstadoVenta.EN_PROCESO);
+        } else {
+            venta.setEstadoVenta(EnumEstadoVenta.EN_PROCESO);
+        }
+
 
         vendedorRepository.save(venta.getVendedor());
 
@@ -148,6 +148,17 @@ public class VentaServiceImpl implements VentaService {
         Calendar rightNow = Calendar.getInstance();
         numero += String.valueOf(rightNow.get(Calendar.YEAR));
         return numero;
+
+    }
+    @Override
+    public Venta finishVenta(Venta venta){
+        if(venta.getEstadoVenta()==null){
+
+        }else{
+            venta.setEstadoVenta(EnumEstadoVenta.TERMINADA);
+        }
+
+        return ventaRepository.save(venta);
 
     }
 }

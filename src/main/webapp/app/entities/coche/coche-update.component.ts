@@ -33,6 +33,7 @@ export class CocheUpdateComponent implements OnInit {
     inputElement.value = colorForm;
     inputElement.style.backgroundColor = colorForm;
     this.editForm.controls.color.setValue(colorForm);
+    this.editForm.controls.backcolor.setValue(colorForm);
   }
 
   ngOnInit(): void {

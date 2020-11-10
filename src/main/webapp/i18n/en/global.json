@@ -107,7 +107,8 @@
       "disponible": "Available",
       "iniciada": "Started",
       "enProceso": "In Process",
-      "terminada": "Finished"
+      "terminada": "Finished",
+      "terminaVenta": "Finish sale"
     },
     "detail": {
       "field": "Field",

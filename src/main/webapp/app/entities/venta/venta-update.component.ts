@@ -24,13 +24,15 @@ type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 @Component({ selector: 'jhi-venta-update', templateUrl: './venta-update.component.html' })
 export class VentaUpdateComponent implements OnInit {
   isSaving = false;
-  estadoVenta: EstadoVenta[] = [];
+  ventas: IVenta[] = [];
   coches: ICoche[] = [];
   clientes: ICliente[] = [];
   vendedors: IVendedor[] = [];
   metodoPago: MetodoPago[] = [];
   predicate!: string;
   ascending!: boolean;
+  estadoVenta: EstadoVenta[] = [];
+  botonTerminar = true;
 
   metodo = Object.entries(MetodoPago).map(([key, value]) => ({ number: key, word: value }));
   estado = Object.entries(EstadoVenta).map(([key, value]) => ({ number: key, word: value }));
@@ -76,11 +78,12 @@ export class VentaUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ venta }) => {
       if (!venta.id) {
-        const today = moment().startOf('day');
+        const today = moment();
         venta.fecha = today;
       }
 
       if (!venta.numeroVenta) {
+        this.botonTerminar = false;
         if (venta.id) {
           const today = moment().startOf('day');
           venta.numeroVenta = '00' + venta.id + today.year();
@@ -92,6 +95,8 @@ export class VentaUpdateComponent implements OnInit {
             });
           });
         }
+      } else {
+        this.botonTerminar = true;
       }
 
       this.updateForm(venta);
@@ -151,6 +156,11 @@ export class VentaUpdateComponent implements OnInit {
     window.history.back();
   }
 
+  trackId(index: number, item: IVenta): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    return item.id!;
+  }
+
   save(): void {
     this.isSaving = true;
     const venta = this.createFromForm();
@@ -158,6 +168,12 @@ export class VentaUpdateComponent implements OnInit {
       this.subscribeToSaveResponse(this.ventaService.update(venta));
     } else {
       this.subscribeToSaveResponse(this.ventaService.create(venta));
+    }
+  }
+  terminaVenta(): void {
+    const venta = this.createFromForm();
+    if (venta.id) {
+      this.subscribeToSaveResponse(this.ventaService.finishVenta(venta.id));
     }
   }
 
@@ -172,7 +188,7 @@ export class VentaUpdateComponent implements OnInit {
       vendedor: this.editForm.get(['vendedor'])!.value,
       metodoPago: this.editForm.get(['metodoPago'])!.value,
       numeroVenta: this.editForm.get(['numeroVenta'])!.value,
-      estadoVenta: 'DISPONIBLE'
+      estadoVenta: this.editForm.get(['estadoVenta'])!.value
     };
   }
 

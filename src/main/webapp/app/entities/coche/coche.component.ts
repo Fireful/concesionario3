@@ -28,7 +28,7 @@ export class CocheComponent implements OnInit, OnDestroy {
   swElec: any;
   swTodos: any;
   swTermic: any;
-  color: any;
+  color = '';
 
   page!: number;
   predicate!: string;
@@ -179,7 +179,7 @@ export class CocheComponent implements OnInit, OnDestroy {
         page: this.page,
         size: this.itemsPerPage,
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc'),
-        color: this.color
+        color: '#edba32'
       }
     });
     this.coches = data || [];

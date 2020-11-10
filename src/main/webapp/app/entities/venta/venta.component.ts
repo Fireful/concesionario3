@@ -51,14 +51,14 @@ export class VentaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ venta }) => {
-      alert('v: ' + venta.g);
+    /* this.activatedRoute.data.subscribe(({ venta }) => {
+
       if (!venta.numeroVenta) {
         this.booleanoEditar = false;
       } else {
         this.booleanoEditar = true;
       }
-    });
+    }); */
 
     this.activatedRoute.data.subscribe(data => {
       this.page = data.pagingParams.page;

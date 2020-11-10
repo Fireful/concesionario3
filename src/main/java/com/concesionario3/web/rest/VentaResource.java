@@ -1,6 +1,7 @@
 package com.concesionario3.web.rest;
 
 import com.concesionario3.domain.Venta;
+import com.concesionario3.domain.enums.EnumEstadoVenta;
 import com.concesionario3.service.VentaService;
 import com.concesionario3.web.rest.errors.BadRequestAlertException;
 
@@ -23,8 +24,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-
-
 
 /**
  * REST controller for managing {@link com.concesionario3.domain.Venta}.
@@ -50,7 +49,9 @@ public class VentaResource {
      * {@code POST  /ventas} : Create a new venta.
      *
      * @param venta the venta to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new venta, or with status {@code 400 (Bad Request)} if the venta has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new venta, or with status {@code 400 (Bad Request)} if the
+     *         venta has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/ventas")
@@ -60,18 +61,20 @@ public class VentaResource {
             throw new BadRequestAlertException("A new venta cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Venta result = ventaService.save(venta);
-        return ResponseEntity.created(new URI("/api/ventas/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/ventas/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /ventas} : Updates an existing venta.
      *
      * @param venta the venta to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated venta,
-     * or with status {@code 400 (Bad Request)} if the venta is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the venta couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated venta, or with status {@code 400 (Bad Request)} if the
+     *         venta is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the venta couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/ventas")
@@ -81,22 +84,24 @@ public class VentaResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Venta result = ventaService.save(venta);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, venta.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(
+                HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, venta.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code GET  /ventas} : get all the ventas.
      *
      * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ventas in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of ventas in body.
      */
     @GetMapping("/ventas")
     public ResponseEntity<List<Venta>> getAllVentas(Pageable pageable) {
         log.debug("REST request to get a page of Ventas");
         Page<Venta> page = ventaService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -104,7 +109,8 @@ public class VentaResource {
      * {@code GET  /ventas/:id} : get the "id" venta.
      *
      * @param id the id of the venta to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the venta, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the venta, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/ventas/{id}")
     public ResponseEntity<Venta> getVenta(@PathVariable Long id) {
@@ -123,7 +129,9 @@ public class VentaResource {
     public ResponseEntity<Void> deleteVenta(@PathVariable Long id) {
         log.debug("REST request to delete Venta : {}", id);
         ventaService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 
     @GetMapping(value = "/ventas/get-num")
@@ -133,4 +141,21 @@ public class VentaResource {
         String numVenta = ventaService.getNewNumeroVenta();
         return new ResponseEntity<>(numVenta, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/ventas/terminada/{id}")
+    @Transactional
+    public ResponseEntity<Void> finishVenta(@PathVariable Long id) {
+        log.debug("REST request to finish Venta : {}", id);
+
+        Venta venta = ventaService.findOne(id).get();
+        if (venta.getEstadoVenta() == null) {
+            venta.setEstadoVenta(EnumEstadoVenta.EN_PROCESO);
+        }
+
+        ventaService.finishVenta(venta);
+
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
 }

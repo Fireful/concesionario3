@@ -95,7 +95,7 @@
                             {{venta.metodoPago }}
                         </td>
                     </ng-template>
-                    <td>
+                    <td style="text-align: center;">
                         {{ venta.numeroVenta }}
                     </td>
                     <td *ngIf="venta.estadoVenta=='DISPONIBLE' else noDisponible" style="text-align: center;">
@@ -131,47 +131,34 @@
                             <ng-container *ngIf="venta.estadoVenta===null else botonDisponible">
                                 <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-success btn-sm">
                                     <fa-icon icon="pencil-alt"></fa-icon>
-                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.disponible">Disponible</span>
                                 </button>
                             </ng-container>
                             <ng-template #botonDisponible>
-                                <ng-container *ngIf="venta.estadoVenta==='DISPONIBLE'; else botonIniciada">
+                                <ng-container *ngIf="venta.estadoVenta==='DISPONIBLE'; else botonEnProceso">
                                     <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-success btn-sm">
                                         <fa-icon icon="pencil-alt"></fa-icon>
-                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.disponible">Disponible</span>
+                                        <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                                     </button>
                                 </ng-container>
-                                <ng-template #botonIniciada>
-                                    <ng-container *ngIf="venta.estadoVenta==='INICIADA'; else botonEnProceso">
-                                        <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-secondary btn-sm">
+                                <ng-template #botonEnProceso>
+                                    <ng-container *ngIf="venta.estadoVenta==='EN_PROCESO'; else botonTerminada">
+                                        <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-dark btn-sm">
                                             <fa-icon icon="pencil-alt"></fa-icon>
-                                            <span class="d-none d-md-inline"
-                                                jhiTranslate="entity.action.iniciada">Iniciada</span>
+                                            <span class="d-none d-md-inline" jhiTranslate="entity.action.enProceso">En
+                                                proceso</span>
                                         </button>
                                     </ng-container>
-                                    <ng-template #botonEnProceso>
-                                        <ng-container *ngIf="venta.estadoVenta==='EN_PROCESO'; else botonTerminada">
-                                            <button type="submit" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-dark btn-sm">
-                                                <fa-icon icon="pencil-alt"></fa-icon>
-                                                <span class="d-none d-md-inline"
-                                                    jhiTranslate="entity.action.enProceso">En proceso</span>
-                                            </button>
-                                        </ng-container>
-                                        <ng-template #botonTerminada>
-                                            <button type="submit" disabled [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-warning btn-sm">
+                                    <ng-template #botonTerminada>
+                                        <button type="submit" disabled [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-warning btn-sm">
                                                 <fa-icon icon="pencil-alt"></fa-icon>
                                                 <span class="d-none d-md-inline"
                                                     jhiTranslate="entity.action.terminada">terminada</span>
                                             </button>
-                                        </ng-template>
                                     </ng-template>
+
                                 </ng-template>
-
-
                             </ng-template>
-
-
-
                             <button type="submit" (click)="delete(venta)" class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>

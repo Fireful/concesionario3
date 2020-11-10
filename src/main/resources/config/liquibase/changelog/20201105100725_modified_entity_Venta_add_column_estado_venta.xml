@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
         <property name="autoIncrement" value="true"/>
-        <property name="enumEstado" value="enum('DISPONIBLE','INICIADA','EN_PROCESO','TERMINADA')" dbms="mysql" />
+        <property name="enumEstado" value="enum('EN_PROCESO','TERMINADA')" dbms="mysql" />
         <property name="enumEstado" value="varchar(255)" dbms="postgresql, h2, oracle" />
     <!--
         Added the entity Coche.

@@ -107,7 +107,8 @@
       "disponible": "Disponible",
       "iniciada": "Iniciada",
       "enProceso": "En Procreso",
-      "terminada": "Terminada"
+      "terminada": "Terminada",
+      "terminaVenta": "Terminar venta"
     },
     "detail": {
       "field": "Campo",

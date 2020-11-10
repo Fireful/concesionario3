@@ -1,6 +1,4 @@
 export enum EstadoVenta {
-  DISPONIBLE = 'DISPONIBLE',
-  INICIADA = 'INICIADA',
   EN_PROCESO = 'EN_PROCESO',
   TERMINADA = 'TERMINADA'
 }
