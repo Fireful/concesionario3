@@ -19,7 +19,7 @@
             <column name="fecha" type="datetime">
                 <constraints nullable="true" />
             </column>
-            <column name="importe_total" type="double">
+            <column name="importe_total" type="double" defaultValue="0.0">
                 <constraints nullable="true" />
             </column>
             <column name="coche_id" type="bigint">

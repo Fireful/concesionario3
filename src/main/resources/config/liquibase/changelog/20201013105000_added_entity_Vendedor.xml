@@ -22,7 +22,7 @@
             <column name="dni" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="total_ventas" type="double">
+            <column name="total_ventas" type="double" defaultValue="0.0">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

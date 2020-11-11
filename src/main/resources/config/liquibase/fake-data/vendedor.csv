@@ -1,11 +1,11 @@
-id;nombre;dni;total_ventas
-1;Norman Osborn;Gourde US Dollar sensor Avon;0
-2;Bruce Wayne;discrete;0
-3;Natascha Romanoff;bus deliverables;0
-4;Peter Parker;Coordinator generating;0
-5;Bruce Banner;white;0
-6;Oswald Cobblepot;Money Market Account;0
-7;Steven Grant Rogers;cross-media Steel Cliff;0
-8;Harleen Frances Quinzel;generate invoice;0
-9;Tony Stark;Berkshire Rustic program;0
-10;Virginia 'Pepper' Potts;solutions panel;0
+id;nombre;dni
+1;Norman Osborn;Gourde US Dollar sensor Avon
+2;Bruce Wayne;discrete
+3;Natascha Romanoff;bus deliverables
+4;Peter Parker;Coordinator generating
+5;Bruce Banner;white
+6;Oswald Cobblepot;Money Market Account
+7;Steven Grant Rogers;cross-media Steel Cliff
+8;Harleen Frances Quinzel;generate invoice
+9;Tony Stark;Berkshire Rustic program
+10;Virginia 'Pepper' Potts;solutions panel

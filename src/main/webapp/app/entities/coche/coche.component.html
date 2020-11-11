@@ -112,7 +112,7 @@
                     </td>
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
                     <td *ngIf="coche.color; else sinColor" style="text-align: center;">
-                        <fa-icon icon="car" style.color="{{coche.color}}">
+                        <fa-icon icon="car" class="iconoCoche" style.color="{{coche.color}}">
                         </fa-icon>
                     </td>
                     <ng-template #sinColor>
