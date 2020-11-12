@@ -49,6 +49,9 @@ export class VentaComponent implements OnInit, OnDestroy {
         () => this.onError()
       );
   }
+  informe(): void {
+    alert('Informe generado');
+  }
 
   ngOnInit(): void {
     /* this.activatedRoute.data.subscribe(({ venta }) => {

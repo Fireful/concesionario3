@@ -23,7 +23,8 @@
       "vendedor": "Vendedor",
       "metodoPago": "Método de pago",
       "numeroVenta": "Número de venta",
-      "estadoVenta": "Estado Venta"
+      "estadoVenta": "Estado Venta",
+      "crearInforme": "Generar informe"
     }
   }
 }
