@@ -24,7 +24,10 @@
       "metodoPago": "Método de pago",
       "numeroVenta": "Número de venta",
       "estadoVenta": "Estado Venta",
-      "crearInforme": "Generar informe"
+      "crearInforme": "Generar informe",
+      "moto": "moto",
+      "vehiculo": "Vehículo",
+      "tipo": "Tipo"
     }
   }
 }

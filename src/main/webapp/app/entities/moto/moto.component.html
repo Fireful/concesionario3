@@ -1,0 +1,168 @@
+<div>
+
+
+    <h2 id="page-heading">
+        <span jhiTranslate="concesionario3App.moto.home.title">Motos</span>
+    </h2>
+
+    <h2>
+        <select class="form-control-sm rounded-pill" #mySelect (change)='paginador(mySelect.value)'>
+            <option class='option' value="5">5</option>
+            <option class='option' value="10">10</option>
+            <option class='option' value="20" selected>20</option>
+        </select>
+
+        <div class="btn-group btn-group-sm  d-inline" role="group" aria-label="...">
+            <button type="button" class="btn btn-secondary" name="todos" (click)='hybrid("todos")'>Todos</button>
+            <button type="button" class="btn btn-secondary" name="elec" (click)='hybrid("electricos")'>Electricos</button>
+            <button type="button" class="btn btn-secondary" name="termic" (click)='hybrid("termicos")'>Térmicos</button>
+        </div>
+        <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-moto rounded-pill" [routerLink]="['/moto/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span jhiTranslate="concesionario3App.moto.home.createLabel">
+                Create a new Moto
+            </span>
+        </button>
+
+        <button id="jh-show-all" class="mr-3 btn btn-success float-right jh-show-all all-cars rounded-pill" (click)="all()">
+            <fa-icon icon="list"></fa-icon>
+            <span jhiTranslate="concesionario3App.moto.home.todos">
+                Todos
+            </span>
+        </button>
+        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars rounded-pill" (click)="disponibles()">
+            <fa-icon icon="asterisk"></fa-icon>
+            <span jhiTranslate="concesionario3App.moto.home.disponibles">
+                Disponibles
+            </span>
+        </button>
+        <button id="jh-sold" class="mr-3 btn btn-warning float-right jh-sold sold-cars rounded-pill" (click)="vendidos()">
+            <fa-icon icon="road"></fa-icon>
+            <span jhiTranslate="concesionario3App.moto.home.vendidos">
+                Vendidos
+            </span>
+        </button>
+        <input type="color" name="filtroColor" list="filtroColores" #colorFiltro (change)='colorFilter(colorFiltro.value)'>
+        <datalist id="filtroColores">
+            <option *ngFor="let moto1 of motos">
+                {{ moto1.color }}
+            </option>
+            <ng-template #distintos>
+
+            </ng-template>
+        </datalist>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="motos?.length === 0">
+        <span jhiTranslate="concesionario3App.moto.home.notFound">No cars found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="motos?.length > 0">
+        <table class="table table-bordered" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="marca"><span jhiTranslate="concesionario3App.moto.marca">Marca</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="modelo"><span jhiTranslate="concesionario3App.moto.modelo">Modelo</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.moto.anio">Anio</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+
+                    <th scope="col" jhiSortBy="electrico"><span jhiTranslate="concesionario3App.moto.electrico">Electrico</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+
+                    <th scope="col" jhiSortBy="color"><span jhiTranslate="concesionario3App.moto.color">Color</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="cilindrada"><span jhiTranslate="concesionario3App.moto.cilindrada">Cilindrada</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+
+                    <th scope="col" jhiSortBy="precio"><span jhiTranslate="concesionario3App.moto.precio">Precio</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="venta_id"><span jhiTranslate="concesionario3App.moto.venta_id">Venta
+                            Id</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let moto of motos ;trackBy: trackId">
+
+                    <td><a [routerLink]="['/moto', moto.id, 'view']">{{ moto.id }}</a></td>
+                    <td>{{ moto.marca }}</td>
+                    <td>{{ moto.modelo }}</td>
+                    <td>{{ moto.anio }}</td>
+                    <td *ngIf="moto.electrico==true">
+                        <fa-icon icon="check" style="color: green;"></fa-icon>
+                    </td>
+
+                    <td *ngIf="moto.electrico==false">
+                        <fa-icon icon="times" style="color: red;"></fa-icon>
+                    </td>
+                    <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
+                    <td *ngIf="moto.color; else sinColor" style="text-align: center;">
+                        <fa-icon icon="car" class="iconoMoto" style.color="{{moto.color}}">
+                        </fa-icon>
+                    </td>
+                    <ng-template #sinColor>
+                        <td></td>
+                    </ng-template>
+                    <td>{{ moto.cilindrada }}</td>
+                    <td>{{ moto.precio | currency: 'EUR' }}</td>
+                    <td *ngIf="!moto.venta">
+                        <span jhiTranslate="concesionario3App.moto.disponible">Disponible</span>
+                    </td>
+                    <td *ngIf="moto.venta">
+                        <a [routerLink]="['/venta', moto.venta?.id, 'view']">{{ moto.venta?.numeroVenta }}</a>
+                    </td>
+
+
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit" [routerLink]="['/moto', moto.id, 'view']" class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit" [routerLink]="['/moto', moto.id, 'edit']" class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(moto)" class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="motos?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)">
+            </ngb-pagination>
+        </div>
+    </div>
+</div>

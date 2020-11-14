@@ -35,7 +35,8 @@ import {
   faHome,
   faCheck,
   faCar,
-  faDoorClosed
+  faDoorClosed,
+  faMotorcycle
   // jhipster-needle-add-icon-import
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -76,6 +77,7 @@ export const fontAwesomeIcons = [
   faAsterisk,
   faCheck,
   faCar,
-  faDoorClosed
+  faDoorClosed,
+  faMotorcycle
   // jhipster-needle-add-icon-import
 ];

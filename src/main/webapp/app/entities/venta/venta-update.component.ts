@@ -18,6 +18,9 @@ import { IVendedor } from 'app/shared/model/vendedor.model';
 import { VendedorService } from 'app/entities/vendedor/vendedor.service';
 import { MetodoPago } from 'app/entities/venta/metodo-pago.enum';
 import { EstadoVenta } from './estado-venta.enum';
+import { IMoto } from 'app/shared/model/moto.model';
+import { MotoService } from '../moto/moto.service';
+import { Tipo } from '../tipo.enum';
 
 type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 
@@ -25,7 +28,9 @@ type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 export class VentaUpdateComponent implements OnInit {
   isSaving = false;
   ventas: IVenta[] = [];
+  venta?: IVenta;
   coches: ICoche[] = [];
+  motos: IMoto[] = [];
   clientes: ICliente[] = [];
   vendedors: IVendedor[] = [];
   metodoPago: MetodoPago[] = [];
@@ -36,6 +41,7 @@ export class VentaUpdateComponent implements OnInit {
 
   metodo = Object.entries(MetodoPago).map(([key, value]) => ({ number: key, word: value }));
   estado = Object.entries(EstadoVenta).map(([key, value]) => ({ number: key, word: value }));
+  tipo = Object.entries(Tipo).map(([key, value]) => ({ number: key, word: value }));
 
   dataAux = '';
   seleccion = 'Importe Total';
@@ -44,6 +50,8 @@ export class VentaUpdateComponent implements OnInit {
     fecha: [],
     importeTotal: [],
     coche: [],
+    moto: [],
+    tipo: [],
     cliente: [],
     vendedor: [],
     metodoPago: [],
@@ -51,18 +59,34 @@ export class VentaUpdateComponent implements OnInit {
     estadoVenta: []
   });
   cocheSeleccionado: any;
+  tipoSeleccionado?: string;
   seleccionado: any;
   numero: any;
+  vehiculoSelec: any;
+  vehiculoSeleccionado = 'coche';
 
   constructor(
     protected ventaService: VentaService,
     protected router: Router,
     protected cocheService: CocheService,
+    protected motoService: MotoService,
     protected clienteService: ClienteService,
     protected vendedorService: VendedorService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
+
+  vehiculo(valor: string): void {
+    this.vehiculoSeleccionado = valor;
+    alert(valor);
+    this.editForm.patchValue({
+      tipo: valor
+    });
+  }
+
+  cambioTipo(): void {
+    alert(this.tipoSeleccionado);
+  }
 
   cambioCoche(): void {
     this.seleccionado = this.cocheSeleccionado.precio;
@@ -76,12 +100,22 @@ export class VentaUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.vehiculoSeleccionado = 'coche';
     this.activatedRoute.data.subscribe(({ venta }) => {
+      this.venta = venta;
       if (!venta.id) {
         const today = moment();
         venta.fecha = today;
       }
 
+      if (venta.tipo === 'moto') {
+        this.vehiculoSelec = 'moto';
+        alert('tipo: ' + this.vehiculoSelec);
+      }
+      if (venta.tipo === 'coche') {
+        this.vehiculoSelec = 'coche';
+        alert('tipo: ' + this.vehiculoSelec);
+      }
       if (!venta.numeroVenta) {
         this.botonTerminar = false;
         if (venta.id) {
@@ -100,6 +134,28 @@ export class VentaUpdateComponent implements OnInit {
       }
 
       this.updateForm(venta);
+
+      this.motoService
+        .disponibles({ venta: false })
+        .pipe(
+          map((res: HttpResponse<IMoto[]>) => {
+            return res.body || [];
+          })
+        )
+        .subscribe((resBody: IMoto[]) => {
+          if (!venta.moto || !venta.moto.id) {
+            this.motos = resBody;
+          } else {
+            this.motoService
+              .find(venta.moto.id)
+              .pipe(
+                map((subRes: HttpResponse<ICoche>) => {
+                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
+                })
+              )
+              .subscribe((concatRes: ICoche[]) => (this.motos = concatRes));
+          }
+        });
 
       this.cocheService
         .disponibles({ venta: false })
@@ -144,6 +200,9 @@ export class VentaUpdateComponent implements OnInit {
       fecha: venta.fecha ? venta.fecha.format(DATE_TIME_FORMAT) : null,
       importeTotal: venta.importeTotal,
       coche: venta.id,
+      moto: venta.id,
+      tipo: venta.tipo,
+      vehiculoSeleccionado: venta.moto,
       cliente: venta.cliente,
       vendedor: venta.vendedor,
       metodoPago: venta.metodoPago,
@@ -184,6 +243,8 @@ export class VentaUpdateComponent implements OnInit {
       fecha: this.editForm.get(['fecha'])!.value ? moment(this.editForm.get(['fecha'])!.value, DATE_TIME_FORMAT) : undefined,
       importeTotal: this.editForm.get(['importeTotal'])!.value,
       coche: this.editForm.get(['coche'])!.value,
+      moto: this.editForm.get(['moto'])!.value,
+      tipo: this.editForm.get(['tipo'])!.value,
       cliente: this.editForm.get(['cliente'])!.value,
       vendedor: this.editForm.get(['vendedor'])!.value,
       metodoPago: this.editForm.get(['metodoPago'])!.value,
@@ -212,7 +273,7 @@ export class VentaUpdateComponent implements OnInit {
     return item.id;
   }
 
-  getNumVenta(): void {
+  getNumVenta(vehiculoSeleccionado: string): void {
     this.ventaService.getNumeroVenta();
   }
 }

@@ -27,8 +27,6 @@ import java.util.Optional;
 @Transactional
 public class VentaServiceImpl implements VentaService {
 
-
-
     private final Logger log = LoggerFactory.getLogger(VentaServiceImpl.class);
 
     private final VentaRepository ventaRepository;
@@ -47,10 +45,19 @@ public class VentaServiceImpl implements VentaService {
      */
     @Override
     public Venta save(Venta venta) {
+        if (venta.getCoche() != null) {
+            log.debug("Vehículo seleccionado coche: " + venta.getCoche());
+            if (venta.getNumeroVenta() == null) {
+                venta.setNumeroVenta(getNewNumeroVenta("coche"));
+                log.debug("Vehículo numero de venta: " + venta.getNumeroVenta());
 
-        if (venta.getNumeroVenta() == null) {
-            venta.setNumeroVenta(getNewNumeroVenta());
-
+            }
+        } else {
+            log.debug("Vehículo seleccionado moto: "+ venta.getMoto());
+            if(venta.getNumeroVenta()==null){
+                venta.setNumeroVenta(getNewNumeroVenta("moto"));
+                log.debug("Vehículo numero de venta: "+venta.getNumeroVenta());
+            }
         }
 
         if (!venta.getVendedor().getNombre().equals("")) {
@@ -66,12 +73,11 @@ public class VentaServiceImpl implements VentaService {
             actualizaNumVentas = (actualizaNumVentas + 1);
             venta.getVendedor().setNumVentas(actualizaNumVentas);
         }
-        if(venta.getEstadoVenta()==null){
+        if (venta.getEstadoVenta() == null) {
             venta.setEstadoVenta(EnumEstadoVenta.EN_PROCESO);
         } else {
             venta.setEstadoVenta(EnumEstadoVenta.EN_PROCESO);
         }
-
 
         vendedorRepository.save(venta.getVendedor());
 
@@ -92,17 +98,6 @@ public class VentaServiceImpl implements VentaService {
         log.debug("Request to get all Ventas");
         return ventaRepository.findAll(pageable);
     }
-
-    /* TODO Borrar la siguiente funcion */
-    public String numeroVenta() {
-        Page<Venta> num = ventaRepository.findAll(PageRequest.of(0, 1, Direction.DESC, "Id"));
-        Calendar ahora = Calendar.getInstance();
-
-        String numVenta = "00" + ((num.getContent().get(0).getId()) + 1) + String.valueOf(ahora.get(Calendar.YEAR));
-
-        return numVenta;
-    }
-    /* */
 
     /**
      * Get one venta by id.
@@ -125,11 +120,11 @@ public class VentaServiceImpl implements VentaService {
     @Override
     public void delete(Long id) {
         Optional<Venta> venta = ventaRepository.findById(id);
-        if(venta.isPresent()){
-            Integer numeroVentas=venta.get().getVendedor().getNumVentas();
-            Double totalVentas=venta.get().getVendedor().getTotalVentas();
-            numeroVentas-=1;
-            totalVentas-=venta.get().getImporteTotal();
+        if (venta.isPresent()) {
+            Integer numeroVentas = venta.get().getVendedor().getNumVentas();
+            Double totalVentas = venta.get().getVendedor().getTotalVentas();
+            numeroVentas -= 1;
+            totalVentas -= venta.get().getImporteTotal();
             venta.get().getVendedor().setNumVentas(numeroVentas);
             venta.get().getVendedor().setTotalVentas(totalVentas);
         }
@@ -138,23 +133,41 @@ public class VentaServiceImpl implements VentaService {
     }
 
     @Override
-    public String getNewNumeroVenta() {
+    public String getNewNumeroVenta(String vehiculoSeleccionado) {
+        String numero = "";
 
-        String numero = "00";
+        log.debug("vehículo Sel: "+vehiculoSeleccionado);
 
-        Page<Venta> numeros = ventaRepository.findAll(PageRequest.of(0, 1, Direction.DESC, "id"));
-        numero += ((numeros.getContent().get(0).getId()) + 1);
+            log.debug("vehículo seleccionado inicial: " + vehiculoSeleccionado);
+            if (vehiculoSeleccionado == null) {
+                numero += "";
+                /* vehiculoSeleccionado="coche"; */
+            }
+            log.debug("vehiculo: " + vehiculoSeleccionado);
+            log.debug("vehículo seleccionado inicial: " + vehiculoSeleccionado);
+            if (vehiculoSeleccionado.equals("moto")) {
+                numero += "M";
+            } else if (vehiculoSeleccionado.equals("coche")) {
+                numero += "C";
+            }
+            log.debug("vehiculo seleccionado numero: " + numero);
+            numero += "00";
 
-        Calendar rightNow = Calendar.getInstance();
-        numero += String.valueOf(rightNow.get(Calendar.YEAR));
+            Page<Venta> numeros = ventaRepository.findAll(PageRequest.of(0, 1, Direction.DESC, "id"));
+            numero += ((numeros.getContent().get(0).getId()) + 1);
+
+            Calendar rightNow = Calendar.getInstance();
+            numero += String.valueOf(rightNow.get(Calendar.YEAR));
+
         return numero;
 
     }
-    @Override
-    public Venta finishVenta(Venta venta){
-        if(venta.getEstadoVenta()==null){
 
-        }else{
+    @Override
+    public Venta finishVenta(Venta venta) {
+        if (venta.getEstadoVenta() == null) {
+
+        } else {
             venta.setEstadoVenta(EnumEstadoVenta.TERMINADA);
         }
 

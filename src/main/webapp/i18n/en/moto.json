@@ -1,0 +1,36 @@
+{
+  "concesionario3App": {
+    "moto": {
+      "home": {
+        "title": "Cars",
+        "createLabel": "Create a new car",
+        "createOrEditLabel": "Create or edit a car",
+        "notFound": "No cars found",
+        "todos": "All cars",
+        "disponibles": "Available cars",
+        "vendidos": "Sold cars",
+        "hybrid": "Hybrid",
+        "termico": "Termic"
+      },
+      "created": "A new car is created with identifier {{ param }}",
+      "updated": "A car is updated with identifier {{ param }}",
+      "deleted": "A car is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete car {{ id }}?"
+      },
+      "detail": {
+        "title": "Car"
+      },
+      "marca": "Brand",
+      "modelo": "Model",
+      "anio": "Year",
+      "electrico": "Hybrid",
+      "precio": "Price",
+      "venta_id": "# Sale",
+      "disponible": "Available",
+      "vendido": "Sold",
+      "color": "Colour",
+      "cilindrada": "Engine"
+    }
+  }
+}

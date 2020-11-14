@@ -1,0 +1,36 @@
+{
+  "concesionario3App": {
+    "moto": {
+      "home": {
+        "title": "Moto",
+        "createLabel": "Crear nuevo Coche",
+        "createOrEditLabel": "Crear o editar Coche",
+        "notFound": "Ningún Moto encontrado",
+        "hybrid": "Eléctricos",
+        "todos": "Todos",
+        "disponibles": "Disponibles",
+        "vendidos": "Vendidos",
+        "termico": "Térmico"
+      },
+      "created": "Un nuevo Coche ha sido creado con el identificador {{ param }}",
+      "updated": "Un Coche ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Coche ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Coche {{ id }}?"
+      },
+      "detail": {
+        "title": "Coche"
+      },
+      "marca": "Marca",
+      "modelo": "Modelo",
+      "anio": "Año",
+      "electrico": "Electrico",
+      "precio": "Precio",
+      "venta_id": "Nº Venta",
+      "vendido": "Vendido",
+      "disponible": "Disponible",
+      "color": "Color",
+      "cilindrada": "Cilindrada"
+    }
+  }
+}

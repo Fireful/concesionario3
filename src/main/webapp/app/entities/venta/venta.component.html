@@ -38,7 +38,10 @@
                     <th scope="col" jhiSortBy="importeTotal"><span jhiTranslate="concesionario3App.venta.importeTotal">Importe Total</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="coche.id"><span jhiTranslate="concesionario3App.venta.coche">Coche</span>
+                    <th scope="col" jhiSortBy="coche.id"><span jhiTranslate="concesionario3App.venta.vehiculo">Vehículo</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="coche.id"><span jhiTranslate="concesionario3App.venta.tipo">Tipo</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="cliente.id"><span jhiTranslate="concesionario3App.venta.cliente">Cliente</span>
@@ -66,9 +69,34 @@
                     <td>{{ venta.importeTotal | currency: 'EUR' }}</td>
                     <td>
                         <div *ngIf="venta.coche">
-                            <a [routerLink]="['/coche', venta.coche?.id, 'view']">{{ venta.coche?.marca }} {{ venta.coche?.modelo }}</a>
+                            <a [routerLink]="['/coche', venta.coche?.id, 'view']">{{ venta.coche?.marca }}
+                                {{ venta.coche?.modelo }}</a>
                         </div>
+                        <div *ngIf="venta.moto">
+                            <a [routerLink]="['/coche', venta.moto?.id, 'view']">{{ venta.moto?.marca }}
+                                {{ venta.moto?.modelo }}</a>
+                        </div>
+
+
                     </td>
+                    <td>
+                        <ng-container *ngIf="venta.tipo=='COCHE'; else tipoMoto">
+                            <fa-icon icon="car" style="color:red">
+                            </fa-icon>
+                        </ng-container>
+                        <ng-template #tipoMoto>
+                            <ng-container *ngIf="venta.tipo=='MOTO'; else tipoOtro">
+                                <fa-icon icon="motorcycle" style="color:green">
+                                </fa-icon>
+                            </ng-container>
+                            <ng-template #tipoOtro>
+
+                            </ng-template>
+
+
+                        </ng-template>
+                    </td>
+
                     <td>
                         <div *ngIf="venta.cliente">
                             <a [routerLink]="['/cliente', venta.cliente?.id, 'view']">{{ venta.cliente?.nombre }}</a>

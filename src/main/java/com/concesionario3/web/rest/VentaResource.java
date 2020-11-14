@@ -136,9 +136,9 @@ public class VentaResource {
 
     @GetMapping(value = "/ventas/get-num")
     @Transactional
-    public ResponseEntity<String> getNumVenta() {
+    public ResponseEntity<String> getNumVenta(String vehiculoSeleccionado) {
         log.debug("REST request to get num venta");
-        String numVenta = ventaService.getNewNumeroVenta();
+        String numVenta = ventaService.getNewNumeroVenta(vehiculoSeleccionado);
         return new ResponseEntity<>(numVenta, HttpStatus.OK);
     }
 

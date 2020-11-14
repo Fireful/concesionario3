@@ -9,6 +9,7 @@
       "entities": {
         "main": "Entidades",
         "coche": "Coche",
+        "moto": "Moto",
         "vendedor": "Vendedor",
         "venta": "Venta",
         "cliente": "Cliente",

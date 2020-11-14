@@ -1,8 +1,11 @@
 package com.concesionario3.domain;
 
 import com.concesionario3.domain.enums.EnumMetodoPago;
+import com.concesionario3.domain.enums.EnumTipo;
 import com.concesionario3.domain.enums.EnumEstadoVenta;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.protobuf.Any;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -36,6 +39,15 @@ public class Venta implements Serializable {
     @JoinColumn(name = "coche_id")
     @JsonIgnoreProperties(value = "venta")
     private Coche coche;
+
+    @OneToOne
+    @JoinColumn(name = "moto_id")
+    @JsonIgnoreProperties(value = "venta")
+    private Moto moto;
+
+    @Column(name = "tipo", nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private EnumTipo tipo;
 
     @ManyToOne
     @JsonIgnoreProperties("ventas")
@@ -184,5 +196,21 @@ public class Venta implements Serializable {
 
     public void setEstadoVenta(EnumEstadoVenta estadoVenta) {
         this.estadoVenta = estadoVenta;
+    }
+
+    public Moto getMoto() {
+        return moto;
+    }
+
+    public void setMoto(Moto moto) {
+        this.moto = moto;
+    }
+
+    public EnumTipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(EnumTipo tipo) {
+        this.tipo = tipo;
     }
 }

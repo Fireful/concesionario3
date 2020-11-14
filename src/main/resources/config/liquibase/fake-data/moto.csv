@@ -1,0 +1,11 @@
+id;marca;modelo;anio;electrico;color;cilindrada;precio
+1;Honda;Africa Twin;24400;true;#823299;500;550
+2;Citroën;C5 Aircross;15636;false;#306179;125;1800
+3;Peugeot;3008;32161;true;#637099;250;3200
+4;Opel;Insignia;83131;true;#695149;1000;10000
+5;Tesla;Model S;23593;true;#489299;750;12500
+6;Fiat;Punto;14537;true;#657589;125;7000
+7;Lamborghini;Gallardo;88189;true;#392333;250;8240
+8;Bugatti;Veyron;55378;true;#353499;1500;6300
+9;DS;4 Crossback;50730;false;#992169;600;2800
+10;Citroën; C3 Picasso;51710;false;#892669;125;16000

@@ -15,6 +15,8 @@ import { JhiEventManager } from 'ng-jhipster';
 import { CocheService } from 'app/entities/coche/coche.service';
 import { ICoche } from 'app/shared/model/coche.model';
 import { HomeResetVentasComponent } from './home-reset-ventas.component';
+import { IMoto } from 'app/shared/model/moto.model';
+import { MotoService } from 'app/entities/moto/moto.service';
 
 @Component({
   selector: 'jhi-home',
@@ -24,6 +26,7 @@ import { HomeResetVentasComponent } from './home-reset-ventas.component';
 export class HomeComponent implements OnInit, OnDestroy {
   maxVentasHome = '';
   disponibles?: ICoche[];
+  motos?: IMoto[];
   vendedores?: IVendedor[] = [];
   account: Account | null = null;
   authSubscription?: Subscription;
@@ -43,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     protected cocheService: CocheService,
+    protected motoService: MotoService,
     private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
@@ -80,6 +84,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.vendedorService.getMaxDinero().subscribe(data => {
       this.dataMaxDinero = data.body;
     });
+
+    this.motoService
+      .vendidos(
+        {
+          page: this.page - 1,
+          size: this.itemsPerPage,
+          sort: ['id,asc']
+        },
+        false
+      )
+      .subscribe(
+        (res: HttpResponse<IMoto[]>) => this.onSuccessM(res.body, res.headers, this.page),
+        () => this.onError()
+      );
 
     this.cocheService
       .vendidos(
@@ -132,8 +150,20 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.authSubscription.unsubscribe();
     }
   }
+  protected onSuccessM(dataM: IMoto[] | null, headers: HttpHeaders, page: number): void {
+    this.totalItems = Number(headers.get('X-Total-Count'));
+    this.page = page;
+    this.router.navigate(['/'], {
+      queryParams: {
+        page: this.page,
+        size: this.itemsPerPage,
+        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
+      }
+    });
+    this.motos = dataM || [];
+  }
 
-  protected onSuccess(data: ICoche[] | null, headers: HttpHeaders, page: number): void {
+  protected onSuccess(data: IMoto[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     this.router.navigate(['/'], {
@@ -145,6 +175,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.vendedores = data || [];
     this.disponibles = data || [];
+    this.motos = data || [];
   }
 
   protected onError(): void {

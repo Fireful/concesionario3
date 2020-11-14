@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
         <span class="hipster img-fluid rounded"></span>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-10">
         <div [ngSwitch]="isAuthenticated() ">
             <div *ngSwitchCase="true ">
                 <h1>
@@ -11,7 +11,7 @@
                         "{{ account.login }} ".</span>
                 </h1>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-5">
                         <div class="tarjeta1 p-3">
                             <div class="tarjeta1-header p-2">
                                 <h3 jhiTranslate="home.masVentas">Vendedor con más ventas</h3>
@@ -46,7 +46,7 @@
 
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-5">
                         <div class="tarjeta2 p-3">
                             <div class="tarjeta2-header p-2">
                                 <h3 jhiTranslate="home.masDinero">Vendedor con mmejor recaudación</h3>
@@ -86,7 +86,7 @@
                 <!-- Tabla coches disponibles -->
                 <h1><span jhiTranslate="home.disponibles">Coches disponibles </span></h1>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-5">
                         <div class="alert alert-warning" id="no-result" *ngIf="disponibles?.length === 0">
                             <span jhiTranslate="concesionario3App.coche.home.noCars">No hay coches disponibles</span>
                         </div>
@@ -151,6 +151,82 @@
                         <div *ngIf="disponibles?.length > 0">
                             <div class="row justify-content-center">
                                 <h2>{{disponibles.length}} coches disponibles</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- LISTADO MOTOS DISPONIBLES -->
+                    <div class="col-5">
+                        <div class="alert alert-warning" id="no-result" *ngIf="motos?.length === 0">
+                            <span jhiTranslate="concesionario3App.coche.home.noMotorbikes">No hay motos disponibles</span>
+                        </div>
+                        <div class="table-responsive" id="entities" *ngIf="motos?.length > 0">
+                            <table class="table" aria-describedby="page-heading">
+                                <thead>
+                                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                                        <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+
+                                        </th>
+                                        <th scope="col" jhiSortBy="marca"><span jhiTranslate="concesionario3App.coche.marca">Marca</span>
+
+                                        </th>
+                                        <th scope="col" jhiSortBy="modelo"><span jhiTranslate="concesionario3App.coche.modelo">Modelo</span>
+
+                                        </th>
+                                        <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.coche.anio">Anio</span>
+
+                                        </th>
+
+                                        <th scope="col" jhiSortBy="electrico"><span jhiTranslate="concesionario3App.coche.electrico">Electrico</span>
+
+                                        </th>
+
+
+                                        <th scope="col" jhiSortBy="color"><span jhiTranslate="concesionario3App.coche.color">Color</span>
+
+                                        </th>
+
+                                        <th scope="col" jhiSortBy="color"><span jhiTranslate="concesionario3App.moto.cilindrada">Cilindrada</span>
+
+                                        </th>
+
+                                        <th scope="col" jhiSortBy="precio"><span jhiTranslate="concesionario3App.coche.precio">Precio</span>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let moto of motos ;trackBy: trackId">
+
+                                        <td><a [routerLink]="['/coche', moto.id, 'view']">{{ moto.id }}</a></td>
+                                        <td>{{ moto.marca }}</td>
+                                        <td>{{ moto.modelo }}</td>
+                                        <td>{{ moto.anio }}</td>
+                                        <td *ngIf="moto.electrico==true">
+                                            <fa-icon icon="check" style="color: green;"></fa-icon>
+                                        </td>
+
+                                        <td *ngIf="moto.electrico==false">
+                                            <fa-icon icon="times" style="color: red;"></fa-icon>
+                                        </td>
+                                        <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
+                                        <td *ngIf="moto.color; else sinColor">
+                                            <fa-icon icon="car" style="color: {{ moto.color }}">
+                                            </fa-icon>{{ moto.color }}
+                                        </td>
+                                        <ng-template #sinColor>
+                                            <td></td>
+                                        </ng-template>
+                                        <td>{{ moto.cilindrada | currency: 'EUR' }}</td>
+
+                                        <td>{{ moto.precio | currency: 'EUR' }}</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div *ngIf="motos?.length > 0">
+                            <div class="row justify-content-center">
+                                <h2>{{motos.length}} coches disponibles</h2>
                             </div>
                         </div>
                     </div>

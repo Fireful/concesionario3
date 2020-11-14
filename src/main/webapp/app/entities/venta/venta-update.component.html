@@ -20,64 +20,92 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.venta.importeTotal" for="field_importeTotal">Importe Total</label>
-                    <input type="number" class="form-control" name="importeTotal" id="field_importeTotal" formControlName="importeTotal" readonly />
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.venta.coche" for="field_coche">Coche</label>
-                    <select class="form-control" id="field_coche" name="coche" formControlName="coche" [(ngModel)]="cocheSeleccionado" (change)="cambioCoche()">
+                    <label class="form-control-label" jhiTranslate="concesionario3App.venta.tipo" for="field_tipo">Tipo</label>
+                    <select class="form-control" id="field_tipo" name="tipo" formControlName="tipo" [(ngModel)]="tipoSeleccionado" (change)="cambioTipo()">
                         <option [ngValue]="null"></option>
-                        <option
-                            [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption"
-                            *ngFor="let cocheOption of coches; trackBy: trackById">
-                            {{ cocheOption.marca }} {{cocheOption.modelo }}</option>
+                        <option [ngValue]="tip.word" *ngFor="let tip of tipo; trackBy: trackById">{{ tip.number }}
+                        </option>
                     </select>
                 </div>
+                <ng-container *ngIf="tipoSeleccionado!=null">
 
-                <ng-template #sinBoton>
-                    Hola
-                </ng-template>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.venta.cliente" for="field_cliente">Cliente</label>
-                    <select class="form-control" id="field_cliente" name="cliente" formControlName="cliente">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="concesionario3App.venta.importeTotal" for="field_importeTotal">Importe Total</label>
+                        <input type="number" class="form-control" name="importeTotal" id="field_importeTotal" formControlName="importeTotal" readonly />
+                    </div>
+
+                    <ng-container *ngIf="tipoSeleccionado=='COCHE'; else templateMoto">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="concesionario3App.venta.coche" for="field_coche">Coche</label>
+                            <select class="form-control" id="field_coche" name="coche" formControlName="coche" [(ngModel)]="cocheSeleccionado" (change)="cambioCoche()">
+                            <option [ngValue]="null"></option>
+                            <option
+                                [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption"
+                                *ngFor="let cocheOption of coches; trackBy: trackById">
+                                {{ cocheOption.marca }} {{cocheOption.modelo }}</option>
+                        </select>
+                        </div>
+                    </ng-container>
+                    <ng-template #templateMoto>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="concesionario3App.venta.moto" for="field_moto">Moto</label>
+                            <select class="form-control" id="field_moto" name="moto" formControlName="moto" [(ngModel)]="cocheSeleccionado" (change)="cambioCoche()">
+                            <option [ngValue]="null"></option>
+                            <option
+                                [ngValue]="motoOption.id === editForm.get('moto')!.value?.id ? editForm.get('moto')!.value : motoOption"
+                                *ngFor="let motoOption of motos; trackBy: trackById">
+                                {{ motoOption.marca }} {{motoOption.modelo }}</option>
+                        </select>
+                        </div>
+                    </ng-template>
+
+
+
+
+                    <ng-template #sinBoton>
+                        Hola
+                    </ng-template>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="concesionario3App.venta.cliente" for="field_cliente">Cliente</label>
+                        <select class="form-control" id="field_cliente" name="cliente" formControlName="cliente">
                         <option [ngValue]="null"></option>
                         <option
                             [ngValue]="clienteOption.id === editForm.get('cliente')!.value?.id ? editForm.get('cliente')!.value : clienteOption"
                             *ngFor="let clienteOption of clientes; trackBy: trackById">{{ clienteOption.nombre }}
                         </option>
                     </select>
-                </div>
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.venta.vendedor" for="field_vendedor">Vendedor</label>
-                    <select class="form-control" id="field_vendedor" name="vendedor" formControlName="vendedor">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="concesionario3App.venta.vendedor" for="field_vendedor">Vendedor</label>
+                        <select class="form-control" id="field_vendedor" name="vendedor" formControlName="vendedor">
                         <option [ngValue]="null"></option>
                         <option
                             [ngValue]="vendedorOption.id === editForm.get('vendedor')!.value?.id ? editForm.get('vendedor')!.value : vendedorOption"
                             *ngFor="let vendedorOption of vendedors; trackBy: trackById">{{ vendedorOption.nombre }}
                         </option>
                     </select>
-                </div>
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.venta.metodoPago" for="field_metodoPago">Vendedor</label>
-                    <select class="form-control" id="field_metodoPago" name="metodoPago" formControlName="metodoPago">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="concesionario3App.venta.metodoPago" for="field_metodoPago">Vendedor</label>
+                        <select class="form-control" id="field_metodoPago" name="metodoPago" formControlName="metodoPago">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="met.word" *ngFor="let met of metodo; trackBy: trackById">{{ met.number }}
                         </option>
                     </select>
-                </div>
+                    </div>
 
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="concesionario3App.venta.numeroVenta" for="field_numeroVenta">Número de venta</label>
-                    <input type="text" class="form-control" name="numeroVenta" id="field_numeroVenta" formControlName="numeroVenta" readonly />
-                </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="concesionario3App.venta.numeroVenta" for="field_numeroVenta">Número de venta</label>
+                        <input type="text" class="form-control" name="numeroVenta" id="field_numeroVenta" formControlName="numeroVenta" readonly />
+                    </div>
 
 
-
+                </ng-container>
             </div>
 
             <div>

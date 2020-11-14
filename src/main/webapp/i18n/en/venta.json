@@ -23,7 +23,10 @@
       "vendedor": "Salesman",
       "metodoPago": "Payment method",
       "numeroVenta": "# Sale",
-      "estadoVenta": "Sale Status"
+      "estadoVenta": "Sale Status",
+      "moto": "botorbike",
+      "vehiculo": "Vehículo",
+      "tipo": "Type"
     }
   }
 }

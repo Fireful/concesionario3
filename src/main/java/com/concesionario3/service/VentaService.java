@@ -46,6 +46,6 @@ public interface VentaService {
      */
     void delete(Long id);
 
-    String getNewNumeroVenta();
+    String getNewNumeroVenta(String vehiculoSeleccionado);
 
 }
