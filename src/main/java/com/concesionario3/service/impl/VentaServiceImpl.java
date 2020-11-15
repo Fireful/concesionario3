@@ -3,6 +3,7 @@ package com.concesionario3.service.impl;
 import com.concesionario3.service.VentaService;
 import com.concesionario3.domain.Venta;
 import com.concesionario3.domain.enums.EnumEstadoVenta;
+import com.concesionario3.domain.enums.EnumTipo;
 import com.concesionario3.repository.VentaRepository;
 import com.concesionario3.repository.VendedorRepository;
 
@@ -45,15 +46,16 @@ public class VentaServiceImpl implements VentaService {
      */
     @Override
     public Venta save(Venta venta) {
-        if (venta.getCoche() != null) {
-            log.debug("Vehículo seleccionado coche: " + venta.getCoche());
+        log.debug("Vehículo tipo: "+venta.getTipo());
+        if (venta.getTipo().toString().equals("COCHE")) {
+            log.debug("Vehículo seleccionado tipo: " + venta.getTipo());
             if (venta.getNumeroVenta() == null) {
                 venta.setNumeroVenta(getNewNumeroVenta("coche"));
                 log.debug("Vehículo numero de venta: " + venta.getNumeroVenta());
 
             }
         } else {
-            log.debug("Vehículo seleccionado moto: "+ venta.getMoto());
+            log.debug("Vehículo seleccionado tipo Moto: "+ venta.getTipo());
             if(venta.getNumeroVenta()==null){
                 venta.setNumeroVenta(getNewNumeroVenta("moto"));
                 log.debug("Vehículo numero de venta: "+venta.getNumeroVenta());
@@ -143,14 +145,14 @@ public class VentaServiceImpl implements VentaService {
                 numero += "";
                 /* vehiculoSeleccionado="coche"; */
             }
-            log.debug("vehiculo: " + vehiculoSeleccionado);
+            log.debug("vehículo: " + vehiculoSeleccionado);
             log.debug("vehículo seleccionado inicial: " + vehiculoSeleccionado);
             if (vehiculoSeleccionado.equals("moto")) {
                 numero += "M";
             } else if (vehiculoSeleccionado.equals("coche")) {
                 numero += "C";
             }
-            log.debug("vehiculo seleccionado numero: " + numero);
+            log.debug("vehículo seleccionado numero: " + numero);
             numero += "00";
 
             Page<Venta> numeros = ventaRepository.findAll(PageRequest.of(0, 1, Direction.DESC, "id"));

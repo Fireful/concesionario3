@@ -163,7 +163,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.motos = dataM || [];
   }
 
-  protected onSuccess(data: IMoto[] | null, headers: HttpHeaders, page: number): void {
+  protected onSuccess(data: ICoche[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     this.router.navigate(['/'], {
@@ -175,7 +175,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.vendedores = data || [];
     this.disponibles = data || [];
-    this.motos = data || [];
   }
 
   protected onError(): void {

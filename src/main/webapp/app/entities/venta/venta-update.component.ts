@@ -28,7 +28,7 @@ type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 export class VentaUpdateComponent implements OnInit {
   isSaving = false;
   ventas: IVenta[] = [];
-  venta?: IVenta;
+  venta: IVenta | undefined;
   coches: ICoche[] = [];
   motos: IMoto[] = [];
   clientes: ICliente[] = [];
@@ -64,6 +64,7 @@ export class VentaUpdateComponent implements OnInit {
   numero: any;
   vehiculoSelec: any;
   vehiculoSeleccionado = 'coche';
+  prefijo: any;
 
   constructor(
     protected ventaService: VentaService,
@@ -108,16 +109,17 @@ export class VentaUpdateComponent implements OnInit {
         venta.fecha = today;
       }
 
-      if (venta.tipo === 'moto') {
+      /* if (venta.tipo === 'moto') {
         this.vehiculoSelec = 'moto';
         alert('tipo: ' + this.vehiculoSelec);
       }
       if (venta.tipo === 'coche') {
         this.vehiculoSelec = 'coche';
         alert('tipo: ' + this.vehiculoSelec);
-      }
+      } */
       if (!venta.numeroVenta) {
         this.botonTerminar = false;
+
         if (venta.id) {
           const today = moment().startOf('day');
           venta.numeroVenta = '00' + venta.id + today.year();
@@ -125,7 +127,7 @@ export class VentaUpdateComponent implements OnInit {
           this.ventaService.getNumeroVenta().subscribe(data => {
             this.dataAux = data.toString();
             this.editForm.patchValue({
-              numeroVenta: this.dataAux
+              numeroVenta: '000'
             });
           });
         }
@@ -199,10 +201,9 @@ export class VentaUpdateComponent implements OnInit {
       id: venta.id,
       fecha: venta.fecha ? venta.fecha.format(DATE_TIME_FORMAT) : null,
       importeTotal: venta.importeTotal,
-      coche: venta.id,
-      moto: venta.id,
+      coche: venta.coche,
+      moto: venta.moto,
       tipo: venta.tipo,
-      vehiculoSeleccionado: venta.moto,
       cliente: venta.cliente,
       vendedor: venta.vendedor,
       metodoPago: venta.metodoPago,

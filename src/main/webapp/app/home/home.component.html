@@ -46,7 +46,7 @@
 
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-6">
                         <div class="tarjeta2 p-3">
                             <div class="tarjeta2-header p-2">
                                 <h3 jhiTranslate="home.masDinero">Vendedor con mmejor recaudación</h3>
@@ -61,6 +61,9 @@
                                                         Vendedor
                                                     </th>
                                                     <th style="text-align: center;" scope="col">
+                                                        Acumulado
+                                                    </th>
+                                                    <th style="text-align: center;" scope="col">
                                                         Ventas
                                                     </th>
                                                 </tr>
@@ -68,6 +71,7 @@
                                             <tr>
                                                 <td>{{dataMaxDinero.nombre}}</td>
                                                 <td style="text-align: center;">{{dataMaxDinero.totalVentas | currency: 'EUR'}}</td>
+                                                <td>{{dataMaxDinero.numVentas}}</td>
                                             </tr>
                                         </table>
                                     </ng-container>
@@ -84,9 +88,10 @@
                 <!-- Fin row tarjetas -->
 
                 <!-- Tabla coches disponibles -->
-                <h1><span jhiTranslate="home.disponibles">Coches disponibles </span></h1>
+
                 <div class="row">
                     <div class="col-5">
+                        <h1><span jhiTranslate="home.cochesDisponibles">Coches disponibles </span></h1>
                         <div class="alert alert-warning" id="no-result" *ngIf="disponibles?.length === 0">
                             <span jhiTranslate="concesionario3App.coche.home.noCars">No hay coches disponibles</span>
                         </div>
@@ -136,8 +141,8 @@
                                         </td>
                                         <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
                                         <td *ngIf="coche.color; else sinColor">
-                                            <fa-icon icon="car" style="color: {{ coche.color }}">
-                                            </fa-icon>{{ coche.color }}
+                                            <fa-icon icon="car" style.color="{{coche.color}}">
+                                            </fa-icon>
                                         </td>
                                         <ng-template #sinColor>
                                             <td></td>
@@ -155,7 +160,9 @@
                         </div>
                     </div>
                     <!-- LISTADO MOTOS DISPONIBLES -->
-                    <div class="col-5">
+
+                    <div class="col-6">
+                        <h1><span jhiTranslate="home.motosDisponibles">Motos disponibles </span></h1>
                         <div class="alert alert-warning" id="no-result" *ngIf="motos?.length === 0">
                             <span jhiTranslate="concesionario3App.coche.home.noMotorbikes">No hay motos disponibles</span>
                         </div>
@@ -210,8 +217,8 @@
                                         </td>
                                         <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
                                         <td *ngIf="moto.color; else sinColor">
-                                            <fa-icon icon="car" style="color: {{ moto.color }}">
-                                            </fa-icon>{{ moto.color }}
+                                            <fa-icon icon="car" style.color="{{moto.color}}">
+                                            </fa-icon>
                                         </td>
                                         <ng-template #sinColor>
                                             <td></td>
@@ -226,7 +233,7 @@
                         </div>
                         <div *ngIf="motos?.length > 0">
                             <div class="row justify-content-center">
-                                <h2>{{motos.length}} coches disponibles</h2>
+                                <h2>{{motos.length}} motos disponibles</h2>
                             </div>
                         </div>
                     </div>

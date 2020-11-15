@@ -1,7 +1,8 @@
 {
   "home": {
     "title": "PSA Group",
-    "disponibles": "Available cars",
+    "cochesDisponibles": "Available cars",
+    "motosDisponibles": "Available motorbikes",
     "sinVentas": "No sales yet",
     "subtitle": "This is your homepage",
     "quesition": "If you have any question on JHipster:",
