@@ -21,7 +21,6 @@ export class MotoUpdateComponent implements OnInit {
     marca: [],
     modelo: [],
     anio: [],
-    electrico: [],
     color: [],
     cilindrada: [],
     precio: []
@@ -49,7 +48,6 @@ export class MotoUpdateComponent implements OnInit {
       marca: moto.marca,
       modelo: moto.modelo,
       anio: moto.anio,
-      electrico: moto.electrico,
       precio: moto.precio,
       color: moto.color
     });
@@ -77,7 +75,6 @@ export class MotoUpdateComponent implements OnInit {
       marca: this.editForm.get(['marca'])!.value,
       modelo: this.editForm.get(['modelo'])!.value,
       anio: this.editForm.get(['anio'])!.value,
-      electrico: this.editForm.get(['electrico'])!.value,
       precio: this.editForm.get(['precio'])!.value,
       color: this.editForm.get(['color'])!.value
     };

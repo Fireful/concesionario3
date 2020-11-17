@@ -38,13 +38,39 @@
                 <dd>
                     {{venta.numeroVenta}}
                 </dd>
+                <dt><span jhiTranslate="concesionario3App.venta.estadoVenta">Estado</span></dt>
+                <dd *ngIf="venta.estadoVenta=='DISPONIBLE' else noDisponible">
+                    <span style="color: red; font-weight: bold;">{{venta.estadoVenta }}</span>
+                </dd>
+                <ng-template #noDisponible>
+                    <dd *ngIf="venta.estadoVenta=='INICIADA' else noIniciada">
+                        <span style="color: orange; font-weight: bold;">{{venta.estadoVenta }}</span>
+                    </dd>
+                </ng-template>
+                <ng-template #noIniciada>
+                    <dd *ngIf="venta.estadoVenta=='EN_PROCESO' else noEnProceso">
+                        <span style="color: green; font-weight: bold;">{{venta.estadoVenta }}</span>
+                    </dd>
+                </ng-template>
+                <ng-template #noEnProceso>
+                    <dd *ngIf="venta.estadoVenta=='TERMINADA' else otroEstado">
+                        <span style="color: blue; font-weight: bold;">{{venta.estadoVenta }}</span>
+                    </dd>
+                </ng-template>
+                <ng-template #otroEstado>
+                    <dd>
+                        {{venta.estadoVenta }}
+                    </dd>
+                </ng-template>
+
             </dl>
 
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary">
+
+            <button *ngIf="venta.estadoVenta!='TERMINADA'" type="button" [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>

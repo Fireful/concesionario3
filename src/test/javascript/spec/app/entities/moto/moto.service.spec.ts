@@ -56,7 +56,6 @@ describe('Service Tests', () => {
           {
             marca: 'BBBBBB',
             anio: 1,
-            electrico: true,
             precio: 1
           },
           elemDefault
@@ -76,7 +75,6 @@ describe('Service Tests', () => {
           {
             marca: 'BBBBBB',
             anio: 1,
-            electrico: true,
             precio: 1
           },
           elemDefault

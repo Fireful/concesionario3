@@ -55,9 +55,6 @@
                     <th scope="col" jhiSortBy="anio"><span jhiTranslate="concesionario3App.moto.anio">Anio</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="electrico"><span jhiTranslate="concesionario3App.moto.electrico">Electrico</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
                     <th scope="col" jhiSortBy="precio"><span jhiTranslate="concesionario3App.moto.precio">Precio</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
@@ -74,13 +71,6 @@
                     <td><a [routerLink]="['/moto', moto.id, 'view']">{{ moto.id }}</a></td>
                     <td>{{ moto.marca }}</td>
                     <td>{{ moto.anio }}</td>
-                    <td *ngIf="moto.electrico==true">
-                        <fa-icon icon="check" style="color: green;"></fa-icon>
-                    </td>
-
-                    <td *ngIf="moto.electrico==false">
-                        <fa-icon icon="times" style="color: red;"></fa-icon>
-                    </td>
                     <td>{{ moto.precio }}</td>
                     <td *ngIf="!moto.venta">
                         <span jhiTranslate="concesionario3App.moto.disponible">Disponible</span>

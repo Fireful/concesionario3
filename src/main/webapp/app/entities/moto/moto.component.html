@@ -78,10 +78,6 @@
                         <fa-icon icon="sort"></fa-icon>
                     </th>
 
-                    <th scope="col" jhiSortBy="electrico"><span jhiTranslate="concesionario3App.moto.electrico">Electrico</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-
                     <th scope="col" jhiSortBy="color"><span jhiTranslate="concesionario3App.moto.color">Color</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
@@ -106,13 +102,7 @@
                     <td>{{ moto.marca }}</td>
                     <td>{{ moto.modelo }}</td>
                     <td>{{ moto.anio }}</td>
-                    <td *ngIf="moto.electrico==true">
-                        <fa-icon icon="check" style="color: green;"></fa-icon>
-                    </td>
 
-                    <td *ngIf="moto.electrico==false">
-                        <fa-icon icon="times" style="color: red;"></fa-icon>
-                    </td>
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
                     <td *ngIf="moto.color; else sinColor" style="text-align: center;">
                         <fa-icon icon="car" class="iconoMoto" style.color="{{moto.color}}">

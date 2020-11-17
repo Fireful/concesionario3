@@ -131,14 +131,6 @@ public class MotoResource {
         return ResponseEntity.ok().headers(headers).body(moto.getContent());
     }
 
-    @GetMapping("/motos/{tipo}/electricos")
-    public ResponseEntity<List<Moto>> getElectricos(Pageable page, @PathVariable String tipo){
-        log.debug("REST request to get eléctricos: {}", tipo);
-        Page<Moto> moto=motoService.findTipo(page, tipo);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), moto);
-        return ResponseEntity.ok().headers(headers).body(moto.getContent());
-    }
-
     @GetMapping("/motos/color/{color}")
     public ResponseEntity<List<Moto>> getColores(Pageable page, @PathVariable String color){
         log.debug("REST request to get colores: {}", color);

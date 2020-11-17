@@ -1,11 +1,11 @@
-id;marca;modelo;anio;electrico;color;cilindrada;precio
-1;Honda;Africa Twin;2016;false;#0000ff;1100;550
-2;Honda;GBR650;15636;false;#ff0000;650;1800
-3;Honda;Goldwing;32161;true;#637099;250;3200
-4;Suzuki;GSX -R1000R;83131;true;#695149;1000;10000
-5;Ducati;Monster;23593;true;#489299;750;12500
-6;Moto Guzzi;Eldorado;14537;true;#657589;125;7000
-7;Harley Davidson;Forty-eight;88189;true;#392333;250;8240
-8;KTM;Super Duke;55378;true;#353499;1500;6300
-9;BMW;S 1000 RR;50730;false;#992169;600;2800
-10;Honda; Transalp;51710;false;#892669;125;16000
+id;marca;modelo;anio;color;cilindrada;precio
+1;Honda;Africa Twin;2016;#0000ff;1100;550
+2;Honda;GBR650;15636;#ff0000;650;1800
+3;Honda;Goldwing;32161;#637099;250;3200
+4;Suzuki;GSX-R1000R;83131;#695149;1000;10000
+5;Ducati;Monster;23593;#489299;750;12500
+6;Moto Guzzi;Eldorado;14537;#657589;125;7000
+7;Kawasaki;ZXR 750;88189;#392333;750;8240
+8;KTM;Super Duke;55378;#353499;1500;6300
+9;BMW;S 1000 RR;50730;#992169;600;2800
+10;Honda; Transalp;51710;#892669;125;16000

@@ -101,20 +101,6 @@ public class MotoServiceImpl implements MotoService {
         }
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Page<Moto> findTipo(Pageable page, String tipo){
-        if(tipo.equals("termicos" )){
-            log.debug("Entramos en tipo termicos");
-            return motoRepository.findAllTermicos(page);
-        } else if(tipo.equals("electricos")){
-            log.debug("Entramos en tipo electricos");
-            return motoRepository.findAllElectricos(page);
-        } else {
-            log.debug("Entramos en tipo todos");
-            return motoRepository.findAll(page);
-        }
-    }
 
     @Override
     @Transactional(readOnly = true)

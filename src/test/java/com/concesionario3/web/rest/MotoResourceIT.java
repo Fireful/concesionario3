@@ -98,7 +98,6 @@ public class MotoResourceIT {
             .marca(DEFAULT_MARCA)
             .modelo(DEFAULT_MODELO)
             .anio(DEFAULT_ANIO)
-            .electrico(DEFAULT_ELECTRICO)
             .precio(DEFAULT_PRECIO);
         return moto;
     }
@@ -113,7 +112,6 @@ public class MotoResourceIT {
             .marca(UPDATED_MARCA)
             .modelo(UPDATED_MODELO)
             .anio(UPDATED_ANIO)
-            .electrico(UPDATED_ELECTRICO)
             .precio(UPDATED_PRECIO);
         return moto;
     }
@@ -140,7 +138,6 @@ public class MotoResourceIT {
         Moto testMoto = motoList.get(motoList.size() - 1);
         assertThat(testMoto.getMarca()).isEqualTo(DEFAULT_MARCA);
         assertThat(testMoto.getAnio()).isEqualTo(DEFAULT_ANIO);
-        assertThat(testMoto.isElectrico()).isEqualTo(DEFAULT_ELECTRICO);
         assertThat(testMoto.getPrecio()).isEqualTo(DEFAULT_PRECIO);
     }
 
@@ -177,7 +174,6 @@ public class MotoResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(moto.getId().intValue())))
             .andExpect(jsonPath("$.[*].marca").value(hasItem(DEFAULT_MARCA)))
             .andExpect(jsonPath("$.[*].anio").value(hasItem(DEFAULT_ANIO)))
-            .andExpect(jsonPath("$.[*].electrico").value(hasItem(DEFAULT_ELECTRICO.booleanValue())))
             .andExpect(jsonPath("$.[*].precio").value(hasItem(DEFAULT_PRECIO.doubleValue())));
     }
 
@@ -194,7 +190,6 @@ public class MotoResourceIT {
             .andExpect(jsonPath("$.id").value(moto.getId().intValue()))
             .andExpect(jsonPath("$.marca").value(DEFAULT_MARCA))
             .andExpect(jsonPath("$.anio").value(DEFAULT_ANIO))
-            .andExpect(jsonPath("$.electrico").value(DEFAULT_ELECTRICO.booleanValue()))
             .andExpect(jsonPath("$.precio").value(DEFAULT_PRECIO.doubleValue()));
     }
 
@@ -221,7 +216,6 @@ public class MotoResourceIT {
         updatedMoto
             .marca(UPDATED_MARCA)
             .anio(UPDATED_ANIO)
-            .electrico(UPDATED_ELECTRICO)
             .precio(UPDATED_PRECIO);
 
         restMotoMockMvc.perform(put("/api/motos")
@@ -235,7 +229,6 @@ public class MotoResourceIT {
         Moto testMoto = motoList.get(motoList.size() - 1);
         assertThat(testMoto.getMarca()).isEqualTo(UPDATED_MARCA);
         assertThat(testMoto.getAnio()).isEqualTo(UPDATED_ANIO);
-        assertThat(testMoto.isElectrico()).isEqualTo(UPDATED_ELECTRICO);
         assertThat(testMoto.getPrecio()).isEqualTo(UPDATED_PRECIO);
     }
 

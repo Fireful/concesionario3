@@ -26,12 +26,6 @@ public interface MotoRepository extends JpaRepository<Moto, Long> {
     Page<Moto> findAllByDisponibles(Pageable disp);
      */
 
-     @Query("SELECT c FROM Moto c WHERE c.electrico=1")
-     Page<Moto> findAllElectricos(Pageable page);
-
-     @Query("SELECT c FROM Moto c WHERE c.electrico=0")
-     Page<Moto> findAllTermicos(Pageable page);
-
 
      Page<Moto> findByColor(Pageable page, String color);
 

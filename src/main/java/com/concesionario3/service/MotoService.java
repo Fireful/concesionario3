@@ -45,8 +45,6 @@ public interface MotoService {
 
     Page<Moto> findVenta(Pageable page, Boolean venta);
 
-    Page<Moto> findTipo(Pageable page, String tipo);
-
     Page<Moto> findColor(Pageable page, String color);
 
     Page<Moto> findDisponibles(Pageable page, Boolean venta);

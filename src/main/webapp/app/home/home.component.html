@@ -46,7 +46,7 @@
 
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-5">
                         <div class="tarjeta2 p-3">
                             <div class="tarjeta2-header p-2">
                                 <h3 jhiTranslate="home.masDinero">Vendedor con mmejor recaudación</h3>
@@ -155,13 +155,14 @@
                         </div>
                         <div *ngIf="disponibles?.length > 0">
                             <div class="row justify-content-center">
+
                                 <h2>{{disponibles.length}} coches disponibles</h2>
                             </div>
                         </div>
                     </div>
                     <!-- LISTADO MOTOS DISPONIBLES -->
 
-                    <div class="col-6">
+                    <div class="col-5">
                         <h1><span jhiTranslate="home.motosDisponibles">Motos disponibles </span></h1>
                         <div class="alert alert-warning" id="no-result" *ngIf="motos?.length === 0">
                             <span jhiTranslate="concesionario3App.coche.home.noMotorbikes">No hay motos disponibles</span>
@@ -183,11 +184,6 @@
 
                                         </th>
 
-                                        <th scope="col" jhiSortBy="electrico"><span jhiTranslate="concesionario3App.coche.electrico">Electrico</span>
-
-                                        </th>
-
-
                                         <th scope="col" jhiSortBy="color"><span jhiTranslate="concesionario3App.coche.color">Color</span>
 
                                         </th>
@@ -204,20 +200,14 @@
                                 <tbody>
                                     <tr *ngFor="let moto of motos ;trackBy: trackId">
 
-                                        <td><a [routerLink]="['/coche', moto.id, 'view']">{{ moto.id }}</a></td>
+                                        <td><a [routerLink]="['/moto', moto.id, 'view']">{{ moto.id }}</a></td>
                                         <td>{{ moto.marca }}</td>
                                         <td>{{ moto.modelo }}</td>
                                         <td>{{ moto.anio }}</td>
-                                        <td *ngIf="moto.electrico==true">
-                                            <fa-icon icon="check" style="color: green;"></fa-icon>
-                                        </td>
 
-                                        <td *ngIf="moto.electrico==false">
-                                            <fa-icon icon="times" style="color: red;"></fa-icon>
-                                        </td>
                                         <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
                                         <td *ngIf="moto.color; else sinColor">
-                                            <fa-icon icon="car" style.color="{{moto.color}}">
+                                            <fa-icon icon="motorcycle" style.color="{{moto.color}}">
                                             </fa-icon>
                                         </td>
                                         <ng-template #sinColor>

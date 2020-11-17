@@ -12,24 +12,31 @@
                 <dd>
                     <span>{{ moto.marca }}</span>
                 </dd>
+                <dt><span jhiTranslate="concesionario3App.moto.modelo">Modelo</span></dt>
+                <dd>
+                    <span>{{ moto.modelo }}</span>
+                </dd>
                 <dt><span jhiTranslate="concesionario3App.moto.anio">Anio</span></dt>
                 <dd>
                     <span>{{ moto.anio }}</span>
                 </dd>
-                <dt><span jhiTranslate="concesionario3App.moto.electrico">Electrico</span></dt>
+                <dt><span jhiTranslate="concesionario3App.moto.color">Color</span></dt>
+                <dd *ngIf="moto.color; else sinColor">
+                    <fa-icon icon="motorcycle" style.color="{{moto.color}}">
+                    </fa-icon>
+                </dd>
+                <ng-template #sinColor>
+                    <dd></dd>
+                </ng-template>
+                <dt><span jhiTranslate="concesionario3App.moto.cilindrada">Cilindrada</span></dt>
                 <dd>
-                    <span>{{ moto.electrico }}</span>
+                    <span>{{ moto.cilindrada }}</span>
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.moto.precio">Precio</span></dt>
                 <dd>
                     <span>{{ moto.precio | currency: 'EUR' }}</span>
                 </dd>
-                <dt><span jhiTranslate="concesionario3App.moto.color">Color</span></dt>
-                <div class="border-box" style="width: 80px; height: 40px; background-color: {{ moto.color }};">
-                    <dd>
-                        <span>{{ moto.color }}</span>
-                    </dd>
-                </div>
+
             </dl>
 
             <button type="submit" (click)="previousState()" class="btn btn-info">

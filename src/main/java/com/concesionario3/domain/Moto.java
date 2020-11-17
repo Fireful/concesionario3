@@ -33,9 +33,6 @@ public class Moto implements Serializable {
     @Column(name = "anio")
     private Integer anio;
 
-    @Column(name = "electrico")
-    private Boolean electrico;
-
     @Column(name = "color")
     private String color;
 
@@ -84,18 +81,6 @@ public class Moto implements Serializable {
         this.anio = anio;
     }
 
-    public Boolean isElectrico() {
-        return electrico;
-    }
-
-    public Moto electrico(Boolean electrico) {
-        this.electrico = electrico;
-        return this;
-    }
-
-    public void setElectrico(Boolean electrico) {
-        this.electrico = electrico;
-    }
 
     public Float getPrecio() {
         return precio;
@@ -133,7 +118,6 @@ public class Moto implements Serializable {
             "id=" + getId() +
             ", marca='" + getMarca() + "'" +
             ", anio=" + getAnio() +
-            ", electrico='" + isElectrico() + "'" +
             ", precio=" + getPrecio() + "'" +
             ", Venta id="+getVenta() + "'"+
             ", Color="+getColor() + "'"+

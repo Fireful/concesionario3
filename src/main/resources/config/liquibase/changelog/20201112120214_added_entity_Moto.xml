@@ -25,9 +25,6 @@
             <column name="anio" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="electrico" type="boolean">
-                <constraints nullable="true" />
-            </column>
             <column name="color" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
@@ -64,7 +61,6 @@
             <column name="marca" type="string"/>
             <column name="modelo" type="string"/>
             <column name="anio" type="numeric"/>
-            <column name="electrico" type="boolean"/>
             <column name="color" type="string"/>
             <column name="cilindrada" type="string"/>
             <column name="precio" type="numeric"/>

@@ -86,7 +86,7 @@ export class VentaUpdateComponent implements OnInit {
   }
 
   cambioTipo(): void {
-    alert(this.tipoSeleccionado);
+    /* alert(this.tipoSeleccionado); */
   }
 
   cambioCoche(): void {
@@ -127,7 +127,7 @@ export class VentaUpdateComponent implements OnInit {
           this.ventaService.getNumeroVenta().subscribe(data => {
             this.dataAux = data.toString();
             this.editForm.patchValue({
-              numeroVenta: '000'
+              numeroVenta: this.dataAux
             });
           });
         }
@@ -274,7 +274,7 @@ export class VentaUpdateComponent implements OnInit {
     return item.id;
   }
 
-  getNumVenta(vehiculoSeleccionado: string): void {
+  /* getNumVenta(vehiculoSeleccionado: string): void {
     this.ventaService.getNumeroVenta();
-  }
+  } */
 }
