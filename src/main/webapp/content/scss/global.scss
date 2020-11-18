@@ -23,6 +23,7 @@ a {
 
 a:hover {
   color: #533f03;
+  text-decoration: none;
 }
 
 /* override hover color for dropdown-item forced by bootstrap to all a:not([href]):not([tabindex]) elements in _reboot.scss */

@@ -21,6 +21,7 @@ import { EstadoVenta } from './estado-venta.enum';
 import { IMoto } from 'app/shared/model/moto.model';
 import { MotoService } from '../moto/moto.service';
 import { Tipo } from '../tipo.enum';
+import * as $ from 'jquery';
 
 type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 
@@ -44,6 +45,7 @@ export class VentaUpdateComponent implements OnInit {
   tipo = Object.entries(Tipo).map(([key, value]) => ({ number: key, word: value }));
 
   dataAux = '';
+  dataCoche = '';
   seleccion = 'Importe Total';
   editForm = this.fb.group({
     id: [],
@@ -58,13 +60,15 @@ export class VentaUpdateComponent implements OnInit {
     numeroVenta: [],
     estadoVenta: []
   });
-  cocheSeleccionado: any;
+
   tipoSeleccionado?: string;
-  seleccionado: any;
+  seleccionado?: ICoche;
   numero: any;
   vehiculoSelec: any;
   vehiculoSeleccionado = 'coche';
   prefijo: any;
+  declare $: any;
+  clienteSelec: any;
 
   constructor(
     protected ventaService: VentaService,
@@ -77,23 +81,26 @@ export class VentaUpdateComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  vehiculo(valor: string): void {
-    this.vehiculoSeleccionado = valor;
-    alert(valor);
-    this.editForm.patchValue({
-      tipo: valor
-    });
-  }
-
   cambioTipo(): void {
     /* alert(this.tipoSeleccionado); */
+    /* alert(this.ventaService.getNumeroVenta()); */
   }
 
   cambioCoche(): void {
-    this.seleccionado = this.cocheSeleccionado.precio;
-    this.editForm.patchValue({
-      importeTotal: this.seleccionado
-    });
+    if (this.editForm.get(['tipo'])!.value === 'COCHE') {
+      if (this.editForm.get(['coche'])!.value !== undefined) {
+        this.editForm.patchValue({
+          importeTotal: this.editForm.get(['coche'])!.value.precio
+        });
+      }
+    } else if (this.editForm.get(['tipo'])!.value === 'MOTO') {
+      if (this.editForm.get(['moto'])!.value !== undefined) {
+        this.editForm.patchValue({
+          importeTotal: this.editForm.get(['moto'])!.value.precio
+        });
+      }
+    }
+
     /*  this.ventaService.subscribe(data =>{
         this.dataAux = data
 
@@ -124,11 +131,8 @@ export class VentaUpdateComponent implements OnInit {
           const today = moment().startOf('day');
           venta.numeroVenta = '00' + venta.id + today.year();
         } else {
-          this.ventaService.getNumeroVenta().subscribe(data => {
-            this.dataAux = data.toString();
-            this.editForm.patchValue({
-              numeroVenta: this.dataAux
-            });
+          this.editForm.patchValue({
+            numeroVenta: this.ventaService.getNumeroVenta()
           });
         }
       } else {

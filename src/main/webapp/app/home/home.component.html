@@ -116,7 +116,6 @@
 
                                         </th>
 
-
                                         <th scope="col" jhiSortBy="color"><span jhiTranslate="concesionario3App.coche.color">Color</span>
 
                                         </th>
@@ -126,9 +125,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let coche of disponibles ;trackBy: trackId">
 
-                                        <td><a [routerLink]="['/coche', coche.id, 'view']">{{ coche.id }}</a></td>
+                                    <tr *ngFor="let coche of disponibles ;trackBy: trackId">
+                                        <a [routerLink]="['/coche', coche.id, 'view']">
+
+                                            <td>{{ coche.id }}</td>
+                                        </a>
                                         <td>{{ coche.marca }}</td>
                                         <td>{{ coche.modelo }}</td>
                                         <td>{{ coche.anio }}</td>
@@ -150,6 +152,7 @@
                                         <td>{{ coche.precio | currency: 'EUR' }}</td>
 
                                     </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -199,8 +202,9 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let moto of motos ;trackBy: trackId">
-
-                                        <td><a [routerLink]="['/moto', moto.id, 'view']">{{ moto.id }}</a></td>
+                                        <a [routerLink]="['/moto', moto.id, 'view']">
+                                            <td>{{ moto.id }}</td>
+                                        </a>
                                         <td>{{ moto.marca }}</td>
                                         <td>{{ moto.modelo }}</td>
                                         <td>{{ moto.anio }}</td>

@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.dia = this.today.getDate();
 
-    if (this.dia === 1) {
+    if (this.dia === 18) {
       this.modalService.open(HomeResetVentasComponent, { size: 'lg', backdrop: 'static' });
     }
   }

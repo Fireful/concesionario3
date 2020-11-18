@@ -1,7 +1,7 @@
 @keyframes lds-pacman-1 {
   0% {
     -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+    transform: rotate(10deg);
   }
   50% {
     -webkit-transform: rotate(-45deg);
@@ -16,7 +16,7 @@
 @-webkit-keyframes lds-pacman-1 {
   0% {
     -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+    transform: rotate(10deg);
   }
   50% {
     -webkit-transform: rotate(-45deg);
@@ -142,7 +142,7 @@
   left: -8px;
   width: 24px;
   height: 10px;
-  background-image: url('../images/logo-jhipster.png');
+  background-image: url('../images/psa.jpg');
   background-size: contain;
   -webkit-animation: lds-pacman-3 1s linear infinite;
   animation: lds-pacman-3 1.5s linear infinite;
