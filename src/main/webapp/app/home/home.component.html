@@ -1,15 +1,104 @@
-<div class="row">
+<div class="row contenido">
     <div class="col-md-2">
         <span class="hipster img-fluid rounded"></span>
     </div>
 
+
+
     <div class="col-md-10">
         <div [ngSwitch]="isAuthenticated() ">
             <div *ngSwitchCase="true ">
-                <h1>
+                <h1 class="col-10" style="text-align: center;">
                     <span id="home-logged-message " *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login } ">Welcome,
                         "{{ account.login }} ".</span>
                 </h1>
+                <!-- <div class="padre col-md-10">
+                    <div class="hijo">
+                        <ngb-carousel class="carrusel" [showNavigationArrows]="false" [showNavigationIndicators]="true">
+                            <ng-template ngbSlide>
+                                <div>
+                                    <div class="tarjeta1 p-3 ">
+                                        <div class="tarjeta1-header p-2 ">
+                                            <h3 jhiTranslate="home.masVentas ">Vendedor con más ventas</h3>
+                                        </div>
+                                        <div class="tarjeta1-cuerpo ">
+                                            <div class="tarjeta1-texto ">
+                                                <ng-container *ngIf="dataMax.numVentas>0; else sinVentas">
+                                                    <table class="table table-bordered" aria-describedby="HomePage">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">
+                                                                    Vendedor
+                                                                </th>
+                                                                <th style="text-align: center;" scope="col">
+                                                                    Ventas
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tr>
+                                                            <td>{{dataMax.nombre}}</td>
+                                                            <td style="text-align: center;">{{dataMax.numVentas}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </ng-container>
+                                                <ng-template #sinVentas>
+                                                    <div class="alert alert-warning">
+                                                        <span jhiTranslate="home.sinVentas">No hay ventas todavía</span>
+                                                    </div>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbSlide>
+                                <div>
+                                    <div class="tarjeta2 p-3">
+                                        <div class="tarjeta2-header p-2">
+                                            <h3 jhiTranslate="home.masDinero">Vendedor con mmejor recaudación</h3>
+                                        </div>
+                                        <div class="tarjeta2-cuerpo">
+                                            <div class="tarjeta2-texto">
+                                                <ng-container *ngIf="dataMaxDinero.totalVentas>0; else sinTotalVentas">
+                                                    <table class="table table-bordered" aria-describedby="HomePage">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">
+                                                                    Vendedor
+                                                                </th>
+                                                                <th style="text-align: center;" scope="col">
+                                                                    Acumulado
+                                                                </th>
+                                                                <th style="text-align: center;" scope="col">
+                                                                    Ventas
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tr>
+                                                            <td>{{dataMaxDinero.nombre}}</td>
+                                                            <td style="text-align: center;">
+                                                                {{dataMaxDinero.totalVentas | currency: 'EUR'}}
+                                                            </td>
+                                                            <td>{{dataMaxDinero.numVentas}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </ng-container>
+                                                <ng-template #sinTotalVentas>
+                                                    <div class="alert alert-warning">
+                                                        <span jhiTranslate="home.sinVentas">No hay ventas todavía</span>
+                                                    </div>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-carousel>
+                        <!-- fin carrusel
+
+            </div>
+        </div> -->
+
                 <div class="row">
                     <div class="col-5">
                         <div class="tarjeta1 p-3">
@@ -43,9 +132,9 @@
                                     </ng-template>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+                    <!-- Fin Tarjeta 1 -->
                     <div class="col-5">
                         <div class="tarjeta2 p-3">
                             <div class="tarjeta2-header p-2">
@@ -83,7 +172,10 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+
                 </div>
                 <!-- Fin row tarjetas -->
 
@@ -273,4 +365,5 @@
 
 
     </div>
+
 </div>

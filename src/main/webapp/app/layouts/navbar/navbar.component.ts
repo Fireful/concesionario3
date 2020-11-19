@@ -6,9 +6,11 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { VERSION } from 'app/app.constants';
 import { LANGUAGES } from 'app/core/language/language.constants';
 import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'jhi-navbar',
@@ -21,6 +23,8 @@ export class NavbarComponent implements OnInit {
   languages = LANGUAGES;
   swaggerEnabled?: boolean;
   version: string;
+  account: Account | null = null;
+  authSubscription?: Subscription;
 
   constructor(
     private loginService: LoginService,
@@ -35,6 +39,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
       this.swaggerEnabled = profileInfo.swaggerEnabled;

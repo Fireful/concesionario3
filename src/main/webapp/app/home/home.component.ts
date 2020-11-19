@@ -21,7 +21,8 @@ import { MotoService } from 'app/entities/moto/moto.service';
 @Component({
   selector: 'jhi-home',
   templateUrl: './home.component.html',
-  styleUrls: ['home.scss']
+  styleUrls: ['home.scss'],
+  animations: []
 })
 export class HomeComponent implements OnInit, OnDestroy {
   maxVentasHome = '';

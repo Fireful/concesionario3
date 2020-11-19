@@ -3,20 +3,20 @@
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-vendedor-heading" jhiTranslate="concesionario3App.vendedor.home.createOrEditLabel">Create or edit a Vendedor</h2>
 
-            <div>
+            <div class="form-row">
                 <jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                <!-- <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
+                </div> -->
 
-                <div class="form-group">
+                <div class="col-md-6 mb-3">
                     <label class="form-control-label" jhiTranslate="concesionario3App.vendedor.nombre" for="field_nombre">Nombre</label>
                     <input type="text" class="form-control" name="nombre" id="field_nombre" formControlName="nombre" />
                 </div>
 
-                <div class="form-group">
+                <div class="col-md-6 mb-3">
                     <label class="form-control-label" jhiTranslate="concesionario3App.vendedor.dni" for="field_dni">Dni</label>
                     <input type="text" class="form-control" name="dni" id="field_dni" formControlName="dni" />
                 </div>

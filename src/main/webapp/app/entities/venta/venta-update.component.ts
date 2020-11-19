@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, RequiredValidator, Validators } from '@angular/forms';
@@ -23,10 +23,23 @@ import { MotoService } from '../moto/moto.service';
 import { Tipo } from '../tipo.enum';
 import * as $ from 'jquery';
 
+import { RouterOutlet } from '@angular/router';
+import { fadeSlideInOut } from '../animations';
+
 type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 
-@Component({ selector: 'jhi-venta-update', templateUrl: './venta-update.component.html' })
+@Component({
+  selector: 'jhi-venta-update',
+  templateUrl: './venta-update.component.html',
+  animations: [
+    fadeSlideInOut
+    // animation triggers go here
+  ]
+})
 export class VentaUpdateComponent implements OnInit {
+  @HostBinding('@.disabled')
+  public animationsDisabled = false;
+
   isSaving = false;
   ventas: IVenta[] = [];
   venta: IVenta | undefined;
@@ -80,6 +93,14 @@ export class VentaUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
+
+  prepareRoute(outlet: RouterOutlet): any {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
+  toggleAnimations(): void {
+    this.animationsDisabled = !this.animationsDisabled;
+  }
 
   cambioTipo(): void {
     /* alert(this.tipoSeleccionado); */

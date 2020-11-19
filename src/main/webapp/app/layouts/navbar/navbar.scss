@@ -16,6 +16,7 @@ Navbar
 }
 
 .navbar {
+  background: linear-gradient(180deg, rgb(104, 190, 162) 0%, rgb(142, 184, 174) 35%, rgba(228, 230, 231, 1) 100%);
   padding: 0.2rem 1rem;
   ul.navbar-nav {
     .nav-item {
@@ -25,6 +26,21 @@ Navbar
   a.nav-link {
     font-weight: 400;
   }
+}
+
+.nav-item:hover {
+  transition: 500ms ease-in-out;
+  background-color: rgb(164, 194, 164);
+  box-shadow: 8px 8px 10px 0 rgb(82, 100, 82);
+}
+
+.nav-item {
+  border-radius: 50px;
+  transition: 500ms ease-in-out;
+}
+
+.navbar:hover {
+  background-color: blue;
 }
 
 /* ==========================================================================

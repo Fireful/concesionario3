@@ -22,6 +22,6 @@
     "importHelpers": true,
     "allowJs": true
   },
-  "include": ["src/main/webapp/app", "src/test/javascript/"],
+  "include": ["src/main/webapp/app", "src/test/javascript/", "src/main/webapp/content/js/home.js"],
   "exclude": ["node_modules"]
 }

@@ -91,5 +91,26 @@ Main page styles
 }
 
 .tarj:hover {
-  background-color: green;
+  background-color: red;
+}
+
+/* Carrusel */
+
+.padre {
+  display: flex;
+  justify-content: center;
+}
+
+.hijo {
+  padding: 10px;
+  margin: 10px;
+}
+
+.contenido {
+  display: flex;
+  height: auto;
+}
+
+.carrusel {
+  border: none;
 }

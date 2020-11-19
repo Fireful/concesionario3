@@ -103,13 +103,20 @@
                     <td>{{ coche.marca }}</td>
                     <td>{{ coche.modelo }}</td>
                     <td>{{ coche.anio }}</td>
-                    <td *ngIf="coche.electrico==true">
-                        <fa-icon icon="check" style="color: green;"></fa-icon>
-                    </td>
+                    <ng-container *ngIf="coche.electrico; else termico">
+                        <td>
+                            <fa-icon icon="check" style="color: green;"></fa-icon>
+                        </td>
+                    </ng-container>
+                    <ng-template #termico>
+                        <td>
+                            <fa-icon icon="times" style="color: red;"></fa-icon>
+                        </td>
+                    </ng-template>
 
-                    <td *ngIf="coche.electrico==false">
-                        <fa-icon icon="times" style="color: red;"></fa-icon>
-                    </td>
+
+
+
                     <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
                     <td *ngIf="coche.color; else sinColor" style="text-align: center;">
                         <fa-icon icon="car" class="iconoCoche" style.color="{{coche.color}}">

@@ -21,9 +21,20 @@
                     <span>{{ coche.anio }}</span>
                 </dd>
                 <dt><span jhiTranslate="concesionario3App.coche.electrico">Electrico</span></dt>
-                <dd>
-                    <span>{{ coche.electrico }}</span>
-                </dd>
+                <ng-container *ngIf="coche.electrico==true else termico">
+                    <dd>
+                        <span>
+                        <fa-icon icon="check" style="color: green;"></fa-icon>
+                    </span>
+                    </dd>
+                </ng-container>
+                <ng-template #termico>
+                    <dd>
+                        <span>
+                            <fa-icon icon="times" style="color: red;"></fa-icon>
+                        </span>
+                    </dd>
+                </ng-template>
                 <dt><span jhiTranslate="concesionario3App.coche.precio">Precio</span></dt>
                 <dd>
                     <span>{{ coche.precio | currency: 'EUR' }}</span>
@@ -31,7 +42,9 @@
                 <dt><span jhiTranslate="concesionario3App.coche.color">Color</span></dt>
                 <div class="border-box" style="width: 80px; height: 40px; background-color: {{ coche.color }};">
                     <dd>
-                        <span>{{ coche.color }}</span>
+                        <span>
+                            <fa-icon icon="car" style.color="{{coche.color}}"></fa-icon>
+                        </span>
                     </dd>
                 </div>
             </dl>

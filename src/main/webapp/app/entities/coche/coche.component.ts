@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,11 +13,19 @@ import { TIPO } from 'app/shared/constants/pagination.constants';
 import { CocheService } from './coche.service';
 import { CocheDeleteDialogComponent } from './coche-delete-dialog.component';
 
+import { fadeSlideInOut } from '../animations';
+
 @Component({
   selector: 'jhi-coche',
-  templateUrl: './coche.component.html'
+  templateUrl: './coche.component.html',
+  animations: [
+    fadeSlideInOut
+    // animation triggers go here
+  ]
 })
 export class CocheComponent implements OnInit, OnDestroy {
+  @HostBinding('@.disabled')
+  public animationsDisabled = false;
   coches?: ICoche[];
   todos?: ICoche[];
   eventSubscriber?: Subscription;
@@ -61,6 +69,13 @@ export class CocheComponent implements OnInit, OnDestroy {
 
   public all(): void {
     this.loadPage();
+  }
+  prepareRoute(outlet: RouterOutlet): any {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
+  toggleAnimations(): void {
+    this.animationsDisabled = !this.animationsDisabled;
   }
 
   colorFilter(colorFiltro: string): void {

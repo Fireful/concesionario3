@@ -4,48 +4,47 @@
             <h2 id="jhi-venta-heading" jhiTranslate="concesionario3App.venta.home.createOrEditLabel">Create or edit a Venta
             </h2>
 
-            <div>
+            <div class="form-row">
                 <jhi-alert-error></jhi-alert-error>
 
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                <!-- <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
-                </div>
+                </div> -->
 
-                <div class="form-group">
+                <div class="col-md-6 mb-3">
                     <label class="form-control-label" jhiTranslate="concesionario3App.venta.fecha" for="field_fecha">Fecha</label>
                     <div class="d-flex">
                         <input id="field_fecha" type="datetime-local" class="form-control" name="fecha" formControlName="fecha" placeholder="YYYY-MM-DD HH:mm" />
                     </div>
                 </div>
                 <ng-container *ngIf="venta.tipo==null">
-                    <div class="form-group">
+                    <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.tipo" for="field_tipo">Tipo</label>
                         <select class="form-control" id="field_tipo" name="tipo" formControlName="tipo" [(ngModel)]="tipoSeleccionado" (change)="cambioTipo()">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="tip.word" *ngFor="let tip of tipo; trackBy: trackById">{{ tip.number }}
-                        </option>
-                    </select>
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="tip.word" *ngFor="let tip of tipo; trackBy: trackById">{{ tip.number }}
+                            </option>
+                        </select>
                     </div>
                 </ng-container>
+            </div>
+            <ng-container *ngIf="tipoSeleccionado!=null || venta.tipo!=null">
+                <div class="form-row" @fadeSlideInOut>
 
-                <ng-container *ngIf="tipoSeleccionado!=null || venta.tipo!=null">
 
 
-
-                    <div class="form-group">
+                    <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.importeTotal" for="field_importeTotal">Importe Total</label>
                         <input type="number" class="form-control" name="importeTotal" id="field_importeTotal" formControlName="importeTotal" readonly />
                     </div>
 
-
-
-
                     <ng-container *ngIf="tipoSeleccionado=='COCHE' ||venta.tipo=='COCHE'; else templateMoto">
-                        <div class="form-group">
+
+                        <div class="col-md-6 mb-3">
                             <label class="form-control-label" jhiTranslate="concesionario3App.venta.coche" for="field_coche">Coche</label>
 
-                            <select class="form-control" id="field_coche" [attr.disabled]="this.venta.id!=undefined?true:null" formControlName="coche" (change)="cambioCoche()">
+                            <select class="form-control" id="field_coche" [attr.disabled]="this.venta.vendedor!=null?true:null" formControlName="coche" (change)="cambioCoche()">
                                     <option [ngValue]="null"></option>
                                     <option
                                         [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption"
@@ -55,9 +54,9 @@
                         </div>
                     </ng-container>
                     <ng-template #templateMoto>
-                        <div class="form-group">
+                        <div class="col-md-6 mb-3">
                             <label class="form-control-label" jhiTranslate="concesionario3App.venta.moto" for="field_moto">Moto</label>
-                            <select class="form-control" id="field_moto" [attr.disabled]="this.venta.id!=undefined?true:null" name="moto" formControlName="moto" (change)="cambioCoche()">
+                            <select class="form-control" id="field_moto" [attr.disabled]="this.venta.vendedor!=null?true:null" name="moto" formControlName="moto" (change)="cambioCoche()">
                                     <option [ngValue]="null"></option>
                                     <option
                                         [ngValue]="motoOption.id === editForm.get('moto')!.value?.id ? editForm.get('moto')!.value : motoOption"
@@ -71,7 +70,7 @@
                         Hola
                     </ng-template>
 
-                    <div class="form-group">
+                    <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.cliente" for="field_cliente">Cliente</label>
                         <select class="form-control" id="field_cliente" name="cliente" formControlName="cliente">
                                 <option [ngValue]="null"></option>
@@ -83,7 +82,7 @@
                             </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.vendedor" for="field_vendedor">Vendedor</label>
                         <select class="form-control" id="field_vendedor" name="vendedor" formControlName="vendedor">
                                 <option [ngValue]="null"></option>
@@ -95,7 +94,7 @@
                             </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.metodoPago" for="field_metodoPago">Vendedor</label>
                         <select class="form-control" id="field_metodoPago" name="metodoPago" formControlName="metodoPago">
                                 <option [ngValue]="null"></option>
@@ -105,13 +104,14 @@
                             </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.numeroVenta" for="field_numeroVenta">Número de venta</label>
                         <input type="text" class="form-control" name="numeroVenta" id="field_numeroVenta" formControlName="numeroVenta" readonly />
                     </div>
+                </div>
 
-                </ng-container>
-            </div>
+            </ng-container>
+
 
 
             <div>
