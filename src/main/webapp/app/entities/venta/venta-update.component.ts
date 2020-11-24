@@ -24,7 +24,7 @@ import { Tipo } from '../tipo.enum';
 import * as $ from 'jquery';
 
 import { RouterOutlet } from '@angular/router';
-import { fadeSlideInOut } from '../animations';
+import { fadeSlideInOut } from '../../animations';
 
 type SelectableEntity = ICoche | ICliente | IVendedor | IVenta;
 

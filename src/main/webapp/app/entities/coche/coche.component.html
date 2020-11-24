@@ -13,30 +13,30 @@
         </select>
 
         <div class="btn-group btn-group-sm  d-inline" role="group" aria-label="...">
-            <button type="button" class="btn btn-secondary" name="todos" (click)='hybrid("todos")'>Todos</button>
-            <button type="button" class="btn btn-secondary" name="elec" (click)='hybrid("electricos")'>Electricos</button>
-            <button type="button" class="btn btn-secondary" name="termic" (click)='hybrid("termicos")'>Térmicos</button>
+            <button type="button" class="btn btn-secondary" name="todos" (click)='hybrid("todos")' @voltear>Todos</button>
+            <button type="button" class="btn btn-secondary" name="elec" (click)='hybrid("electricos")' @voltear>Electricos</button>
+            <button type="button" class="btn btn-secondary" name="termic" (click)='hybrid("termicos")' @voltear>Térmicos</button>
         </div>
-        <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche rounded-pill" [routerLink]="['/coche/new']">
+        <button id="jh-create-entity" class="mr-3 btn btn-primary float-right jh-create-entity create-coche rounded-pill" [routerLink]="['/coche/new']" @flyDesdeAbajo>
             <fa-icon icon="plus"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.createLabel">
                 Create a new Coche
             </span>
         </button>
 
-        <button id="jh-show-all" class="mr-3 btn btn-success float-right jh-show-all all-cars rounded-pill" (click)="all()">
+        <button id="jh-show-all" class="mr-3 btn btn-success float-right jh-show-all all-cars rounded-pill" (click)="all()" @flyDesdeArriba>
             <fa-icon icon="list"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.todos">
                 Todos
             </span>
         </button>
-        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars rounded-pill" (click)="disponibles()">
+        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars rounded-pill" (click)="disponibles()" @flyDesdeIzquierda>
             <fa-icon icon="asterisk"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.disponibles">
                 Disponibles
             </span>
         </button>
-        <button id="jh-sold" class="mr-3 btn btn-warning float-right jh-sold sold-cars rounded-pill" (click)="vendidos()">
+        <button id="jh-sold" class="mr-3 btn btn-warning float-right jh-sold sold-cars" (click)="vendidos()" @flyDesdeDerecha>
             <fa-icon icon="road"></fa-icon>
             <span jhiTranslate="concesionario3App.coche.home.vendidos">
                 Vendidos
@@ -62,7 +62,7 @@
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="coches?.length > 0">
-        <table class="table table-bordered" aria-describedby="page-heading">
+        <table class="table table-bordered" aria-describedby="page-heading" @fadeSlideInOut>
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>

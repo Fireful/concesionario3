@@ -13,13 +13,20 @@ import { TIPO } from 'app/shared/constants/pagination.constants';
 import { CocheService } from './coche.service';
 import { CocheDeleteDialogComponent } from './coche-delete-dialog.component';
 
-import { fadeSlideInOut } from '../animations';
+import { desdeDerecha, desdeAbajo, desdeArriba, fadeSlideInOut, flyInOut, slide, desdeIzquierda, voltear } from '../../animations';
 
 @Component({
   selector: 'jhi-coche',
   templateUrl: './coche.component.html',
   animations: [
-    fadeSlideInOut
+    fadeSlideInOut,
+    slide,
+    flyInOut,
+    desdeDerecha,
+    desdeArriba,
+    desdeAbajo,
+    desdeIzquierda,
+    voltear
     // animation triggers go here
   ]
 })

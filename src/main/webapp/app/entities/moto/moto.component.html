@@ -24,13 +24,13 @@
             </span>
         </button>
 
-        <button id="jh-show-all" class="mr-3 btn btn-success float-right jh-show-all all-cars rounded-pill" (click)="all()">
+        <button id="jh-show-all" class="mr-3 btn btn-success float-right jh-show-all all-cars rounded-pill" (click)="all()" @bounceIn>
             <fa-icon icon="list"></fa-icon>
             <span jhiTranslate="concesionario3App.moto.home.todos">
                 Todos
             </span>
         </button>
-        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars rounded-pill" (click)="disponibles()">
+        <button id="jh-available" class="mr-3 btn btn-secondary float-right jh-vailable available-cars rounded-pill" (click)="disponibles()" @fadeSlideInOut>
             <fa-icon icon="asterisk"></fa-icon>
             <span jhiTranslate="concesionario3App.moto.home.disponibles">
                 Disponibles

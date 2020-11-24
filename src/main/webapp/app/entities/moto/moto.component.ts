@@ -12,10 +12,22 @@ import { TIPO } from 'app/shared/constants/pagination.constants';
 
 import { MotoService } from './moto.service';
 import { MotoDeleteDialogComponent } from './moto-delete-dialog.component';
+import { desdeDerecha, desdeAbajo, desdeArriba, fadeSlideInOut, flyInOut, slide, desdeIzquierda, fadeInGrow } from '../../animations';
 
 @Component({
   selector: 'jhi-moto',
-  templateUrl: './moto.component.html'
+  templateUrl: './moto.component.html',
+  animations: [
+    fadeSlideInOut,
+    slide,
+    flyInOut,
+    desdeDerecha,
+    desdeArriba,
+    desdeAbajo,
+    desdeIzquierda,
+    fadeInGrow
+    // animation triggers go here
+  ]
 })
 export class MotoComponent implements OnInit, OnDestroy {
   motos?: IMoto[];

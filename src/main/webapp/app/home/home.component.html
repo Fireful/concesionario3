@@ -1,15 +1,14 @@
 <div class="row contenido">
-    <div class="col-md-2">
+    <div class="col-md-2" @voltear>
         <span class="hipster img-fluid rounded"></span>
     </div>
-
 
 
     <div class="col-md-10">
         <div [ngSwitch]="isAuthenticated() ">
             <div *ngSwitchCase="true ">
                 <h1 class="col-10" style="text-align: center;">
-                    <span id="home-logged-message " *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login } ">Welcome,
+                    <span id="home-logged-message " *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }">Welcome,
                         "{{ account.login }} ".</span>
                 </h1>
                 <!-- <div class="padre col-md-10">
@@ -108,7 +107,7 @@
                             <div class="tarjeta1-cuerpo">
                                 <div class="tarjeta1-texto">
                                     <ng-container *ngIf="dataMax.numVentas>0; else sinVentas">
-                                        <table class="table table-bordered" aria-describedby="HomePage">
+                                        <table class="table table-bordered" aria-describedby="HomePage" @fadeSlideInOut>
                                             <thead>
                                                 <tr>
                                                     <th scope="col">
@@ -160,7 +159,7 @@
                                             <tr>
                                                 <td>{{dataMaxDinero.nombre}}</td>
                                                 <td style="text-align: center;">{{dataMaxDinero.totalVentas | currency: 'EUR'}}</td>
-                                                <td>{{dataMaxDinero.numVentas}}</td>
+                                                <td style="text-align: center;">{{dataMaxDinero.numVentas}}</td>
                                             </tr>
                                         </table>
                                     </ng-container>
@@ -187,7 +186,7 @@
                         <div class="alert alert-warning" id="no-result" *ngIf="disponibles?.length === 0">
                             <span jhiTranslate="concesionario3App.coche.home.noCars">No hay coches disponibles</span>
                         </div>
-                        <div class="table-responsive" id="entities" *ngIf="disponibles?.length > 0">
+                        <div class="table-responsive" id="entities" *ngIf="disponibles?.length > 0" @flyDesdeDerecha>
                             <table class="table" aria-describedby="page-heading">
                                 <thead>
                                     <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
@@ -226,22 +225,22 @@
                                         <td>{{ coche.marca }}</td>
                                         <td>{{ coche.modelo }}</td>
                                         <td>{{ coche.anio }}</td>
-                                        <td *ngIf="coche.electrico==true">
+                                        <td *ngIf="coche.electrico==true" style="text-align: center;">
                                             <fa-icon icon="check" style="color: green;"></fa-icon>
                                         </td>
 
-                                        <td *ngIf="coche.electrico==false">
+                                        <td *ngIf="coche.electrico==false" style="text-align: center;">
                                             <fa-icon icon="times" style="color: red;"></fa-icon>
                                         </td>
                                         <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
-                                        <td *ngIf="coche.color; else sinColor">
+                                        <td *ngIf="coche.color; else sinColor" style="text-align: center;">
                                             <fa-icon icon="car" style.color="{{coche.color}}">
                                             </fa-icon>
                                         </td>
                                         <ng-template #sinColor>
                                             <td></td>
                                         </ng-template>
-                                        <td>{{ coche.precio | currency: 'EUR' }}</td>
+                                        <td style="text-align: center;">{{ coche.precio | currency: 'EUR' }}</td>
 
                                     </tr>
 
@@ -262,8 +261,8 @@
                         <div class="alert alert-warning" id="no-result" *ngIf="motos?.length === 0">
                             <span jhiTranslate="concesionario3App.coche.home.noMotorbikes">No hay motos disponibles</span>
                         </div>
-                        <div class="table-responsive" id="entities" *ngIf="motos?.length > 0">
-                            <table class="table" aria-describedby="page-heading">
+                        <div class="table-responsive" id="entities" *ngIf="motos?.length > 0" @flyDesdeIzquierda>
+                            <table class="table" aria-describedby="page-heading" @flyDesdeIzquierda>
                                 <thead>
                                     <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                                         <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
@@ -294,6 +293,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let moto of motos ;trackBy: trackId">
+
                                         <a [routerLink]="['/moto', moto.id, 'view']">
                                             <td>{{ moto.id }}</td>
                                         </a>
@@ -302,16 +302,16 @@
                                         <td>{{ moto.anio }}</td>
 
                                         <!-- TODO Revisar por qué no colorea el icono del color correspondiente. -->
-                                        <td *ngIf="moto.color; else sinColor">
+                                        <td *ngIf="moto.color; else sinColor" style="text-align: center;">
                                             <fa-icon icon="motorcycle" style.color="{{moto.color}}">
                                             </fa-icon>
                                         </td>
                                         <ng-template #sinColor>
                                             <td></td>
                                         </ng-template>
-                                        <td>{{ moto.cilindrada | currency: 'EUR' }}</td>
+                                        <td style="text-align: center;">{{ moto.cilindrada }}</td>
 
-                                        <td>{{ moto.precio | currency: 'EUR' }}</td>
+                                        <td style="text-align: center;">{{ moto.precio | currency: 'EUR' }}</td>
 
                                     </tr>
                                 </tbody>

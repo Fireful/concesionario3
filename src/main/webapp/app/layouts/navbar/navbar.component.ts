@@ -11,11 +11,35 @@ import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { Subscription } from 'rxjs';
+import {
+  desdeDerecha,
+  desdeAbajo,
+  desdeArriba,
+  fadeSlideInOut,
+  flyInOut,
+  slide,
+  desdeIzquierda,
+  fadeInGrow,
+  idaVuelta
+} from '../../animations';
 
 @Component({
   selector: 'jhi-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['navbar.scss']
+  styleUrls: ['navbar.scss'],
+  animations: [
+    fadeSlideInOut,
+    slide,
+    flyInOut,
+    desdeDerecha,
+    desdeArriba,
+    desdeAbajo,
+    desdeIzquierda,
+    fadeInGrow,
+    idaVuelta,
+    slide
+    // animation triggers go here
+  ]
 })
 export class NavbarComponent implements OnInit {
   inProduction?: boolean;

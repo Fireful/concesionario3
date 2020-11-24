@@ -109,7 +109,16 @@ Generic styles
 }
 
 .footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  background: linear-gradient(0deg, rgb(104, 190, 162) 0%, rgb(142, 184, 174) 35%, rgba(228, 230, 231, 1) 100%);
+  padding: 0.2rem 1rem;
+  ul.navbar-nav {
+    .nav-item {
+      margin-left: 0.5em;
+    }
+  }
+  a.nav-link {
+    font-weight: 400;
+  }
 }
 
 .hand,
@@ -237,4 +246,8 @@ button {
 
 .row {
   padding-top: 10px;
+}
+
+.btn {
+  border-radius: 50px;
 }

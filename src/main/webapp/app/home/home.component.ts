@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { LoginModalService } from 'app/core/login/login-modal.service';
@@ -10,25 +10,37 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
 import { CocheService } from 'app/entities/coche/coche.service';
 import { ICoche } from 'app/shared/model/coche.model';
 import { HomeResetVentasComponent } from './home-reset-ventas.component';
 import { IMoto } from 'app/shared/model/moto.model';
 import { MotoService } from 'app/entities/moto/moto.service';
+import { fadeSlideInOut, voltear, slide, desdeDerecha, desdeIzquierda, desdeArriba, desdeAbajo } from '../animations';
 
 @Component({
   selector: 'jhi-home',
   templateUrl: './home.component.html',
   styleUrls: ['home.scss'],
-  animations: []
+  animations: [
+    slide,
+    fadeSlideInOut,
+    voltear,
+    desdeDerecha,
+    desdeIzquierda,
+    desdeArriba,
+    desdeAbajo
+    // animation triggers go here
+  ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  @HostBinding('@.disabled')
+  public animationsDisabled = false;
+
   maxVentasHome = '';
   disponibles?: ICoche[];
   motos?: IMoto[];
-  vendedores?: IVendedor[] = [];
   account: Account | null = null;
   authSubscription?: Subscription;
   eventSubscriber?: Subscription;
@@ -56,6 +68,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     private vendedorService: VendedorService,
     protected modalService: NgbModal
   ) {}
+
+  prepareRoute(outlet: RouterOutlet): any {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
+  toggleAnimations(): void {
+    this.animationsDisabled = !this.animationsDisabled;
+  }
 
   loadPage(page?: number): void {
     const pageToLoad: number = page || this.page;
@@ -174,7 +194,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.vendedores = data || [];
     this.disponibles = data || [];
   }
 

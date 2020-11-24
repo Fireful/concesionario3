@@ -16,7 +16,7 @@ Navbar
 }
 
 .navbar {
-  background: linear-gradient(180deg, rgb(104, 190, 162) 0%, rgb(142, 184, 174) 35%, rgba(228, 230, 231, 1) 100%);
+  // background: linear-gradient(180deg, rgb(104, 190, 162) 0%, rgb(142, 184, 174) 35%, rgba(228, 230, 231, 1) 100%);
   padding: 0.2rem 1rem;
   ul.navbar-nav {
     .nav-item {
@@ -25,6 +25,47 @@ Navbar
   }
   a.nav-link {
     font-weight: 400;
+  }
+  background: linear-gradient(0deg, #0cdfa8, #8f72c2, #d7ff00, #4083a1, #123456, #abcdef, #987654, #fedcba);
+  background-size: 800% 800%;
+  -webkit-animation: AnimationName 20s ease infinite;
+  -moz-animation: AnimationName 20s ease infinite;
+  animation: AnimationName 20s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 51% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 51% 0%;
+  }
+}
+
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 51% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 51% 0%;
+  }
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 51% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 51% 0%;
   }
 }
 
@@ -41,6 +82,10 @@ Navbar
 
 .navbar:hover {
   background-color: blue;
+}
+
+.colorNavBar {
+  background-color: red;
 }
 
 /* ==========================================================================
