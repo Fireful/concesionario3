@@ -80,4 +80,9 @@ export class VentaService {
       .get<IVenta>(`${this.resourceUrl}/terminada/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
+
+  terminadas(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IVenta[]>(encodeURI(`${this.resourceUrl}/terminadas`), { params: options, observe: 'response' });
+  }
 }

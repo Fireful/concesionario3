@@ -48,4 +48,6 @@ public interface VentaService {
 
     String getNewNumeroVenta(String vehiculoSeleccionado);
 
+    Page<Venta> findTerminadas(Pageable page);
+
 }

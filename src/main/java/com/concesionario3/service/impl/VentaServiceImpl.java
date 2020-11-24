@@ -176,4 +176,10 @@ public class VentaServiceImpl implements VentaService {
         return ventaRepository.save(venta);
 
     }
+
+    @Override
+    public Page<Venta> findTerminadas(Pageable page) {
+        log.debug("Entramos en implement");
+        return ventaRepository.findAllTerminadas(page);
+    }
 }

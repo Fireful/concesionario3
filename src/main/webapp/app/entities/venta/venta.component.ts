@@ -17,6 +17,7 @@ import { VentaDeleteDialogComponent } from './venta-delete-dialog.component';
 })
 export class VentaComponent implements OnInit, OnDestroy {
   ventas?: IVenta[];
+  terminadas?: IVenta[];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -49,7 +50,17 @@ export class VentaComponent implements OnInit, OnDestroy {
         () => this.onError()
       );
   }
-  informe(): void {
+  terminadasPDF(): void {
+    this.ventaService
+      .terminadas({
+        page: this.page - 1,
+        size: this.itemsPerPage,
+        sort: this.sort()
+      })
+      .subscribe(
+        (res: HttpResponse<IVenta[]>) => this.onSuccess(res.body, res.headers, this.page),
+        () => this.onError()
+      );
     alert('Informe generado');
   }
 
@@ -112,6 +123,7 @@ export class VentaComponent implements OnInit, OnDestroy {
       }
     });
     this.ventas = data || [];
+    this.terminadas = data || [];
   }
 
   protected onError(): void {

@@ -158,4 +158,13 @@ public class VentaResource {
                 .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
+    @GetMapping("/ventas/terminadas")
+    public ResponseEntity<List<Venta>> getTerminadas(Pageable page) {
+        log.debug("REST request to get ventas terminadas: {}");
+        Page<Venta> venta = ventaService.findTerminadas(page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), venta);
+        return ResponseEntity.ok().headers(headers).body(venta.getContent());
+    }
+
 }
