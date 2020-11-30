@@ -329,6 +329,31 @@
         </dependency>
 
         <!-- jhipster-needle-maven-add-dependency -->
+        <dependency>
+            <groupId>com.openhtmltopdf</groupId>
+            <artifactId>openhtmltopdf-pdfbox</artifactId>
+            <version>0.0.1-RC17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>fontbox</artifactId>
+            <version>2.0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>preflight</artifactId>
+            <version>2.0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox-tools</artifactId>
+            <version>2.0.14</version>
+        </dependency>
     </dependencies>
 
     <build>

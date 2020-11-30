@@ -251,3 +251,86 @@ button {
 .btn {
   border-radius: 50px;
 }
+
+/* ==========================================================================
+Informes
+========================================================================== */
+
+@keyframes ejemplo {
+  from {
+    top: -100px;
+  }
+  to {
+    top: 0;
+  }
+}
+
+.informesVentas {
+  border: 1px solid black;
+  width: 450px;
+  height: 100px;
+  padding: 15px;
+  border-radius: 15px;
+  transition: 200ms linear;
+}
+
+.informesVendedores {
+  border: 1px solid black;
+  width: 450px;
+  height: 100px;
+  padding: 15px;
+  border-radius: 15px;
+  transition: 200ms ease-in-out;
+}
+
+.botonesInformesVentas {
+  opacity: 0;
+  display: inline;
+  position: relative;
+  top: -50px;
+  transition: all 500ms ease-in-out;
+  -webkit-transition: all 500ms ease-in-out;
+  /** Chrome & Safari **/
+  -moz-transition: all 500ms ease-in-out;
+  /** Firefox **/
+  -o-transition: all 500ms ease-in-out;
+  /** Opera **/
+}
+
+.botonesInformesVendedores {
+  opacity: 0;
+  position: relative;
+  top: -50px;
+  transition: all 500ms ease-in-out;
+  -webkit-transition: all 500ms ease-in-out;
+  /** Chrome & Safari **/
+  -moz-transition: all 500ms ease-in-out;
+  /** Firefox **/
+  -o-transition: all 500ms ease-in-out;
+  /** Opera **/
+}
+
+.informesVentas:hover {
+  height: 120px;
+  transition: 200ms linear;
+}
+
+.informesVendedores:hover {
+  height: 220px;
+}
+
+.informesVentas:hover .botonesInformesVentas {
+  opacity: 1;
+  position: relative;
+  top: 0;
+  transition: 500ms linear;
+  height: 150px;
+}
+
+.informesVendedores:hover .botonesInformesVendedores {
+  opacity: 1;
+  position: relative;
+  top: 0;
+  transition: 500ms linear;
+  height: 150px;
+}

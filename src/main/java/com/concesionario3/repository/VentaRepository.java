@@ -1,5 +1,7 @@
 package com.concesionario3.repository;
 
+import java.util.List;
+
 import com.concesionario3.domain.Venta;
 
 import org.springframework.data.domain.Page;
@@ -18,6 +20,12 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
 
     @Query("SELECT v FROM Venta v WHERE v.estadoVenta='TERMINADA'")
     Page<Venta> findAllTerminadas(Pageable page);
+
+    @Query("SELECT v FROM Venta v WHERE v.estadoVenta='TERMINADA'")
+    List<Venta> findAllTerminadasList();
+
+    @Query("SELECT v from Venta v WHERE v.vendedor.id=?1")
+    List<Venta> findAllTerminadasVendedorList(Long id);
 
 }
 

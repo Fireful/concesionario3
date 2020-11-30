@@ -1,6 +1,6 @@
 {
   "concesionario3App": {
-    "venta": {
+    "informes": {
       "home": {
         "title": "Ventas",
         "createLabel": "Crear nuevo Venta",
@@ -27,13 +27,8 @@
       "crearInforme": "Generar informe",
       "moto": "moto",
       "vehiculo": "Vehículo",
-      "tipo": "Tipo"
-    },
-    "informes": {
-      "ventasTerminadas": "Ventas Terminadas",
-      "ventas": "Informes de ventas",
-      "vendedores": "Informes de Vendedores",
-      "ventasRealizadas": "Ventas realizadas"
+      "tipo": "Tipo",
+      "ventasTerminadas": "Ventas Terminadas"
     }
   }
 }

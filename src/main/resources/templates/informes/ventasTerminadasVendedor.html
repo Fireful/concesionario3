@@ -1,0 +1,27 @@
+<body>
+    <h1>Vendedor</h1>
+    <table border="1" class="tabla">
+        <thead>
+            <th scope="col">numero de venta</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Vendedor</th>
+            <th scope="col">Método de pago</th>
+            <th scope="col">Importe Total</th>
+        </thead>
+        <tr th:each="venta: ${ventas}">
+            <td th:text="${venta.numeroVenta}"></td>
+            <td th:text="${#dates.format(venta.fecha, 'dd/mm/YYYY')}"></td>
+            <td th:text="${venta.coche.marca + ' ' + venta.coche.modelo}"></td>
+            <td th:text="${venta.tipo}"></td>
+            <td th:text="${venta.cliente.nombre}"></td>
+            <td th:text="${venta.vendedor.nombre}"></td>
+            <td th:text="${venta.metodoPago}"></td>
+            <td th:text="${#numbers.formatDecimal(venta.importeTotal, 0, 'COMMA', 2, 'POINT')}"> €</td>
+        </tr>
+    </table>
+</body>
+
+</html>

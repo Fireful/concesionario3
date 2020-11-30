@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
-
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -181,5 +181,17 @@ public class VentaServiceImpl implements VentaService {
     public Page<Venta> findTerminadas(Pageable page) {
         log.debug("Entramos en implement");
         return ventaRepository.findAllTerminadas(page);
+    }
+
+    @Override
+    public List<Venta> findTerminadasList(){
+        log.debug("Mostramos listado de ventas Terminadas");
+        return ventaRepository.findAllTerminadasList();
+    }
+
+    @Override
+    public List<Venta> findTerminadasVendedorList(Long id) {
+        log.debug("Mostramos listado de ventas Terminadas");
+        return ventaRepository.findAllTerminadasVendedorList(id);
     }
 }

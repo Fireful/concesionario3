@@ -2,6 +2,7 @@ package com.concesionario3.web.rest;
 
 import com.concesionario3.domain.Venta;
 import com.concesionario3.domain.enums.EnumEstadoVenta;
+import com.concesionario3.service.ImpresionService;
 import com.concesionario3.service.VentaService;
 import com.concesionario3.web.rest.errors.BadRequestAlertException;
 
@@ -40,9 +41,11 @@ public class VentaResource {
     private String applicationName;
 
     private final VentaService ventaService;
+    private final ImpresionService impresionService;
 
-    public VentaResource(VentaService ventaService) {
+    public VentaResource(VentaService ventaService, ImpresionService impresionService) {
         this.ventaService = ventaService;
+        this.impresionService=impresionService;
     }
 
     /**
@@ -165,6 +168,25 @@ public class VentaResource {
         HttpHeaders headers = PaginationUtil
                 .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), venta);
         return ResponseEntity.ok().headers(headers).body(venta.getContent());
+    }
+
+    @GetMapping("/ventas/download/pdf")
+    public ResponseEntity<byte[]> generaInforme() {
+        log.debug("REST request to get ventas terminadas: {}");
+        List<Venta> venta = ventaService.findTerminadasList();
+        ResponseEntity<byte[]> ventasTerminadas=impresionService.printVenta(venta);
+        return ventasTerminadas;
+
+
+    }
+
+    @GetMapping("/ventas/vendedor/{id}")
+    public ResponseEntity<byte[]> generaInformeVendedor(@PathVariable Long id) {
+        log.debug("REST request to get ventas terminadas: {}");
+        List<Venta> venta = ventaService.findTerminadasVendedorList(id);
+        ResponseEntity<byte[]> ventasTerminadasVendedor = impresionService.printVentaVendedor(venta);
+        return ventasTerminadasVendedor;
+
     }
 
 }

@@ -45,24 +45,24 @@
                             <label class="form-control-label" jhiTranslate="concesionario3App.venta.coche" for="field_coche">Coche</label>
 
                             <select class="form-control" id="field_coche" [attr.disabled]="this.venta.vendedor!=null?true:null" formControlName="coche" (change)="cambioCoche()">
-                                    <option [ngValue]="null"></option>
-                                    <option
-                                        [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption"
-                                        *ngFor="let cocheOption of coches; trackBy: trackById">
-                                        {{ cocheOption.marca }} {{cocheOption.modelo }}</option>
-                                </select>
+                                <option [ngValue]="null"></option>
+                                <option
+                                    [ngValue]="cocheOption.id === editForm.get('coche')!.value?.id ? editForm.get('coche')!.value : cocheOption"
+                                    *ngFor="let cocheOption of coches; trackBy: trackById">
+                                    {{ cocheOption.marca }} {{cocheOption.modelo }}</option>
+                            </select>
                         </div>
                     </ng-container>
                     <ng-template #templateMoto>
                         <div class="col-md-6 mb-3">
                             <label class="form-control-label" jhiTranslate="concesionario3App.venta.moto" for="field_moto">Moto</label>
                             <select class="form-control" id="field_moto" [attr.disabled]="this.venta.vendedor!=null?true:null" name="moto" formControlName="moto" (change)="cambioCoche()">
-                                    <option [ngValue]="null"></option>
-                                    <option
-                                        [ngValue]="motoOption.id === editForm.get('moto')!.value?.id ? editForm.get('moto')!.value : motoOption"
-                                        *ngFor="let motoOption of motos; trackBy: trackById">
-                                        {{ motoOption.marca }} {{ motoOption.modelo }}</option>
-                                </select>
+                                <option [ngValue]="null"></option>
+                                <option
+                                    [ngValue]="motoOption.id === editForm.get('moto')!.value?.id ? editForm.get('moto')!.value : motoOption"
+                                    *ngFor="let motoOption of motos; trackBy: trackById">
+                                    {{ motoOption.marca }} {{ motoOption.modelo }}</option>
+                            </select>
                         </div>
                     </ng-template>
 
@@ -73,35 +73,35 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.cliente" for="field_cliente">Cliente</label>
                         <select class="form-control" id="field_cliente" name="cliente" formControlName="cliente">
-                                <option [ngValue]="null"></option>
-                                <option
-                                    [ngValue]="clienteOption.id === editForm.get('cliente')!.value?.id ? editForm.get('cliente')!.value : clienteOption"
-                                    *ngFor="let clienteOption of clientes; trackBy: trackById">
-                                    {{ clienteOption.nombre }}
-                                </option>
-                            </select>
+                            <option [ngValue]="null"></option>
+                            <option
+                                [ngValue]="clienteOption.id === editForm.get('cliente')!.value?.id ? editForm.get('cliente')!.value : clienteOption"
+                                *ngFor="let clienteOption of clientes; trackBy: trackById">
+                                {{ clienteOption.nombre }}
+                            </option>
+                        </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.vendedor" for="field_vendedor">Vendedor</label>
                         <select class="form-control" id="field_vendedor" name="vendedor" formControlName="vendedor">
-                                <option [ngValue]="null"></option>
-                                <option
-                                    [ngValue]="vendedorOption.id === editForm.get('vendedor')!.value?.id ? editForm.get('vendedor')!.value : vendedorOption"
-                                    *ngFor="let vendedorOption of vendedors; trackBy: trackById">
-                                    {{ vendedorOption.nombre }}
-                                </option>
-                            </select>
+                            <option [ngValue]="null"></option>
+                            <option
+                                [ngValue]="vendedorOption.id === editForm.get('vendedor')!.value?.id ? editForm.get('vendedor')!.value : vendedorOption"
+                                *ngFor="let vendedorOption of vendedors; trackBy: trackById">
+                                {{ vendedorOption.nombre }}
+                            </option>
+                        </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-control-label" jhiTranslate="concesionario3App.venta.metodoPago" for="field_metodoPago">Vendedor</label>
                         <select class="form-control" id="field_metodoPago" name="metodoPago" formControlName="metodoPago">
-                                <option [ngValue]="null"></option>
-                                <option [ngValue]="met.word" *ngFor="let met of metodo; trackBy: trackById">
-                                    {{ met.number }}
-                                </option>
-                            </select>
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="met.word" *ngFor="let met of metodo; trackBy: trackById">
+                                {{ met.number }}
+                            </option>
+                        </select>
                     </div>
 
                     <div class="col-md-6 mb-3">

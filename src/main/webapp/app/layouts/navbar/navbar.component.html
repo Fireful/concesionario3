@@ -2,6 +2,7 @@
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img"></span>
         <span jhiTranslate="global.title-psa" class="navbar-title">Grupo PSA</span>
+
         <!-- <span class="navbar-version">{{ version }}</span> -->
     </a>
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
@@ -9,6 +10,11 @@
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true}">
+                <a class="btn btn-primary" routerLink="informes" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="collapseNavbar()">
+                    Informes
+                </a>
+            </li>
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>

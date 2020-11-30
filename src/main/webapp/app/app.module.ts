@@ -8,7 +8,9 @@ import { Concesionario3CoreModule } from 'app/core/core.module';
 import { Concesionario3AppRoutingModule } from './app-routing.module';
 import { Concesionario3HomeModule } from './home/home.module';
 import { Concesionario3EntityModule } from './entities/entity.module';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';

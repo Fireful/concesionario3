@@ -2,15 +2,25 @@ package com.concesionario3.service;
 
 import com.concesionario3.domain.Venta;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
  * Service Interface for managing {@link Venta}.
  */
 public interface VentaService {
+
+    public final Logger log = LoggerFactory.getLogger(VentaService.class);
+
+    final SpringTemplateEngine templateEngine=null;
 
     /**
      * Save a venta.
@@ -49,5 +59,20 @@ public interface VentaService {
     String getNewNumeroVenta(String vehiculoSeleccionado);
 
     Page<Venta> findTerminadas(Pageable page);
+
+    List<Venta> findTerminadasList();
+
+    List<Venta> findTerminadasVendedorList(Long id);
+
+    public default void sacarInforme(Page<Venta> venta) {
+        log.debug("Mostrando el informe");
+        mostrarInforme("informes/ventasTerminadas", venta);
+    }
+
+    static void mostrarInforme(String templateName, Page<Venta> venta) {
+        Context context = new Context();
+        String content = templateEngine.process(templateName, context);
+
+    }
 
 }

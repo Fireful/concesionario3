@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IVenta } from 'app/shared/model/venta.model';
+import { saveAs } from 'file-saver';
 
 type EntityResponseType = HttpResponse<IVenta>;
 type EntityArrayResponseType = HttpResponse<IVenta[]>;
@@ -84,5 +85,37 @@ export class VentaService {
   terminadas(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IVenta[]>(encodeURI(`${this.resourceUrl}/terminadas`), { params: options, observe: 'response' });
+  }
+
+  download(): any {
+    return new Promise<any>((resolve, reject) => {
+      return this.http.get(`${this.resourceUrl}/download/pdf`, { responseType: 'blob' }).subscribe(
+        data => {
+          const file: Blob = new Blob([data], { type: 'application/pdf' });
+          const nombreFichero = 'VentasTerminadas.pdf';
+          saveAs(file, nombreFichero);
+          resolve(data);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  pdfVendedores(id: number): any {
+    return new Promise<any>((resolve, reject) => {
+      return this.http.get(`${this.resourceUrl}/vendedor/${id}`, { responseType: 'blob' }).subscribe(
+        data => {
+          const file: Blob = new Blob([data], { type: 'application/pdf' });
+          const nombreFichero = 'VentasPorVendedor.pdf';
+          saveAs(file, nombreFichero);
+          resolve(data);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
   }
 }

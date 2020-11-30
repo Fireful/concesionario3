@@ -27,6 +27,10 @@
       "moto": "botorbike",
       "vehiculo": "Vehículo",
       "tipo": "Type"
+    },
+    "informes": {
+      "ventasTerminadas": "Finished Sales",
+      "ventas": "Sales Reports"
     }
   }
 }

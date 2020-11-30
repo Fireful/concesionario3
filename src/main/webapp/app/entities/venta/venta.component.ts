@@ -50,7 +50,12 @@ export class VentaComponent implements OnInit, OnDestroy {
         () => this.onError()
       );
   }
+
   terminadasPDF(): void {
+    this.ventaService.download();
+  }
+
+  /* terminadasPDF(): void {
     this.ventaService
       .terminadas({
         page: this.page - 1,
@@ -62,7 +67,7 @@ export class VentaComponent implements OnInit, OnDestroy {
         () => this.onError()
       );
     alert('Informe generado');
-  }
+  } */
 
   ngOnInit(): void {
     /* this.activatedRoute.data.subscribe(({ venta }) => {
