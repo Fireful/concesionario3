@@ -24,7 +24,7 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
     @Query("SELECT v FROM Venta v WHERE v.estadoVenta='TERMINADA'")
     List<Venta> findAllTerminadasList();
 
-    @Query("SELECT v from Venta v WHERE v.vendedor.id=?1")
+    @Query("SELECT v FROM Venta v WHERE v.vendedor.id=?1 AND v.estadoVenta='TERMINADA'")
     List<Venta> findAllTerminadasVendedorList(Long id);
 
 }

@@ -10,7 +10,6 @@ import { IVenta } from 'app/shared/model/venta.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { VentaService } from './venta.service';
 import { VentaDeleteDialogComponent } from './venta-delete-dialog.component';
-
 @Component({
   selector: 'jhi-venta',
   templateUrl: './venta.component.html'
@@ -55,30 +54,11 @@ export class VentaComponent implements OnInit, OnDestroy {
     this.ventaService.download();
   }
 
-  /* terminadasPDF(): void {
-    this.ventaService
-      .terminadas({
-        page: this.page - 1,
-        size: this.itemsPerPage,
-        sort: this.sort()
-      })
-      .subscribe(
-        (res: HttpResponse<IVenta[]>) => this.onSuccess(res.body, res.headers, this.page),
-        () => this.onError()
-      );
-    alert('Informe generado');
-  } */
+  facturaPDF(venta: IVenta): void {
+    this.ventaService.downloadFactura(venta);
+  }
 
   ngOnInit(): void {
-    /* this.activatedRoute.data.subscribe(({ venta }) => {
-
-      if (!venta.numeroVenta) {
-        this.booleanoEditar = false;
-      } else {
-        this.booleanoEditar = true;
-      }
-    }); */
-
     this.activatedRoute.data.subscribe(data => {
       this.page = data.pagingParams.page;
       this.ascending = data.pagingParams.ascending;

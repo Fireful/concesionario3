@@ -1,5 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="es">
+
+<head>
+    <title>Ventas <span th:text="${ventas[0].vendedor.nombre}"></span></title>
+    <meta charset="UTF-8"></meta>
+
+    <style>
+        table {
+            font-size: 12px;
+            border-radius: 10px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e0e0e0;
+            transition: 500ms ease-in-out;
+        }
+
+        thead {
+            border-radius: 10px;
+            background-color: aqua;
+        }
+
+        td {
+            padding: 3px;
+        }
+
+        th {
+            border: 1px solid black;
+            padding: 2px;
+            background-color: rgb(154, 164, 189);
+        }
+
+        th:first-child {
+            border-top-left-radius: 10px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 10px;
+        }
+
+        td {
+            border: solid 1px #000;
+        }
+
+        tr:first-child td:first-child {
+            border-top-left-radius: 10px;
+        }
+
+        tr:first-child td:last-child {
+            border-top-right-radius: 10px;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 10px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 10px;
+        }
+    </style>
+
+</head>
+
 <body>
-    <h1>Vendedor</h1>
+    <h1 th:text="${ventas[0].vendedor.nombre}"></h1>
     <table border="1" class="tabla">
         <thead>
             <th scope="col">numero de venta</th>
@@ -7,17 +71,20 @@
             <th scope="col">Marca</th>
             <th scope="col">Tipo</th>
             <th scope="col">Cliente</th>
-            <th scope="col">Vendedor</th>
             <th scope="col">Método de pago</th>
             <th scope="col">Importe Total</th>
         </thead>
         <tr th:each="venta: ${ventas}">
             <td th:text="${venta.numeroVenta}"></td>
             <td th:text="${#dates.format(venta.fecha, 'dd/mm/YYYY')}"></td>
-            <td th:text="${venta.coche.marca + ' ' + venta.coche.modelo}"></td>
+            <!-- <td th:if="@{venta.coche!=null}" th:text="${venta.coche.marca + ' ' + venta.coche.modelo}"></td> -->
+            <td>
+                <span th:if="${venta.coche!=null}" th:text="${venta.coche.marca + ' ' + venta.coche.modelo}"></span>
+                <span th:unless="${venta.coche!=null}" th:text="${venta.moto.marca + ' ' + venta.moto.modelo}"></span>
+            </td>
+
             <td th:text="${venta.tipo}"></td>
             <td th:text="${venta.cliente.nombre}"></td>
-            <td th:text="${venta.vendedor.nombre}"></td>
             <td th:text="${venta.metodoPago}"></td>
             <td th:text="${#numbers.formatDecimal(venta.importeTotal, 0, 'COMMA', 2, 'POINT')}"> €</td>
         </tr>

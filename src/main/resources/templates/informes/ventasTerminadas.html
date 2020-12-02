@@ -10,46 +10,51 @@
             font-size: 12px;
             border-radius: 10px;
         }
-
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+            transition: 500ms ease-in-out;
+        }
+        
         thead {
             border-radius: 10px;
             background-color: aqua;
         }
-
+        
         td {
             padding: 3px;
         }
-
+        
         th {
             border: 1px solid black;
             padding: 2px;
             background-color: grey;
         }
-
+        
         th:first-child {
             border-top-left-radius: 10px;
         }
-
+        
         th:last-child {
             border-top-right-radius: 10px;
         }
-
+        
         td {
             border: solid 1px #000;
         }
-
+        
         tr:first-child td:first-child {
             border-top-left-radius: 10px;
         }
-
+        
         tr:first-child td:last-child {
             border-top-right-radius: 10px;
         }
-
+        
         tr:last-child td:first-child {
             border-bottom-left-radius: 10px;
         }
-
+        
         tr:last-child td:last-child {
             border-bottom-right-radius: 10px;
         }
@@ -60,7 +65,7 @@
 <body>
     <h1>Ventas finalizadas</h1>
     <table border="1" class="tabla">
-        <thead>
+        <thead>!
             <th scope="col">numero de venta</th>
             <th scope="col">Fecha</th>
             <th scope="col">Marca</th>
@@ -73,7 +78,10 @@
         <tr th:each="venta: ${ventas}">
             <td th:text="${venta.numeroVenta}"></td>
             <td th:text="${#dates.format(venta.fecha, 'dd/mm/YYYY')}"></td>
-            <td th:text="${venta.coche.marca + ' ' + venta.coche.modelo}"></td>
+            <td>
+                <span th:if="${venta.coche!=null}" th:text="${venta.coche.marca + ' ' + venta.coche.modelo}"></span>
+                <span th:unless="${venta.coche!=null}" th:text="${venta.moto.marca + ' ' + venta.moto.modelo}"></span>
+            </td>
             <td th:text="${venta.tipo}"></td>
             <td th:text="${venta.cliente.nombre}"></td>
             <td th:text="${venta.vendedor.nombre}"></td>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="es">
+
+<head>
+    <title th:text="${'Factura - ' + venta.cliente.nombre}">Factura </title>
+    <meta charset="UTF-8"></meta>
+
+    <style>
+        .tabla {
+            margin-top: 10px;
+            width: 60%;
+            float: right;
+            border: 1px solid grey;
+        }
+        
+        .celdasCoche {
+            padding: 5px;
+        }
+        
+        .celdaTitulo {
+            font-weight: bold;
+            padding-left: 5px;
+        }
+        
+        .total {
+            font-weight: bolder;
+        }
+        
+        .celda {
+            border: 1px solid grey;
+            padding: 5px;
+        }
+        
+        .celdaCliente {
+            height: 50px;
+        }
+        
+        .celdaCliente {
+            width: 200px;
+        }
+        
+        .celdaReferencia {
+            color: green;
+            text-align: center;
+        }
+        
+        .nombreCliente {
+            padding-right: 10px;
+            font-size: 20px;
+        }
+        
+        .datosEconomicos {
+            min-height: 300px;
+            width: 230px;
+            border: 1px solid grey;
+            position: relative;
+            top: 30px;
+            left: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .datosVendedor {
+            padding: 5px;
+        }
+        
+        .cuadrito {
+            float: right;
+            border: 1px solid grey;
+            height: 40px;
+            padding-top: 20px;
+            padding-right: 5px;
+            width: 140px;
+            text-align: right;
+        }
+        
+        .texto {
+            padding-left: 5px;
+        }
+        
+        .texto4 {
+            padding: 5px 5px 5px 5px;
+        }
+        
+        .datosCoche {
+            position: relative;
+            top: 100px;
+        }
+        
+        .thCoche {
+            background-color: rgb(171, 221, 204);
+        }
+        
+        .fecha {
+            border-bottom: 1px solid grey;
+        }
+        
+        .fila1 {
+            width: 100%;
+            display: block;
+        }
+        
+        .col1 {
+            width: 100%;
+            border: 1px solid black;
+        }
+        
+        .concepto {
+            border: 1px solid grey;
+            height: 62px;
+        }
+        
+        .col2 {
+            float: right;
+            width: 100%;
+            border: 1px solid black;
+        }
+        
+        .derecha {
+            float: right;
+        }
+        
+        .domiciliacion {
+            border: 1px solid grey;
+            position: relative;
+            top: 50px;
+            height: 40px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Factura</h1>
+    <hr></hr>
+    <table border="1" class="tabla" aria-describedby="Tabla de los datos de la compra">
+        <tr>
+            <td class="celdaTitulo">Fecha de compra</td>
+            <td th:text="${#dates.format(venta.fecha, 'dd/MM/YYYY HH:mm')}"></td>
+        </tr>
+        <tr>
+
+
+            <td colspan="2" class="celdaCliente"><span class="celdaTitulo">Cliente</span><span class="nombreCliente" th:text="${venta.cliente.nombre}" style="float: right;"></span> </td>
+        </tr>
+        <tr>
+            <td class="celdaTitulo">Vendedor</td>
+            <td th:text="${venta.vendedor.nombre}"></td>
+        </tr>
+        <tr>
+            <td class="celdaTitulo">Referencia</td>
+            <td class="celdaReferencia" th:text="${venta.numeroVenta}"></td>
+        </tr>
+    </table>
+    <div class="datosVendedor">
+        Nombre: <span th:text="${venta.vendedor.nombre}"></span><br /> DNI: <span th:text="${venta.vendedor.dni}"></span>
+
+    </div>
+
+    <div class="datosCoche">
+        <table border="1" class="tablaCoche" th:if="${venta.coche!=null}">
+            <tr>
+                <th class="celdasCoche thCoche">Año</th>
+                <th class="celdasCoche thCoche">Marca</th>
+                <th class="celdasCoche thCoche">Modelo</th>
+                <th class="celdasCoche thCoche">Color</th>
+                <th class="celdasCoche thCoche">Tipo</th>
+                <th class="celdasCoche thCoche">Eléctrico</th>
+            </tr>
+            <tr>
+                <td class="celdasCoche" th:text="${venta.coche.anio}"></td>
+                <td class="celdasCoche" th:text="${venta.coche.marca}"></td>
+                <td class="celdasCoche" th:text="${venta.coche.modelo}"></td>
+                <td class="celdasCoche" th:text="${venta.coche.color}" th:style="|background-color: ${venta.coche.color};|">
+                </td>
+                <td class="celdasCoche" th:text="${venta.tipo}"></td>
+                <td class="celdasCoche" th:text="${venta.coche.electrico}"></td>
+            </tr>
+        </table>
+        <table border="1" class="tablaCoche" th:unless="${venta.coche!=null}">
+            <tr>
+                <th class="celdasCoche thCoche">Año</th>
+                <th class="celdasCoche thCoche">Marca</th>
+                <th class="celdasCoche thCoche">Modelo</th>
+                <th class="celdasCoche thCoche">Color</th>
+                <th class="celdasCoche thCoche">Tipo</th>
+                <th class="celdasCoche thCoche">Cilindrada</th>
+            </tr>
+            <tr>
+                <td class="celdasCoche" th:text="${venta.moto.anio}"></td>
+                <td class="celdasCoche" th:text="${venta.moto.marca}"></td>
+                <td class="celdasCoche" th:text="${venta.moto.modelo}"></td>
+                <td class="celdasCoche motoColor" th:style="|background-color: ${venta.moto.color};|"></td>
+                <td class="celdasCoche" th:text="${venta.tipo}"></td>
+                <td class="celdasCoche" th:text="${venta.moto.cilindrada}"></td>
+            </tr>
+        </table>
+
+
+
+    </div>
+
+    <div class="datosEconomicos">
+        <div class="concepto texto4">
+            Precio:
+
+            <div class="cuadrito">
+                <span class="texto" th:text="${#numbers.formatDecimal(venta.importeTotal, 0, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+        </div>
+        <div class="concepto texto4">
+            Método:
+
+            <div class="cuadrito">
+                <span class="texto" th:text="${venta.metodoPago}"></span>
+            </div>
+        </div>
+        <div class="concepto texto4">
+            Precio:
+
+            <div class="cuadrito">
+                <span class="texto" th:text="${#numbers.formatDecimal(venta.importeTotal, 0, 'POINT', 2, 'COMMA')+' €'}"></span>
+            </div>
+        </div>
+        <div class="concepto texto4">
+            I.V.A:
+
+            <div class="cuadrito" th:with="iva=${venta.importeTotal * 0.21}">
+                <span class="texto" th:text="${#numbers.formatDecimal(iva, 0, 'POINT', 2, 'COMMA')+' €'}"></span>
+            </div>
+        </div>
+
+        <div class="concepto texto4">
+            TOTAL:
+
+            <div class="cuadrito" th:with="total=${(venta.importeTotal* 0.21)+ venta.importeTotal}">
+                <span class="texto total" th:text="${#numbers.formatDecimal(total, 0, 'POINT', 2, 'COMMA')+ ' €'} "></span>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="domiciliacion" th:if="${venta.metodoPago.toString() == 'DOMICILIACION'}">
+        <span>
+            No domi
+        </span>
+    </div>
+
+
+
+
+
+</body>
+
+</html>

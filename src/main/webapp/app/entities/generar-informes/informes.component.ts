@@ -27,6 +27,8 @@ export class InformesComponent implements OnInit, OnDestroy {
   vendedores: IVendedor[] = [];
   eventSubscriber?: Subscription;
   vendedorSeleccionado?: String;
+  prueba?: any;
+  vendedor?: IVendedor;
 
   constructor(
     protected ventaService: VentaService,
@@ -40,8 +42,10 @@ export class InformesComponent implements OnInit, OnDestroy {
   terminadasPDF(): void {
     this.ventaService.download();
   }
-  vendedoresPDF(valor: any): void {
+  vendedoresPDF(valor: number): void {
+    // parseInt(valor, 10);
     alert(valor);
+
     this.ventaService.pdfVendedores(valor);
   }
 

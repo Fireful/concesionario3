@@ -194,4 +194,5 @@ public class VentaServiceImpl implements VentaService {
         log.debug("Mostramos listado de ventas Terminadas");
         return ventaRepository.findAllTerminadasVendedorList(id);
     }
+
 }

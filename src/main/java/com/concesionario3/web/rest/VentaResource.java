@@ -163,7 +163,7 @@ public class VentaResource {
 
     @GetMapping("/ventas/terminadas")
     public ResponseEntity<List<Venta>> getTerminadas(Pageable page) {
-        log.debug("REST request to get ventas terminadas: {}");
+        log.debug("REST mostrar listado de ventas terminadas: {}");
         Page<Venta> venta = ventaService.findTerminadas(page);
         HttpHeaders headers = PaginationUtil
                 .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), venta);
@@ -172,7 +172,7 @@ public class VentaResource {
 
     @GetMapping("/ventas/download/pdf")
     public ResponseEntity<byte[]> generaInforme() {
-        log.debug("REST request to get ventas terminadas: {}");
+        log.debug("REST Generar informe de ventas terminadas: {}");
         List<Venta> venta = ventaService.findTerminadasList();
         ResponseEntity<byte[]> ventasTerminadas=impresionService.printVenta(venta);
         return ventasTerminadas;
@@ -180,7 +180,16 @@ public class VentaResource {
 
     }
 
-    @GetMapping("/ventas/vendedor/{id}")
+    @GetMapping("/ventas/downloadFactura/{id}")
+    public ResponseEntity<byte[]> generaFactura(@PathVariable Long id) {
+        log.debug("REST request to get ventas terminadas: {}");
+        Venta venta = ventaService.findOne(id).get();
+        ResponseEntity<byte[]> ventasTerminadas = impresionService.printFactura(venta);
+        return ventasTerminadas;
+
+    }
+
+    @GetMapping("/ventas/{id}/vendedor")
     public ResponseEntity<byte[]> generaInformeVendedor(@PathVariable Long id) {
         log.debug("REST request to get ventas terminadas: {}");
         List<Venta> venta = ventaService.findTerminadasVendedorList(id);

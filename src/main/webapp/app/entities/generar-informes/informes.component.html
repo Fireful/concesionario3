@@ -22,20 +22,19 @@
             <div class="botonesInformesVendedores">
 
                 <label class="form-control-label" jhiTranslate="concesionario3App.venta.metodoPago" for="field_metodoPago">Vendedor</label>
-                <select class="form-control" id="field_metodoPago" name="vendedor" formControlName="vendedor" #myVendedor>
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]=vendedor.id *ngFor="let vendedor of vendedores; trackBy: trackById">
-                            {{ vendedor.nombre }}
-                        </option>
-                    </select>
-                <br/>
-                <button id="jh-show-all" class="mr-3 btn btn-success jh-show-all rounded-pill" (click)="vendedoresPDF(myVendedor.value)">
-                        <fa-icon icon="list"></fa-icon>
-                        <span jhiTranslate="concesionario3App.informes.ventasRealizadas">
-                            Ventas terminadas
-                        </span>
-                    </button>
-                </form>
+                <select class="form-control" id="field_vendedor" name="vendedor" [(ngModel)]="vendedor">
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]=vendedor.id *ngFor="let vendedor of vendedores; trackBy: trackById">
+                        {{ vendedor.nombre }}
+                    </option>
+                </select>
+                <br />
+                <button id="jh-show-all" class="mr-3 btn btn-success jh-show-all rounded-pill" (click)="vendedoresPDF(vendedor)">
+                    <fa-icon icon="list"></fa-icon>
+                    <span jhiTranslate="concesionario3App.informes.ventasRealizadas">
+                        Ventas terminadas
+                    </span>
+                </button>
             </div>
         </div>
     </div>

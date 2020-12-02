@@ -87,6 +87,7 @@ export class VentaService {
     return this.http.get<IVenta[]>(encodeURI(`${this.resourceUrl}/terminadas`), { params: options, observe: 'response' });
   }
 
+  /* Descarga de informes de ventas terminadas */
   download(): any {
     return new Promise<any>((resolve, reject) => {
       return this.http.get(`${this.resourceUrl}/download/pdf`, { responseType: 'blob' }).subscribe(
@@ -103,9 +104,27 @@ export class VentaService {
     });
   }
 
+  /* Factura individual */
+  downloadFactura(req?: any): any {
+    return new Promise<any>((resolve, reject) => {
+      return this.http.get(`${this.resourceUrl}/downloadFactura/${req.id}`, { responseType: 'blob' }).subscribe(
+        data => {
+          const file: Blob = new Blob([data], { type: 'application/pdf' });
+          const nombreFichero = 'factura - ' + req.cliente.nombre + '.pdf';
+          saveAs(file, nombreFichero);
+          resolve(data);
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  /* Informe de ventas por vendedor */
   pdfVendedores(id: number): any {
     return new Promise<any>((resolve, reject) => {
-      return this.http.get(`${this.resourceUrl}/vendedor/${id}`, { responseType: 'blob' }).subscribe(
+      return this.http.get(`${this.resourceUrl}/${id}/vendedor`, { responseType: 'blob' }).subscribe(
         data => {
           const file: Blob = new Blob([data], { type: 'application/pdf' });
           const nombreFichero = 'VentasPorVendedor.pdf';

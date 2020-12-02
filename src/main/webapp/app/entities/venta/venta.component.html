@@ -185,11 +185,17 @@
                                         </button>
                                     </ng-container>
                                     <ng-template #botonTerminada>
-                                        <button type="submit" disabled [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-warning btn-sm">
+                                        <button id="jh-show-all" class="btn btn-warning float-right jh-show-all all-cars" (click)="facturaPDF(venta)">
+                                            <fa-icon icon="list"></fa-icon>
+                                            <span jhiTranslate="concesionario3App.venta.factura">
+                                                Factura
+                                            </span>
+                                        </button>
+                                        <!-- <button type="submit" disabled [routerLink]="['/venta', venta.id, 'edit']" class="btn btn-warning btn-sm">
                                                 <fa-icon icon="pencil-alt"></fa-icon>
                                                 <span class="d-none d-md-inline"
                                                     jhiTranslate="entity.action.terminada">terminada</span>
-                                            </button>
+                                            </button> -->
                                     </ng-template>
 
                                 </ng-template>

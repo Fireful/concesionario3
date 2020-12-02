@@ -30,52 +30,86 @@ public class ImpresionService {
     private final Logger log = LoggerFactory.getLogger(ImpresionService.class);;
     private final JHipsterProperties jHipsterProperties;
 
+    private Venta factura;
     private final UserService userService;
 
     private final SpringTemplateEngine templateEngine;
 
-    public ImpresionService(JHipsterProperties jHipsterProperties, SpringTemplateEngine templateEngine, UserService userService) {
+    public ImpresionService(JHipsterProperties jHipsterProperties, SpringTemplateEngine templateEngine,
+            UserService userService) {
         this.jHipsterProperties = jHipsterProperties;
         this.templateEngine = templateEngine;
-        this.userService= userService;
+        this.userService = userService;
 
     }
 
-    public ResponseEntity<byte[]> printVenta(List<Venta> venta) throws IOException{
-        HttpHeaders headers=new HttpHeaders();
+    public ResponseEntity<byte[]> printVenta(List<Venta> venta) throws IOException {
+        HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
         headers.add("Content-Disposition", "attachment;filename-invoice.pdf");
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 
         log.debug("Generando invoice...");
-        User user= userService.getUserWithAuthorities().get();
-        Locale locale= Locale.forLanguageTag(user.getLangKey());
-        Context context =new Context(locale);
+        User user = userService.getUserWithAuthorities().get();
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
 
         context.setVariable("ventas", venta);
 
-        String  templateContent = "";
+        String templateContent = "";
 
-        templateContent=templateEngine.process("informes/ventasTerminadas.html", context);
+        templateContent = templateEngine.process("informes/ventasTerminadas.html", context);
 
-        ByteArrayOutputStream pdfContents=new ByteArrayOutputStream();
+        ByteArrayOutputStream pdfContents = new ByteArrayOutputStream();
 
         // process html
-        try{
-            PdfRendererBuilder builder=new PdfRendererBuilder();
+        try {
+            PdfRendererBuilder builder = new PdfRendererBuilder();
 
             builder.withHtmlContent(templateContent, "/");
             builder.toStream(pdfContents);
             builder.run();
             pdfContents.close();
-        }
-        catch(Exception ioe){
+        } catch (Exception ioe) {
             ioe.printStackTrace();
         }
 
-       return new ResponseEntity<byte[]>(
-            pdfContents.toByteArray(), headers, HttpStatus.OK
-        );
+        return new ResponseEntity<byte[]>(pdfContents.toByteArray(), headers, HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<byte[]> printFactura(Venta venta) throws IOException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+        headers.add("Content-Disposition", "attachment;filename-invoice.pdf");
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+        log.debug("Generando invoice...");
+        User user = userService.getUserWithAuthorities().get();
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+
+        context.setVariable("venta", venta);
+
+        String templateContent = "";
+
+        templateContent = templateEngine.process("informes/facturas.html", context);
+
+        ByteArrayOutputStream pdfContents = new ByteArrayOutputStream();
+
+        // process html
+        try {
+            PdfRendererBuilder builder = new PdfRendererBuilder();
+
+            builder.withHtmlContent(templateContent, "/");
+            builder.toStream(pdfContents);
+            builder.run();
+            pdfContents.close();
+        } catch (Exception ioe) {
+            ioe.printStackTrace();
+        }
+
+        return new ResponseEntity<byte[]>(pdfContents.toByteArray(), headers, HttpStatus.OK);
 
     }
 
@@ -113,6 +147,5 @@ public class ImpresionService {
         return new ResponseEntity<byte[]>(pdfContents.toByteArray(), headers, HttpStatus.OK);
 
     }
-
 
 }
