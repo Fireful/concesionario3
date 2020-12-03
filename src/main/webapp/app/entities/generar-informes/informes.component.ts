@@ -44,7 +44,6 @@ export class InformesComponent implements OnInit, OnDestroy {
   }
   vendedoresPDF(valor: number): void {
     // parseInt(valor, 10);
-    alert(valor);
 
     this.ventaService.pdfVendedores(valor);
   }

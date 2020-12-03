@@ -271,7 +271,7 @@ Informes
   height: 100px;
   padding: 15px;
   border-radius: 15px;
-  transition: 200ms linear;
+  transition: 1000ms linear;
 }
 
 .informesVendedores {
@@ -280,7 +280,7 @@ Informes
   height: 100px;
   padding: 15px;
   border-radius: 15px;
-  transition: 200ms ease-in-out;
+  transition: 1000ms ease-in-out;
 }
 
 .botonesInformesVentas {
@@ -288,12 +288,12 @@ Informes
   display: inline;
   position: relative;
   top: -50px;
-  transition: all 500ms ease-in-out;
-  -webkit-transition: all 500ms ease-in-out;
+  transition: all 1000ms ease-in-out;
+  -webkit-transition: all 1000ms ease-in-out;
   /** Chrome & Safari **/
-  -moz-transition: all 500ms ease-in-out;
+  -moz-transition: all 1000ms ease-in-out;
   /** Firefox **/
-  -o-transition: all 500ms ease-in-out;
+  -o-transition: all 1000ms ease-in-out;
   /** Opera **/
 }
 
@@ -301,29 +301,36 @@ Informes
   opacity: 0;
   position: relative;
   top: -50px;
-  transition: all 500ms ease-in-out;
-  -webkit-transition: all 500ms ease-in-out;
+  transition: all 1000ms ease-in-out;
+  -webkit-transition: all 1000ms ease-in-out;
   /** Chrome & Safari **/
-  -moz-transition: all 500ms ease-in-out;
+  -moz-transition: all 1000ms ease-in-out;
   /** Firefox **/
-  -o-transition: all 500ms ease-in-out;
+  -o-transition: all 1000ms ease-in-out;
   /** Opera **/
 }
 
 .informesVentas:hover {
   height: 120px;
-  transition: 200ms linear;
+  transition: 1000ms linear;
+  background-color: rgb(180, 180, 180);
+  transform: scale(1.03);
+  box-shadow: 8px 8px 10px 0 rgb(126, 126, 126);
 }
 
 .informesVendedores:hover {
   height: 220px;
+  transition: 1000ms linear;
+  background-color: rgb(131, 131, 131);
+  transform: scale(1.03);
+  box-shadow: 8px 8px 10px 0 rgb(126, 126, 126);
 }
 
 .informesVentas:hover .botonesInformesVentas {
   opacity: 1;
   position: relative;
   top: 0;
-  transition: 500ms linear;
+  transition: 1000ms linear;
   height: 150px;
 }
 
@@ -331,6 +338,6 @@ Informes
   opacity: 1;
   position: relative;
   top: 0;
-  transition: 500ms linear;
+  transition: 1000ms linear;
   height: 150px;
 }
